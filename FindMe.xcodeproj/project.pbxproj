@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,8 @@
 		2B42BC6024BCFB78007241E1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42BC5F24BCFB78007241E1 /* main.m */; };
 		2B42BC6A24BCFB78007241E1 /* FindMeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42BC6924BCFB78007241E1 /* FindMeTests.m */; };
 		2B42BC7524BCFB78007241E1 /* FindMeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42BC7424BCFB78007241E1 /* FindMeUITests.m */; };
+		2B42BC8524BD2E3C007241E1 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42BC8424BD2E3C007241E1 /* User.m */; };
+		2B42BC8824BD2FA6007241E1 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42BC8724BD2FA6007241E1 /* Contact.m */; };
 		63170F27A5992BCDC1232525 /* Pods_FindMeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0588228D9238D0DAC892449 /* Pods_FindMeTests.framework */; };
 		6BBB36CEEDA8BE35CC329333 /* Pods_FindMe_FindMeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A279E2C2B4A7E42657E6C695 /* Pods_FindMe_FindMeUITests.framework */; };
 /* End PBXBuildFile section */
@@ -59,6 +61,10 @@
 		2B42BC7024BCFB78007241E1 /* FindMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FindMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B42BC7424BCFB78007241E1 /* FindMeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindMeUITests.m; sourceTree = "<group>"; };
 		2B42BC7624BCFB78007241E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B42BC8324BD2E3C007241E1 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		2B42BC8424BD2E3C007241E1 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		2B42BC8624BD2FA6007241E1 /* Contact.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		2B42BC8724BD2FA6007241E1 /* Contact.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
 		2C41A87BB1A17F9D32D295D3 /* Pods-FindMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindMe.release.xcconfig"; path = "Target Support Files/Pods-FindMe/Pods-FindMe.release.xcconfig"; sourceTree = "<group>"; };
 		517A78D3A5E003A86D99C02D /* Pods-FindMe-FindMeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindMe-FindMeUITests.release.xcconfig"; path = "Target Support Files/Pods-FindMe-FindMeUITests/Pods-FindMe-FindMeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A279E2C2B4A7E42657E6C695 /* Pods_FindMe_FindMeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FindMe_FindMeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +127,7 @@
 		2B42BC4C24BCFB77007241E1 /* FindMe */ = {
 			isa = PBXGroup;
 			children = (
+				2B42BC8224BD2B87007241E1 /* Model */,
 				2B42BC4D24BCFB77007241E1 /* AppDelegate.h */,
 				2B42BC4E24BCFB77007241E1 /* AppDelegate.m */,
 				2B42BC5024BCFB77007241E1 /* SceneDelegate.h */,
@@ -154,6 +161,17 @@
 			path = FindMeUITests;
 			sourceTree = "<group>";
 		};
+		2B42BC8224BD2B87007241E1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2B42BC8324BD2E3C007241E1 /* User.h */,
+				2B42BC8424BD2E3C007241E1 /* User.m */,
+				2B42BC8624BD2FA6007241E1 /* Contact.h */,
+				2B42BC8724BD2FA6007241E1 /* Contact.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		4D180BB5FF14E3DF54DB8C33 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,7 +192,6 @@
 				0D15CE343A13BA92FFCD76A3 /* Pods-FindMeTests.debug.xcconfig */,
 				E93D1EE73FB104F9E75AFF01 /* Pods-FindMeTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -416,9 +433,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B42BC8524BD2E3C007241E1 /* User.m in Sources */,
 				2B42BC5524BCFB77007241E1 /* ViewController.m in Sources */,
 				2B42BC4F24BCFB77007241E1 /* AppDelegate.m in Sources */,
 				2B42BC6024BCFB78007241E1 /* main.m in Sources */,
+				2B42BC8824BD2FA6007241E1 /* Contact.m in Sources */,
 				2B42BC5224BCFB77007241E1 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
