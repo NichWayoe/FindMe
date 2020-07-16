@@ -7,8 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "LocationManager.h"
 #import "Parse/Parse.h"
-
+@import GoogleMaps;
 @interface AppDelegate ()
 
 @end
@@ -18,6 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [GMSServices provideAPIKey:@"AIzaSyAPFwU0JDYQMn9QbxV1-jCYxwtyjiLxXcM"];
     ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
              
              configuration.applicationId = @"myAppId";

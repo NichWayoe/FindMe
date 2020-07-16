@@ -7,26 +7,42 @@
 //
 
 #import "MapViewController.h"
+#import "LocationManager.h"
+#import <GoogleMaps/GoogleMaps.h>
 
-@interface MapViewController ()
+@interface MapViewController () <CLLocationManagerDelegate>
+
+@property (strong, nonatomic) LocationManager *mylocation;
+@property(strong, nonatomic) CLLocation *coordinate;
 
 @end
 
 @implementation MapViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.mylocation = LocationManager.shared;
+    [self.mylocation getlocation];
+    NSLog(@"%@",self.mylocation.currentLocation);
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.mylocation.currentLocation.coordinate.latitude
+                                                            longitude:self.mylocation.currentLocation.coordinate.longitude
+                                                                 zoom:15];
+    GMSMapView *mapView = [GMSMapView mapWithFrame:self.view.frame camera:camera];
+    mapView.myLocationEnabled = YES;
+    mapView.mapType = kGMSTypeNormal;
+    mapView.settings.myLocationButton = YES;
+    mapView.settings.compassButton = YES;
+    [self.view addSubview:mapView];
+//    GMSMarker *marker = [GMSMarker new];
+//    marker.position = CLLocationCoordinate2DMake(self.mylocation.currentLocation.coordinate.latitude, self.mylocation.currentLocation.coordinate.longitude);
+//    marker.title = @"Sydney";
+//    marker.snippet = @"Australia";
+//    marker.map = mapView;
+//    UIEdgeInsets mapInsets = UIEdgeInsetsMake(100.0, 0.0, 0.0, 300.0);
+//    mapView.padding = mapInsets;
+
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
