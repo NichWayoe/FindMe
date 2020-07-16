@@ -57,7 +57,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7u-Mb-s5k">
-                                <rect key="frame" x="129" y="570" width="78" height="51"/>
+                                <rect key="frame" x="152" y="635" width="78" height="51"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="sigin "/>
                                 <connections>
@@ -109,6 +109,7 @@
         <!--FindMe-->
         <scene sceneID="IRy-bY-Yex">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zZs-TD-SeM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="3pB-0z-X24" customClass="FindMeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t6r-wR-pyu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
@@ -165,7 +166,6 @@
                         <outlet property="tableView" destination="ZJ3-K6-2h0" id="NqW-kC-BEa"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zZs-TD-SeM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-994.20289855072474" y="4370.7589285714284"/>
         </scene>
@@ -254,10 +254,10 @@
             </objects>
             <point key="canvasLocation" x="3500" y="4356"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar View Controller-->
         <scene sceneID="GYE-wI-4xY">
             <objects>
-                <tabBarController id="JVU-jJ-ApI" sceneMemberID="viewController">
+                <tabBarController id="JVU-jJ-ApI" customClass="MainTabBarViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="dtf-Qd-3k5">
                         <barButtonItem key="leftBarButtonItem" title="loyout" id="WXt-0S-Mij"/>
                         <barButtonItem key="rightBarButtonItem" title="Item" id="CGw-d2-bTt"/>
@@ -267,6 +267,11 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="selectedIndex">
+                            <integer key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="3pB-0z-X24" kind="relationship" relationship="viewControllers" id="6Yk-Zy-fQG"/>
                         <segue destination="lsz-0T-JMA" kind="relationship" relationship="viewControllers" id="Mad-G6-Bkm"/>

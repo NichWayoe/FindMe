@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)shared;
 - (void) getlocation;
+- (void) begintracking;
+
 @end
 
 NS_ASSUME_NONNULL_END

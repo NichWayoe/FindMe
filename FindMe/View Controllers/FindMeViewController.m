@@ -7,17 +7,22 @@
 //
 
 #import "FindMeViewController.h"
+#import "LocationManager.h"
 
 @interface FindMeViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) LocationManager *mylocation;
 
 @end
 
 @implementation FindMeViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.mylocation = LocationManager.shared;
+    [self.mylocation begintracking];
+   
 }
 - (IBAction)onFindMe:(id)sender {
 }
