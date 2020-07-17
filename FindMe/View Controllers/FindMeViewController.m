@@ -10,6 +10,7 @@
 #import "LocationManager.h"
 
 @interface FindMeViewController ()
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) LocationManager *mylocation;
 
@@ -21,11 +22,10 @@
 {
     [super viewDidLoad];
     self.mylocation = LocationManager.shared;
-    [self.mylocation begintracking];
-   
-}
-- (IBAction)onFindMe:(id)sender {
+    [self.mylocation beginTracking];
 }
 
+- (IBAction)onFindMe:(id)sender {
+}
 
 @end

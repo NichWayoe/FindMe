@@ -13,7 +13,7 @@
 @interface MapViewController () <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) LocationManager *mylocation;
-@property(strong, nonatomic) CLLocation *coordinate;
+@property (strong,nonatomic) GMSMapView *mapView;
 
 @end
 
@@ -23,14 +23,24 @@
 {
     [super viewDidLoad];
     self.mylocation = LocationManager.shared;
-    
-    
+    self.mapView = [[GMSMapView alloc] initWithFrame:self.view.frame];
+    self.mapView.mapType = kGMSTypeNormal;
+    self.mapView.settings.myLocationButton = YES;
+    self.mapView.settings.compassButton = YES;
+    self.mapView.myLocationEnabled = YES;
+    [self.view addSubview:self.mapView];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self.mylocation getlocation];
-    if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied){
+    
+    [self.mylocation getLocation];
+    if (self.mylocation.currentLocation != nil) {
+        GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:self.mylocation.currentLocation.coordinate zoom:15];
+        [self.mapView setCamera:camera];
+    }
+    
+    if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Permission not Allowed"
                                                                        message:@"We need your permission to show you on the map. TO allow, open settings and enable locations"
                                                                 preferredStyle:(UIAlertControllerStyleAlert)];
@@ -55,16 +65,6 @@
         [self presentViewController:alert animated:YES completion:^{
         }];
     }
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.mylocation.currentLocation.coordinate.latitude
-                                                            longitude:self.mylocation.currentLocation.coordinate.longitude
-                                                                 zoom:15];
-    GMSMapView *mapView = [GMSMapView mapWithFrame:self.view.frame camera:camera];
-    mapView.mapType = kGMSTypeNormal;
-    mapView.settings.myLocationButton = YES;
-    mapView.settings.compassButton = YES;
-    mapView.myLocationEnabled = YES;
-    [self.view addSubview:mapView];
-    
 }
 
 @end

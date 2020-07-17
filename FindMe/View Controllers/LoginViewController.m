@@ -19,14 +19,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 - (IBAction)onLogin:(id)sender {
-    
 }
+
 - (IBAction)onSignUp:(id)sender {
-    
 }
 
 

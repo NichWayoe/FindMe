@@ -12,12 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LocationManager : NSObject <CLLocationManagerDelegate>
 
-@property (strong,nonatomic) CLLocationManager *locationManager;
 @property (strong,nonatomic) CLLocation *currentLocation;
 
 + (instancetype)shared;
-- (void) getlocation;
-- (void) begintracking;
+- (void)getLocation;
+- (void)beginTracking;
 
 @end
 

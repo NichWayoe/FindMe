@@ -8,6 +8,12 @@
 
 #import "LocationManager.h"
 
+@interface LocationManager()
+
+@property (strong,nonatomic) CLLocationManager *locationManager;
+
+@end
+
 @implementation LocationManager
 
 + (instancetype)shared
@@ -20,7 +26,7 @@
     return sharedManager;
 }
 
-- (instancetype) init
+- (instancetype)init
 {
     self = [super init];
     if (self != nil) {
@@ -30,31 +36,29 @@
     return self;
 }
 
-- (void) getlocation
+- (void)getLocation
 {
-    if ([CLLocationManager locationServicesEnabled])
-    {
-        [self.locationManager requestWhenInUseAuthorization];
-        if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorizedWhenInUse){
-            self.currentLocation = self.locationManager.location;
+    if (CLLocationManager.locationServicesEnabled) {
+        if (CLLocationManager.authorizationStatus == kCLAuthorizationStatusNotDetermined) {
+            [self.locationManager requestWhenInUseAuthorization];
         }
+        self.currentLocation = self.locationManager.location;
     }
 }
 
--(void) begintracking
+-(void)beginTracking
 {
-    if ([CLLocationManager locationServicesEnabled]){
-        [self.locationManager requestAlwaysAuthorization];
-        if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorizedAlways){
-            //I will implement functionality here
+    if (CLLocationManager.locationServicesEnabled) {
+        if(CLLocationManager.authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse) {
+            [self.locationManager requestAlwaysAuthorization];
         }
+        //I will implement functionality here
     }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
     self.currentLocation = [locations lastObject];
-    NSLog(@"%f",self.currentLocation.coordinate.latitude);
 }
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -81,7 +85,6 @@
         case kCLAuthorizationStatusAuthorizedWhenInUse:
             break;
     }
-    
 }
 
 @end
