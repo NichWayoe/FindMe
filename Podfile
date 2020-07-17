@@ -7,6 +7,8 @@ target 'FindMe' do
 
   # Pods for FindMe
   pod 'Parse'
+  pod 'GoogleMaps'
+ 
 
   target 'FindMeTests' do
     inherit! :search_paths
