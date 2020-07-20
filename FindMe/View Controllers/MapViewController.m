@@ -12,7 +12,8 @@
 
 @interface MapViewController () <CLLocationManagerDelegate>
 
-@property (strong, nonatomic) LocationManager *mylocation;
+@property (strong, nonatomic) LocationManager *myLocationManager;
+@property (strong, nonatomic) CLLocation *mylocation;
 @property (strong,nonatomic) GMSMapView *mapView;
 
 @end
@@ -22,24 +23,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.mylocation = LocationManager.shared;
+    self.myLocationManager = LocationManager.shared;
     self.mapView = [[GMSMapView alloc] initWithFrame:self.view.frame];
     self.mapView.mapType = kGMSTypeNormal;
     self.mapView.settings.myLocationButton = YES;
     self.mapView.settings.compassButton = YES;
-    self.mapView.myLocationEnabled = YES;
+    self.mapView.myLocationEnabled= YES;
     [self.view addSubview:self.mapView];
+    [self.myLocationManager requestLocationPermission];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    
-    [self.mylocation getLocation];
-    if (self.mylocation.currentLocation != nil) {
-        GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:self.mylocation.currentLocation.coordinate zoom:15];
+    self.mylocation = [self.myLocationManager getLocation];
+    if (self.mylocation != nil) {
+        GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:self.mylocation.coordinate zoom:15];
         [self.mapView setCamera:camera];
     }
-    
     if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Permission not Allowed"
                                                                        message:@"We need your permission to show you on the map. TO allow, open settings and enable locations"
