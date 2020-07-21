@@ -8,6 +8,7 @@ target 'FindMe' do
   # Pods for FindMe
   pod 'Parse'
   pod 'GoogleMaps'
+  pod 'Parse/UI'
  
 
   target 'FindMeTests' do

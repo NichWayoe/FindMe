@@ -11,6 +11,14 @@
 @interface LocationManager()
 
 @property (strong,nonatomic) CLLocationManager *locationManager;
+typedef NS_ENUM(NSInteger, locationPermissionStatus) {
+    allowedWhenInUse,
+    restricted,
+    denied,
+    allowedAlways,
+    notDetermined
+};
+@property (nonatomic, assign) locationPermissionStatus currentLocationPermission;
 
 @end
 
@@ -32,57 +40,83 @@
     if (self != nil) {
         self.locationManager = [CLLocationManager new];
         self.locationManager.delegate = self;
+        self.locationManager.distanceFilter = 5;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
     }
     return self;
 }
 
-- (void)getLocation
+- (CLLocation* )getLocation
 {
-    if (CLLocationManager.locationServicesEnabled) {
-        if (CLLocationManager.authorizationStatus == kCLAuthorizationStatusNotDetermined) {
-            [self.locationManager requestWhenInUseAuthorization];
+    if ((self.currentLocationPermission == allowedWhenInUse) || (self.currentLocationPermission == allowedAlways)) {
+        return self.locationManager.location;
+    }
+    else {
+          return nil;
+    }
+}
+
+- (void)requestLocationPermission
+{
+    if (CLLocationManager.locationServicesEnabled){
+        if (self.currentLocationPermission == notDetermined) {
+            [self.locationManager requestWhenInUseAuthorization];}
+        
+        else if (self.currentLocationPermission == allowedWhenInUse){
+            [self.locationManager requestAlwaysAuthorization];
         }
-        self.currentLocation = self.locationManager.location;
+        else {
+            
+        }
+    }
+    else {
+        
     }
 }
 
 -(void)beginTracking
 {
-    if (CLLocationManager.locationServicesEnabled) {
-        if(CLLocationManager.authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse) {
-            [self.locationManager requestAlwaysAuthorization];
-        }
-        //I will implement functionality here
+    if (self.currentLocationPermission == allowedAlways) {
+        [self.locationManager startUpdatingLocation];
     }
+    else {
+        
+    }
+        
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
-{
-    self.currentLocation = [locations lastObject];
-}
-
-- (void)locationManager:(CLLocationManager *)manager
-       didFailWithError:(NSError *)error
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     NSLog(@"Location service failed with error %@", error);
 }
 
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+    if (locations.count >= 1) {
+    NSLog(@"%@", [locations lastObject]);
+    }
+    else {
+        
+    }
+}
+
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
-    NSLog(@"%i",status);
     switch (status) {
         case kCLAuthorizationStatusRestricted:
-            NSLog(@"%i",status);
+            self.currentLocationPermission = restricted;
             break;
         case kCLAuthorizationStatusDenied:
-            NSLog(@"%i",status);
+            self.currentLocationPermission = denied;
             break;
         case kCLAuthorizationStatusNotDetermined:
-            NSLog(@"%i",status);
+            self.currentLocationPermission = notDetermined;
             break;
         case kCLAuthorizationStatusAuthorizedAlways:
+            self.currentLocationPermission = allowedAlways;
             break;
         case kCLAuthorizationStatusAuthorizedWhenInUse:
+            self.currentLocationPermission = allowedWhenInUse;
             break;
     }
 }
