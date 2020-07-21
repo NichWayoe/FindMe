@@ -78,7 +78,7 @@
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
-- (void)createBottomBoarder:(UITextField *)textField
+- (void)createBottomBorder:(UITextField *)textField
 {
     CALayer *border = [CALayer layer];
     CGFloat borderWidth = 2;
