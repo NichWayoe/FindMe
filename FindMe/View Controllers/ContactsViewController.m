@@ -9,7 +9,7 @@
 #import "ContactsViewController.h"
 #import "MainTabBarViewController.h"
 #import "ContactCell.h"
-#import "Parse/Parse.h"
+#import "DatabaseManager.h"
 
 @interface ContactsViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -31,15 +31,14 @@
 
 - (void)fetchContacts
 {
-    PFQuery *query = [PFQuery queryWithClassName:@"Contact"];
-    [query orderByDescending:@"createdAt"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *contacts, NSError *error) {
-        if (contacts != nil) {
-            self.contacts = (NSMutableArray *) contacts;
+    [DatabaseManager fetchContacts:^(NSArray * _Nonnull contacts, bool gotContacts){
+        if(gotContacts) {
+            NSLog(@"%@",contacts);
+            self.contacts = (NSMutableArray *)contacts;
             [self.tableView reloadData];
         }
-        else{
-            NSLog(@"%@", error.localizedDescription);
+        else {
+            [self showAlert];
         }
     }];
 }
@@ -47,7 +46,6 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     ContactCell *cell = [tableView dequeueReusableCellWithIdentifier:@"contactCell"];
-    NSLog(@"%@",self.contacts[indexPath.row]);
     cell.contact = self.contacts[indexPath.row];
     return cell;
 }
@@ -60,6 +58,20 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self fetchContacts];
+}
+
+- (void)showAlert
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"couldn't fetch contacts"
+                                                                   message:@"something went wrong"
+                                                            preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"try again"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:okAction];
+    [self presentViewController:alert animated:YES completion:^{
+    }];
 }
 
 @end

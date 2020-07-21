@@ -8,6 +8,7 @@
 
 #import "MainTabBarViewController.h"
 #import "SceneDelegate.h"
+#import "DatabaseManager.h"
 #import "LoginViewController.h"
 #import "Contact.h"
 #import "Parse/Parse.h"
@@ -42,22 +43,40 @@
                 NSLog(@"error %@", error.localizedDescription);
             }
             else {
-                NSLog(@"contact saved");
+                 self.selectedIndex = 2;
             }
         }];
-        self.selectedIndex = 2;
+      
     }
 }
 
 - (IBAction)onTapLoyout:(id)sender
 {
-    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        if (!error) {
+    [DatabaseManager logOutUser:^(bool didlogOut, NSError * _Nonnull error) {
+        if(didlogOut){
             SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
             myDelegate.window.rootViewController = loginViewController;
         }
+        else {
+            [self showAlert:error];
+            
+        }
+    }];
+}
+
+-(void)showAlert:(NSError *)error{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Logout Failed"
+                                                                   message:error.localizedDescription
+                                                            preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"try again"
+                                                       style:UIAlertActionStyleDefault
+                               
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:okAction];
+    [self presentViewController:alert animated:YES completion:^{
     }];
 }
 

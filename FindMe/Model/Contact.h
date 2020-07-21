@@ -14,12 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Contact : PFObject<PFSubclassing>
 
-    @property (nonatomic, strong) NSString *email;
-    @property (nonatomic, strong) NSString *name;
-    @property (nonatomic, strong) NSString *lastName;
-    @property (nonatomic, strong) PFUser *user;
-    @property (nonatomic, strong) NSString *telephoneNumber;
+@property (nonatomic, strong) NSString *email;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, strong) PFUser *user;
+@property (nonatomic, strong) NSString *telephoneNumber;
 
-+ (void)uploadContacts: (NSArray<CNContact*> *)contacts withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void)uploadContacts:(NSArray<CNContact*> *)contacts withCompletion:(PFBooleanResultBlock  _Nullable)completion;
+
 @end
 NS_ASSUME_NONNULL_END

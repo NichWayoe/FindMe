@@ -7,7 +7,7 @@
 //
 
 #import "LoginViewController.h"
-#import <Parse/Parse.h>
+#import "DatabaseManager.h"
 
 @interface LoginViewController ()
 
@@ -33,14 +33,12 @@
 {
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
-    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
-        if (error != nil) {
-            NSLog(@"User log in failed: %@", error.localizedDescription);
-            [self showAlert:error];
+    [DatabaseManager logInUser:username withPassword:password withCompletion:^(bool didLogIn, NSError * _Nonnull error) {
+        if(didLogIn) {
+             [self performSegueWithIdentifier:@"homeSegue" sender:nil];
         }
         else {
-            NSLog(@"User logged in successfully");
-            [self performSegueWithIdentifier:@"homeSegue" sender:nil];
+            [self showAlert:error];
         }
     }];
 }
@@ -73,7 +71,7 @@
 {
     [UIView animateWithDuration:0.2 animations:^{self.view.frame = CGRectMake(self.view.frame.origin.x, 0, self.view.frame.size.width, self.view.frame.size.height);}];
 }
--(void) showAlert:(NSError *)error{
+-(void)showAlert:(NSError *)error{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login Failed"
                                                                    message:error.localizedDescription
                                                             preferredStyle:(UIAlertControllerStyleAlert)];

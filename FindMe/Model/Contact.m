@@ -33,8 +33,14 @@
             if(contact.givenName) {
                 newContact.lastName = contact.familyName;
             }
+            else {
+                
+            }
             if (contact.emailAddresses) {
                 newContact.email = contact.emailAddresses.firstObject.value;
+            }
+            else {
+                
             }
             newContact.telephoneNumber = contact.phoneNumbers.firstObject.value.stringValue;
             [newContact saveInBackgroundWithBlock: completion];

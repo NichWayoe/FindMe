@@ -66,7 +66,7 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
             [self.locationManager requestAlwaysAuthorization];
         }
         else {
-            
+        
         }
     }
     else {
@@ -82,7 +82,6 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
     else {
         
     }
-        
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error

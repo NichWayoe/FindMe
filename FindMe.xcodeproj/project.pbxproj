@@ -29,6 +29,7 @@
 		2B42BCA224BE1552007241E1 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42BCA124BE1552007241E1 /* MapViewController.m */; };
 		2B42BCB624BFEE9B007241E1 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42BCB524BFEE9B007241E1 /* LocationManager.m */; };
 		2B42BCBD24C0FB6A007241E1 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42BCBC24C0FB6A007241E1 /* MainTabBarViewController.m */; };
+		2BAF03D024C7759600AF8875 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BAF03CF24C7759600AF8875 /* DatabaseManager.m */; };
 		63170F27A5992BCDC1232525 /* Pods_FindMeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0588228D9238D0DAC892449 /* Pods_FindMeTests.framework */; };
 		6BBB36CEEDA8BE35CC329333 /* Pods_FindMe_FindMeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A279E2C2B4A7E42657E6C695 /* Pods_FindMe_FindMeUITests.framework */; };
 /* End PBXBuildFile section */
@@ -93,6 +94,8 @@
 		2B42BCB524BFEE9B007241E1 /* LocationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		2B42BCBB24C0FB6A007241E1 /* MainTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarViewController.h; sourceTree = "<group>"; };
 		2B42BCBC24C0FB6A007241E1 /* MainTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabBarViewController.m; sourceTree = "<group>"; };
+		2BAF03CE24C7759600AF8875 /* DatabaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
+		2BAF03CF24C7759600AF8875 /* DatabaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
 		2C41A87BB1A17F9D32D295D3 /* Pods-FindMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindMe.release.xcconfig"; path = "Target Support Files/Pods-FindMe/Pods-FindMe.release.xcconfig"; sourceTree = "<group>"; };
 		517A78D3A5E003A86D99C02D /* Pods-FindMe-FindMeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindMe-FindMeUITests.release.xcconfig"; path = "Target Support Files/Pods-FindMe-FindMeUITests/Pods-FindMe-FindMeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A279E2C2B4A7E42657E6C695 /* Pods_FindMe_FindMeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FindMe_FindMeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +169,7 @@
 		2B42BC4C24BCFB77007241E1 /* FindMe */ = {
 			isa = PBXGroup;
 			children = (
+				2BAF03CD24C7757000AF8875 /* Parse Manager */,
 				2B17C1F924C6395700A1551F /* Views */,
 				2B42BCB724C0F930007241E1 /* Tab Bar View Contollers */,
 				2B42BCA424BFB9CC007241E1 /* Location */,
@@ -256,6 +260,15 @@
 			children = (
 			);
 			path = "New Group";
+			sourceTree = "<group>";
+		};
+		2BAF03CD24C7757000AF8875 /* Parse Manager */ = {
+			isa = PBXGroup;
+			children = (
+				2BAF03CE24C7759600AF8875 /* DatabaseManager.h */,
+				2BAF03CF24C7759600AF8875 /* DatabaseManager.m */,
+			);
+			path = "Parse Manager";
 			sourceTree = "<group>";
 		};
 		4D180BB5FF14E3DF54DB8C33 /* Frameworks */ = {
@@ -570,6 +583,7 @@
 				2B42BC9024BE141A007241E1 /* SignUpViewController.m in Sources */,
 				2B42BC5224BCFB77007241E1 /* SceneDelegate.m in Sources */,
 				2B17C1FC24C63A5D00A1551F /* ContactCell.m in Sources */,
+				2BAF03D024C7759600AF8875 /* DatabaseManager.m in Sources */,
 				2B42BCA224BE1552007241E1 /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

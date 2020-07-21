@@ -249,6 +249,7 @@
                         <outlet property="registerButton" destination="FR7-Hj-bho" id="SaZ-r2-gFV"/>
                         <outlet property="scrollView" destination="2ff-Wi-kjR" id="2q5-bw-sOk"/>
                         <outlet property="userNameField" destination="1Ef-51-mbO" id="gjB-Nb-dW7"/>
+                        <segue destination="l4v-Sg-bpi" kind="show" identifier="homeSegue" id="oco-HZ-96n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0aL-Tm-2EF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -520,6 +521,9 @@
             <point key="canvasLocation" x="-1246.376811594203" y="-51.5625"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="oco-HZ-96n"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="person.crop.circle.badge.plus" catalog="system" width="128" height="101"/>
         <image name="photo" catalog="system" width="128" height="93"/>

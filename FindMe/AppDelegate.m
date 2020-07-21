@@ -20,7 +20,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [GMSServices provideAPIKey:@""];
+    [GMSServices provideAPIKey:@"AlzaSyAPFwuOJDYQMn9QbxV1-jCYxwtyjiLxXcM"];
     ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
              
              configuration.applicationId = @"myAppId";
