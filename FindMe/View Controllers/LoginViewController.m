@@ -21,7 +21,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.passwordField.secureTextEntry= YES;
     [self registerForKeyboardNotifications];
 }
 
@@ -37,17 +36,7 @@
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
         if (error != nil) {
             NSLog(@"User log in failed: %@", error.localizedDescription);
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login Failed"
-                                                                           message:error.localizedDescription
-                                                                    preferredStyle:(UIAlertControllerStyleAlert)];
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"try again"
-                                                               style:UIAlertActionStyleDefault
-                                       
-                                                             handler:^(UIAlertAction * _Nonnull action) {
-            }];
-            [alert addAction:okAction];
-            [self presentViewController:alert animated:YES completion:^{
-            }];
+            [self showAlert:error];
         }
         else {
             NSLog(@"User logged in successfully");
@@ -76,12 +65,26 @@
 {
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    [UIView animateWithDuration:0.2 animations:^{self.view.frame = CGRectMake(self.view.frame.origin.x,0-kbSize.height/2,self.view.frame.size.width, self.view.frame.size.height);}];
+    
+    [UIView animateWithDuration:0.2 animations:^{self.view.frame = CGRectMake(self.view.frame.origin.x, 0 - (kbSize.height/2), self.view.frame.size.width, self.view.frame.size.height);}];
 }
 
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
-    [UIView animateWithDuration:0.2 animations:^{self.view.frame = CGRectMake(self.view.frame.origin.x,0,self.view.frame.size.width, self.view.frame.size.height);}];
+    [UIView animateWithDuration:0.2 animations:^{self.view.frame = CGRectMake(self.view.frame.origin.x, 0, self.view.frame.size.width, self.view.frame.size.height);}];
+}
+-(void) showAlert:(NSError *)error{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login Failed"
+                                                                   message:error.localizedDescription
+                                                            preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"try again"
+                                                       style:UIAlertActionStyleDefault
+                               
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:okAction];
+    [self presentViewController:alert animated:YES completion:^{
+    }];
 }
 
 @end

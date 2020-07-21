@@ -13,6 +13,7 @@
 @property (strong,nonatomic) CLLocationManager *locationManager;
 typedef NS_ENUM(NSInteger, locationPermissionStatus) {
     allowedWhenInUse,
+    restricted,
     denied,
     allowedAlways,
     notDetermined
@@ -50,7 +51,9 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
     if ((self.currentLocationPermission == allowedWhenInUse) || (self.currentLocationPermission == allowedAlways)) {
         return self.locationManager.location;
     }
-    return nil;
+    else {
+          return nil;
+    }
 }
 
 - (void)requestLocationPermission
@@ -60,8 +63,14 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
             [self.locationManager requestWhenInUseAuthorization];}
         
         else if (self.currentLocationPermission == allowedWhenInUse){
-            [self.locationManager requestWhenInUseAuthorization];
+            [self.locationManager requestAlwaysAuthorization];
         }
+        else {
+            
+        }
+    }
+    else {
+        
     }
 }
 
@@ -70,6 +79,10 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
     if (self.currentLocationPermission == allowedAlways) {
         [self.locationManager startUpdatingLocation];
     }
+    else {
+        
+    }
+        
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -80,16 +93,18 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
     if (locations.count >= 1) {
-    NSLog(@"%@",[locations lastObject]);
+    NSLog(@"%@", [locations lastObject]);
+    }
+    else {
+        
     }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
-    NSLog(@"%i",status);
     switch (status) {
         case kCLAuthorizationStatusRestricted:
-            self.currentLocationPermission = denied;
+            self.currentLocationPermission = restricted;
             break;
         case kCLAuthorizationStatusDenied:
             self.currentLocationPermission = denied;

@@ -31,22 +31,22 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     CGFloat contentWidth = self.scrollView.bounds.size.width;
     CGFloat contentHeight = self.scrollView.bounds.size.height;
     self.scrollView.contentSize = CGSizeMake(contentWidth, contentHeight);
+}
+
+-(void)setTextFields
+{
     [self hideAlertLabels];
     [self registerForKeyboardNotifications];
-    [self setTextFieldDelegates];
-    self.passwordField.secureTextEntry = YES;
-    self.confirmPasswordField.secureTextEntry = YES;
-    
     [self createBottomBoarder:self.firstNameField];
     [self createBottomBoarder:self.lastNameField];
     [self createBottomBoarder:self.emailField];
     [self createBottomBoarder:self.passwordField];
     [self createBottomBoarder:self.userNameField];
     [self createBottomBoarder:self.confirmPasswordField];
-    [super viewDidLoad];
     self.profilePhoto.layer.cornerRadius = 50;
 }
 
@@ -57,7 +57,7 @@
 
 - (void)hideAlertLabels
 {
-    self.passwordStatus.hidden =YES;
+    self.passwordStatus.hidden = YES;
     self.confirmPasswordStatus.hidden = YES;
     self.emailStatus.hidden = YES;
 }
@@ -76,16 +76,6 @@
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
     [self presentViewController:imagePickerVC animated:YES completion:nil];
-}
-
-- (void)setTextFieldDelegates
-{
-    self.userNameField.delegate = self;
-    self.lastNameField.delegate = self;
-    self.firstNameField.delegate = self;
-    self.emailField.delegate = self;
-    self.passwordField.delegate = self;
-    self.confirmPasswordField.delegate = self;
 }
 
 - (void)createBottomBoarder:(UITextField *)textField
@@ -172,14 +162,14 @@
 {
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height,0.0);
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
     self.scrollView.contentInset = contentInsets;
     self.scrollView.scrollIndicatorInsets = contentInsets;
 }
 
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0,0.0);
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
     self.scrollView.contentInset = contentInsets;
     self.scrollView.scrollIndicatorInsets = contentInsets;
 }
@@ -201,8 +191,8 @@
     self.emailStatus.hidden = NO;
     NSString *emailRegEx = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
-    if ([emailTest evaluateWithObject:self.emailField.text] == NO) {
-        self.emailStatus.text =@"invalid email";
+    if (![emailTest evaluateWithObject:self.emailField.text]) {
+        self.emailStatus.text = @"invalid email";
         self.emailStatus.textColor = [UIColor redColor];
     }
     else {
@@ -212,14 +202,13 @@
 
 - (IBAction)onEditingConfirmPasswordField:(id)sender
 {
-    NSLog(@"%@",self.confirmPasswordField.text);
     self.confirmPasswordStatus.hidden = NO;
-    if ([self.passwordField.text isEqualToString: self.confirmPasswordField.text]) {
-        self.confirmPasswordStatus.text =@"Passwords match";
+    if ([self.passwordField.text isEqualToString:self.confirmPasswordField.text]) {
+        self.confirmPasswordStatus.text = @"Passwords match";
         self.confirmPasswordStatus.textColor = [UIColor greenColor];
     }
     else {
-        self.confirmPasswordStatus.text =@"Passwords don't match";
+        self.confirmPasswordStatus.text = @"Passwords don't match";
         self.confirmPasswordStatus.textColor = [UIColor redColor];
     }
 }
