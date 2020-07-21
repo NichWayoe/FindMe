@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2199AF924E64514A6D3A11B9 /* Pods_FindMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E14D289B8457FB116F5B200 /* Pods_FindMe.framework */; };
+		2B17C1F624C6331500A1551F /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B17C1F524C6331500A1551F /* Contacts.framework */; };
+		2B17C1F824C6331D00A1551F /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B17C1F724C6331D00A1551F /* ContactsUI.framework */; };
+		2B17C1FC24C63A5D00A1551F /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B17C1FB24C63A5D00A1551F /* ContactCell.m */; };
 		2B42BC4F24BCFB77007241E1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42BC4E24BCFB77007241E1 /* AppDelegate.m */; };
 		2B42BC5224BCFB77007241E1 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42BC5124BCFB77007241E1 /* SceneDelegate.m */; };
 		2B42BC5824BCFB77007241E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B42BC5624BCFB77007241E1 /* Main.storyboard */; };
@@ -50,6 +53,10 @@
 /* Begin PBXFileReference section */
 		0D15CE343A13BA92FFCD76A3 /* Pods-FindMeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindMeTests.debug.xcconfig"; path = "Target Support Files/Pods-FindMeTests/Pods-FindMeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1E14D289B8457FB116F5B200 /* Pods_FindMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FindMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B17C1F524C6331500A1551F /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		2B17C1F724C6331D00A1551F /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
+		2B17C1FA24C63A5D00A1551F /* ContactCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactCell.h; sourceTree = "<group>"; };
+		2B17C1FB24C63A5D00A1551F /* ContactCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactCell.m; sourceTree = "<group>"; };
 		2B42BC4A24BCFB77007241E1 /* FindMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B42BC4D24BCFB77007241E1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2B42BC4E24BCFB77007241E1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -100,7 +107,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B17C1F824C6331D00A1551F /* ContactsUI.framework in Frameworks */,
 				2199AF924E64514A6D3A11B9 /* Pods_FindMe.framework in Frameworks */,
+				2B17C1F624C6331500A1551F /* Contacts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +132,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B17C1F924C6395700A1551F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2B17C1FA24C63A5D00A1551F /* ContactCell.h */,
+				2B17C1FB24C63A5D00A1551F /* ContactCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		2B42BC4124BCFB77007241E1 = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +166,7 @@
 		2B42BC4C24BCFB77007241E1 /* FindMe */ = {
 			isa = PBXGroup;
 			children = (
+				2B17C1F924C6395700A1551F /* Views */,
 				2B42BCB724C0F930007241E1 /* Tab Bar View Contollers */,
 				2B42BCA424BFB9CC007241E1 /* Location */,
 				2B42BC8A24BE13CB007241E1 /* View Controllers */,
@@ -242,6 +261,8 @@
 		4D180BB5FF14E3DF54DB8C33 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2B17C1F724C6331D00A1551F /* ContactsUI.framework */,
+				2B17C1F524C6331500A1551F /* Contacts.framework */,
 				1E14D289B8457FB116F5B200 /* Pods_FindMe.framework */,
 				A279E2C2B4A7E42657E6C695 /* Pods_FindMe_FindMeUITests.framework */,
 				E0588228D9238D0DAC892449 /* Pods_FindMeTests.framework */,
@@ -548,6 +569,7 @@
 				2B42BC8824BD2FA6007241E1 /* Contact.m in Sources */,
 				2B42BC9024BE141A007241E1 /* SignUpViewController.m in Sources */,
 				2B42BC5224BCFB77007241E1 /* SceneDelegate.m in Sources */,
+				2B17C1FC24C63A5D00A1551F /* ContactCell.m in Sources */,
 				2B42BCA224BE1552007241E1 /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
