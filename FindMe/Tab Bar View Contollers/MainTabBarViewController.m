@@ -66,7 +66,7 @@
     }];
 }
 
--(void)showAlert:(NSError *)error{
+- (void)showAlert:(NSError *)error{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Logout Failed"
                                                                    message:error.localizedDescription
                                                             preferredStyle:(UIAlertControllerStyleAlert)];

@@ -71,7 +71,7 @@
 {
     [UIView animateWithDuration:0.2 animations:^{self.view.frame = CGRectMake(self.view.frame.origin.x, 0, self.view.frame.size.width, self.view.frame.size.height);}];
 }
--(void)showAlert:(NSError *)error{
+- (void)showAlert:(NSError *)error{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login Failed"
                                                                    message:error.localizedDescription
                                                             preferredStyle:(UIAlertControllerStyleAlert)];

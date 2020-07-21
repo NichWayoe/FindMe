@@ -201,7 +201,7 @@
     }
 }
 
--(void)showAlert:(NSError *)error
+- (void)showAlert:(NSError *)error
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login Failed"
                                                                    message:error.localizedDescription
