@@ -109,4 +109,13 @@
     }];
 }
 
++ (void)checkForPersistentUser: (void(^)(bool isUserloggedIn))completion
+{
+    if (PFUser.currentUser) {
+        completion(YES);
+    }
+    else {
+        completion(NO);
+    }
+}
 @end

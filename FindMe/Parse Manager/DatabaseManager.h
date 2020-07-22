@@ -21,5 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)logInUser:(NSString *)usernane withPassword:(NSString *)password withCompletion:(void(^)(NSError * error))completion;
 + (void)uploadContacts:(NSArray *)contacts withCompletion:(void(^)(NSError *error))completion;
 + (Contact *)getContactFromPFObject: (PFObject *)contactObject;
++ (void)checkForPersistentUser: (void(^)(bool isUserloggedIn))completion;
+
 @end
 NS_ASSUME_NONNULL_END

@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, childViewControllers) {
 - (void)contactPicker:(CNContactPickerViewController *)picker didSelectContacts:(NSArray<CNContact*> *)contacts
 {
     if (contacts.count >= 1) {
-        NSArray *selectedContacts = (NSArray *) [Contact contactsWithArray:contacts];
+        NSArray *selectedContacts = (NSArray *)[Contact contactsWithArray:contacts];
         [DatabaseManager uploadContacts:selectedContacts withCompletion:^(NSError * _Nonnull error) {
             if (error) {
                 [self showAlert:error];
@@ -52,6 +52,7 @@ typedef NS_ENUM(NSInteger, childViewControllers) {
                 
             }
         }];
+        self.selectedIndex = contactsViewController;
     }
     else {
         
@@ -61,7 +62,7 @@ typedef NS_ENUM(NSInteger, childViewControllers) {
 - (IBAction)onTapLogOut:(id)sender
 {
     [DatabaseManager logOutUser:^(NSError * _Nonnull error) {
-        if(!error) {
+        if (!error) {
             SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
@@ -73,7 +74,8 @@ typedef NS_ENUM(NSInteger, childViewControllers) {
     }];
 }
 
-- (void)showAlert:(NSError *)error{
+- (void)showAlert:(NSError *)error
+{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Logout Failed"
                                                                    message:error.localizedDescription
                                                             preferredStyle:(UIAlertControllerStyleAlert)];

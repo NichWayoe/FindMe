@@ -8,7 +8,7 @@
 
 #import "LocationManager.h"
 
-@interface LocationManager()
+@interface LocationManager ()
 
 @property (strong,nonatomic) CLLocationManager *locationManager;
 typedef NS_ENUM(NSInteger, locationPermissionStatus) {
@@ -58,11 +58,11 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
 
 - (void)requestLocationPermission
 {
-    if (CLLocationManager.locationServicesEnabled){
+    if (CLLocationManager.locationServicesEnabled) {
         if (self.currentLocationPermission == notDetermined) {
-            [self.locationManager requestWhenInUseAuthorization];}
-        
-        else if (self.currentLocationPermission == allowedWhenInUse){
+            [self.locationManager requestWhenInUseAuthorization];
+        }
+        else if (self.currentLocationPermission == allowedWhenInUse) {
             [self.locationManager requestAlwaysAuthorization];
         }
         else {
@@ -74,7 +74,7 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
     }
 }
 
--(void)beginTracking
+- (void)beginTracking
 {
     if (self.currentLocationPermission == allowedAlways) {
         [self.locationManager startUpdatingLocation];
@@ -89,7 +89,7 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
     
 }
 
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
     if (locations.count >= 1) {
     }

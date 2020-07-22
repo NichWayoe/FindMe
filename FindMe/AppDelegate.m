@@ -25,7 +25,6 @@
              configuration.applicationId = @"myAppId";
              configuration.server = @"https://findmern.herokuapp.com/parse";
          }];
-         
          [Parse initializeWithConfiguration:config];
     return YES;
 }

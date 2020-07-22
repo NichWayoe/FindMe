@@ -28,7 +28,7 @@
 
 - (void)fetchContacts
 {
-    [DatabaseManager fetchContacts:^(NSArray * _Nonnull contacts){
+    [DatabaseManager fetchContacts:^(NSArray * _Nonnull contacts) {
         if (contacts) {
             self.contacts = (NSMutableArray *)contacts;
             [self.tableView reloadData];

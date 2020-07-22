@@ -10,7 +10,7 @@
 #import "DatabaseManager.h"
 #import "User.h"
 
-@interface SignUpViewController ()<UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface SignUpViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *firstNameField;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameField;
@@ -39,7 +39,7 @@
     self.scrollView.contentSize = CGSizeMake(contentWidth, contentHeight);
 }
 
--(void)setTextFields
+- (void)setTextFields
 {
     [self hideAlertLabels];
     [self registerForKeyboardNotifications];
@@ -107,7 +107,7 @@
         @"password": self.passwordField.text,
         @"profileImage": profilePhotoData
     };
-    User *user= [[User alloc]initWithDictionary:userDetails];
+    User *user= [[User alloc] initWithDictionary:userDetails];
     [DatabaseManager saveUser:user withCompletion:^(NSError * _Nonnull error) {
         if (error != nil) {
             [self showAlert:(error)];
@@ -144,7 +144,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification object:nil];

@@ -7,7 +7,7 @@
 //
 
 #import "SceneDelegate.h"
-#import "Parse/Parse.h"
+#import "DatabaseManager.h"
 
 @interface SceneDelegate ()
 
@@ -17,14 +17,15 @@
 
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions
 {
-    if (PFUser.currentUser) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"Home"];
-    }
-    else {
-        
-    }
+    [DatabaseManager checkForPersistentUser:^(bool isUserloggedIn) {
+        if(isUserloggedIn) {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"Home"];
+        }
+        else {
+            
+        }
+    }];
 }
-
 
 @end
