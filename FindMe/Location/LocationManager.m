@@ -52,7 +52,7 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
         return self.locationManager.location;
     }
     else {
-          return nil;
+        return nil;
     }
 }
 
@@ -66,7 +66,7 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
             [self.locationManager requestAlwaysAuthorization];
         }
         else {
-        
+            
         }
     }
     else {
@@ -86,13 +86,12 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    NSLog(@"Location service failed with error %@", error);
+    
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
     if (locations.count >= 1) {
-    NSLog(@"%@", [locations lastObject]);
     }
     else {
         

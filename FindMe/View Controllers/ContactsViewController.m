@@ -11,7 +11,7 @@
 #import "ContactCell.h"
 #import "DatabaseManager.h"
 
-@interface ContactsViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface ContactsViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSMutableArray *contacts;
@@ -24,16 +24,13 @@
 {
     [super viewDidLoad];
     self.contacts = [NSMutableArray new];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
     [self fetchContacts];
 }
 
 - (void)fetchContacts
 {
-    [DatabaseManager fetchContacts:^(NSArray * _Nonnull contacts, bool gotContacts){
-        if(gotContacts) {
-            NSLog(@"%@",contacts);
+    [DatabaseManager fetchContacts:^(NSArray * _Nonnull contacts){
+        if (contacts) {
             self.contacts = (NSMutableArray *)contacts;
             [self.tableView reloadData];
         }
@@ -70,8 +67,7 @@
                                                      handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alert addAction:okAction];
-    [self presentViewController:alert animated:YES completion:^{
-    }];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

@@ -397,6 +397,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ds3-7x-Jeq" id="y7h-J0-mEz"/>
+                                    <outlet property="delegate" destination="Ds3-7x-Jeq" id="y10-VQ-53A"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -433,9 +437,9 @@
             <objects>
                 <tabBarController id="JVU-jJ-ApI" customClass="MainTabBarViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="dtf-Qd-3k5">
-                        <barButtonItem key="leftBarButtonItem" title="loyout" id="WXt-0S-Mij">
+                        <barButtonItem key="leftBarButtonItem" title="Log out" id="WXt-0S-Mij">
                             <connections>
-                                <action selector="onTapLoyout:" destination="JVU-jJ-ApI" id="u7X-xT-Fgo"/>
+                                <action selector="onTapLogOut:" destination="JVU-jJ-ApI" id="Ddz-Tr-woX"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="person.crop.circle.badge.plus" catalog="system" id="CGw-d2-bTt">

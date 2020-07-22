@@ -8,24 +8,25 @@
 
 #import "DatabaseManager.h"
 #import "Parse/Parse.h"
+#import "Contact.h"
 
 @implementation DatabaseManager
 
-+ (void)createUser:(NSDictionary *)userDetails withCompletion:(void(^)(NSError *error))completion
++ (void)saveUser:(User *)user withCompletion:(void(^)(NSError *error))completion
 {
-    PFUser *user = [PFUser new];
-    user.username = userDetails[@"username"];
-    user.password = userDetails[@"password"];
-    user[@"firstName"] = userDetails[@"firstName"];
-    user[@"lastName"] = userDetails[@"lastName"];
-    if (userDetails[@"profilePhotoData"]) {
-        user[@"profilePhoto"] = [PFFileObject fileObjectWithData:userDetails[@"profilePhotoData"]];
+    PFUser *newUser = [PFUser new];
+    newUser.username = user.username;
+    newUser.password = user.password;
+    newUser[@"firstName"] = user.firstName;
+    newUser[@"lastName"] = user.lastName;
+    if (user.profileImageData) {
+        newUser[@"profilePhoto"] = [PFFileObject fileObjectWithData:user.profileImageData];
     }
     else {
         
     }
-    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-        if (error) {
+    [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+        if (!succeeded && error) {
             completion(error);
         }
         else
@@ -33,52 +34,64 @@
     }];
 }
 
-+ (void)getUser:(void(^)(PFUser * user))completion
++ (void)uploadContacts:(NSArray *)contacts withCompletion:(void(^)(NSError *error))completion
 {
-    PFUser *user = [PFUser currentUser];
-    if(user) {
-        completion(user);
+    PFObject *contactsToAlert = [PFObject objectWithClassName:@"contactsToAlert"];
+    if (contacts) {
+        for (Contact* contact in contacts) {
+            contactsToAlert[@"user"] = [PFUser currentUser];
+            contactsToAlert[@"firstName"] = contact.firstName;
+            contactsToAlert[@"LastName"] = contact.lastName;
+            contactsToAlert[@"telephoneNumber"] = contact.telephoneNumber;
+            contactsToAlert[@"email"] = contact.email;
+            [contactsToAlert saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if(!succeeded && error ) {
+                }
+                else {
+                }
+            }];
+        }
     }
     else {
-        completion(nil);
+        
     }
 }
 
-+ (void)fetchContacts:(void(^)(NSArray *contacts, bool gotContacts))completion
++ (void)fetchContacts:(void(^)(NSArray *contacts))completion
 {
-    PFQuery *query = [PFQuery queryWithClassName:@"Contact"];
+    PFQuery *query = [PFQuery queryWithClassName:@"contactsToAlert"];
     [query orderByDescending:@"createdAt"];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *contacts, NSError *error) {
         if (error) {
-            completion(nil, NO);
+            completion(nil);
         }
         else {
-            completion(contacts, YES);
+            completion(contacts);
         }
     }];
 }
 
-+ (void)logOutUser:(void(^)(bool didLogOut, NSError * error))completion
++ (void)logOutUser:(void(^)(NSError * error))completion
 {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         if (error) {
-            completion(NO, error);
+            completion(error);
         }
         else {
-            completion(YES, nil);
+            completion(nil);
         }
     }];
 }
 
-+ (void)logInUser:(NSString *)username withPassword:(NSString *)password withCompletion:(void(^)(bool didLogIn, NSError * error))completion
++ (void)logInUser:(NSString *)username withPassword:(NSString *)password withCompletion:(void(^)(NSError * error))completion
 {
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
         if (error) {
-            completion(NO, error);
+            completion(error);
         }
         else {
-            completion(YES, nil);
+            completion(nil);
         }
     }];
 }

@@ -11,11 +11,17 @@
 #import "DatabaseManager.h"
 #import "LoginViewController.h"
 #import "Contact.h"
-#import "Parse/Parse.h"
 @import Contacts;
 @import ContactsUI;
 
-@interface MainTabBarViewController ()<CNContactPickerDelegate, CNContactViewControllerDelegate>
+@interface MainTabBarViewController () <CNContactPickerDelegate, CNContactViewControllerDelegate>
+
+typedef NS_ENUM(NSInteger, childViewControllers) {
+    findMeViewController = 0,
+    mapViewController,
+    contactsViewController,
+    profileViewController,
+};
 
 @end
 
@@ -24,7 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.selectedIndex = 1;
+    self.selectedIndex = mapViewController;
 }
 
 - (IBAction)onTapAddContact:(id)sender
@@ -37,23 +43,25 @@
 - (void)contactPicker:(CNContactPickerViewController *)picker didSelectContacts:(NSArray<CNContact*> *)contacts
 {
     if (contacts.count >= 1) {
-        [Contact uploadContacts:contacts
-                 withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-            if (error != nil) {
-                NSLog(@"error %@", error.localizedDescription);
+        NSArray *selectedContacts = (NSArray *) [Contact contactsWithArray:contacts];
+        [DatabaseManager uploadContacts:selectedContacts withCompletion:^(NSError * _Nonnull error) {
+            if (error) {
+                [self showAlert:error];
             }
             else {
-                 self.selectedIndex = 2;
+                
             }
         }];
-      
+    }
+    else {
+        
     }
 }
 
-- (IBAction)onTapLoyout:(id)sender
+- (IBAction)onTapLogOut:(id)sender
 {
-    [DatabaseManager logOutUser:^(bool didlogOut, NSError * _Nonnull error) {
-        if(didlogOut){
+    [DatabaseManager logOutUser:^(NSError * _Nonnull error) {
+        if(!error) {
             SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
@@ -61,7 +69,6 @@
         }
         else {
             [self showAlert:error];
-            
         }
     }];
 }
@@ -72,12 +79,10 @@
                                                             preferredStyle:(UIAlertControllerStyleAlert)];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"try again"
                                                        style:UIAlertActionStyleDefault
-                               
                                                      handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alert addAction:okAction];
-    [self presentViewController:alert animated:YES completion:^{
-    }];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

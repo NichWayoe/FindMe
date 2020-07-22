@@ -12,40 +12,39 @@
 
 @implementation Contact
 
-@dynamic telephoneNumber;
-@dynamic name;
-@dynamic user;
-@dynamic email;
-@dynamic lastName;
-
-+ (nonnull NSString *)parseClassName
+- (instancetype)initWithContact:(CNContact *)contact
 {
-    return @"Contact";
+    self = [super init];
+    if (self) {
+        self.firstName = contact.givenName;
+        if (contact.familyName) {
+            self.lastName = contact.familyName;
+        }
+        else {
+            
+        }
+        if (contact.emailAddresses) {
+            self.email = contact.emailAddresses.firstObject.value;
+        }
+        else {
+        }
+        self.telephoneNumber = contact.phoneNumbers.firstObject.value.stringValue;
+    }
+    return self;
 }
 
-+ (void)uploadContacts: (NSArray<CNContact*> *)contacts withCompletion: (PFBooleanResultBlock  _Nullable)completion
++ (NSMutableArray *)contactsWithArray:(NSArray *)selectedContacts
 {
-    if(contacts) {
-        for (CNContact *contact in contacts) {
-            Contact *newContact = [Contact new];
-            newContact.name = contact.givenName;
-            newContact.user = [PFUser currentUser];
-            if(contact.givenName) {
-                newContact.lastName = contact.familyName;
-            }
-            else {
-                
-            }
-            if (contact.emailAddresses) {
-                newContact.email = contact.emailAddresses.firstObject.value;
-            }
-            else {
-                
-            }
-            newContact.telephoneNumber = contact.phoneNumbers.firstObject.value.stringValue;
-            [newContact saveInBackgroundWithBlock: completion];
+    NSMutableArray *contacts = [NSMutableArray new];
+    if (selectedContacts) {
+        for (CNContact *contact in selectedContacts) {
+            Contact *newContact = [[Contact alloc] initWithContact:contact];
+            [contacts addObject:newContact];
         }
+        return contacts;
     }
+    else
+        return nil;
 }
 
 @end

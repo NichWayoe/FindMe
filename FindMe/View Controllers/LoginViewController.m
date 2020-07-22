@@ -33,9 +33,9 @@
 {
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
-    [DatabaseManager logInUser:username withPassword:password withCompletion:^(bool didLogIn, NSError * _Nonnull error) {
-        if(didLogIn) {
-             [self performSegueWithIdentifier:@"homeSegue" sender:nil];
+    [DatabaseManager logInUser:username withPassword:password withCompletion:^(NSError * _Nonnull error) {
+        if(!error) {
+            [self performSegueWithIdentifier:@"homeSegue" sender:nil];
         }
         else {
             [self showAlert:error];
@@ -64,12 +64,14 @@
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     
-    [UIView animateWithDuration:0.2 animations:^{self.view.frame = CGRectMake(self.view.frame.origin.x, 0 - (kbSize.height/2), self.view.frame.size.width, self.view.frame.size.height);}];
+    [UIView animateWithDuration:0.2 animations:^{self.view.frame = CGRectMake(self.view.frame.origin.x, 0 - (kbSize.height/2), self.view.frame.size.width, self.view.frame.size.height);
+    }];
 }
 
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
-    [UIView animateWithDuration:0.2 animations:^{self.view.frame = CGRectMake(self.view.frame.origin.x, 0, self.view.frame.size.width, self.view.frame.size.height);}];
+    [UIView animateWithDuration:0.2 animations:^{self.view.frame = CGRectMake(self.view.frame.origin.x, 0, self.view.frame.size.width, self.view.frame.size.height);
+    }];
 }
 - (void)showAlert:(NSError *)error{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login Failed"

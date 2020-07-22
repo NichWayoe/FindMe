@@ -23,7 +23,7 @@
 - (void)setContact:(Contact *)contact
 {
     _contact = contact;
-    self.contactNameLabel.text = [contact.lastName stringByAppendingString:contact.name];
+    self.contactNameLabel.text = [contact.lastName stringByAppendingString:contact.firstName];
     self.contactPhoneNumberLabel.text = contact.telephoneNumber;
 }
 

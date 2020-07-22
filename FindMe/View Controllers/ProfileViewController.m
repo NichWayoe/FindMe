@@ -7,10 +7,6 @@
 //
 
 #import "ProfileViewController.h"
-#import "LoginViewController.h"
-#import "SceneDelegate.h"
-#import "Parse/Parse.h"
-
 
 @interface ProfileViewController ()
 

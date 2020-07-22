@@ -2,25 +2,24 @@
 //  User.h
 //  FindMe
 //
-//  Created by Nicholas Wayoe on 7/13/20.
+//  Created by Nicholas Wayoe on 7/22/20.
 //  Copyright © 2020 Nicholas Wayoe. All rights reserved.
 //
 
-#import <Parse/Parse.h>
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface User : PFObject<PFSubclassing>
+@interface User : NSObject
 
 @property (nonatomic, strong) NSString *email;
 @property (nonatomic, strong) NSString *password;
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *lastName;
-@property (nonatomic, strong) PFFileObject *profileImage;
+@property (nonatomic, strong) NSData   *profileImageData;
 
-+ (void)createUser: (NSDictionary *)userDetails withCompletion:(PFBooleanResultBlock  _Nullable)completion;
-
+- (instancetype)initWithDictionary:(NSDictionary *)userDetails;
 @end
 
 NS_ASSUME_NONNULL_END

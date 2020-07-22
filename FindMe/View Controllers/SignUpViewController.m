@@ -8,6 +8,7 @@
 
 #import "SignUpViewController.h"
 #import "DatabaseManager.h"
+#import "User.h"
 
 @interface SignUpViewController ()<UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -73,7 +74,6 @@
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
     else {
-        NSLog(@"Camera 🚫 available so we will use photo library instead");
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
     [self presentViewController:imagePickerVC animated:YES completion:nil];
@@ -94,24 +94,28 @@
 {
     NSData *profilePhotoData;
     if (self.profilePhoto.image) {
-        profilePhotoData =  UIImagePNGRepresentation(self.profilePhoto.image);}
+        profilePhotoData =  UIImagePNGRepresentation(self.profilePhoto.image);
+    }
     else {
         profilePhotoData = nil;
     }
-    NSDictionary *userDetails = @{@"username":self.userNameField.text,
-                                  @"firstName":self.firstNameField.text,
-                                  @"lastName":self.lastNameField.text,
-                                  @"email":self.emailField.text,
-                                  @"password":self.passwordField.text,
-                                  @"profileImage":profilePhotoData};
-    [DatabaseManager createUser:userDetails withCompletion:^(NSError * _Nonnull error) {
+    NSDictionary *userDetails = @{
+        @"username": self.userNameField.text,
+        @"firstName": self.firstNameField.text,
+        @"lastName": self.lastNameField.text,
+        @"email": self.emailField.text,
+        @"password": self.passwordField.text,
+        @"profileImage": profilePhotoData
+    };
+    User *user= [[User alloc]initWithDictionary:userDetails];
+    [DatabaseManager saveUser:user withCompletion:^(NSError * _Nonnull error) {
         if (error != nil) {
-            NSLog(@"error %@s", error.localizedDescription);
             [self showAlert:(error)];
         }
         else {
             [self performSegueWithIdentifier:@"homeSegue" sender:nil];
-        }}];
+        }
+    }];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
@@ -203,7 +207,7 @@
 
 - (void)showAlert:(NSError *)error
 {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login Failed"
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sign Up Failed"
                                                                    message:error.localizedDescription
                                                             preferredStyle:(UIAlertControllerStyleAlert)];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"try again"
@@ -211,8 +215,7 @@
                                                      handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alert addAction:okAction];
-    [self presentViewController:alert animated:YES completion:^{
-    }];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

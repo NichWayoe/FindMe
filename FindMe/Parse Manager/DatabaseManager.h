@@ -8,15 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import "Parse/Parse.h"
+#import "User.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DatabaseManager : NSObject
 
-+ (void)createUser:(NSDictionary *)userDetails withCompletion:(void(^)(NSError *error))completion;
-+ (void)fetchContacts:(void(^)(NSArray *contacts, bool gotContacts))completion;
-+ (void)logOutUser:(void(^)(bool didLogOut, NSError * error))completion;
-+ (void)logInUser:(NSString *)usernane withPassword:(NSString *)password withCompletion:(void(^)(bool didLogIn, NSError * error))completion;
-                    
++ (void)saveUser:(User *)user withCompletion:(void(^)(NSError *error))completion;
++ (void)fetchContacts:(void(^)(NSArray *contacts))completion;
++ (void)logOutUser:(void(^)(NSError * error))completion;
++ (void)logInUser:(NSString *)usernane withPassword:(NSString *)password withCompletion:(void(^)(NSError * error))completion;
++ (void)uploadContacts:(NSArray *)contacts withCompletion:(void(^)(NSError *error))completion;
+
 @end
 NS_ASSUME_NONNULL_END
