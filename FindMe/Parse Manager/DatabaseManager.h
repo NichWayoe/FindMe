@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Parse/Parse.h"
+#import "Contact.h"
 #import "User.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -19,6 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)logOutUser:(void(^)(NSError * error))completion;
 + (void)logInUser:(NSString *)usernane withPassword:(NSString *)password withCompletion:(void(^)(NSError * error))completion;
 + (void)uploadContacts:(NSArray *)contacts withCompletion:(void(^)(NSError *error))completion;
-
++ (Contact *)getContactFromPFObject: (PFObject *)contactObject;
 @end
 NS_ASSUME_NONNULL_END

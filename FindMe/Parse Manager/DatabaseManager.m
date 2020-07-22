@@ -7,8 +7,6 @@
 //
 
 #import "DatabaseManager.h"
-#import "Parse/Parse.h"
-#import "Contact.h"
 
 @implementation DatabaseManager
 
@@ -57,8 +55,19 @@
     }
 }
 
++ (Contact *)getContactFromPFObject: (PFObject *)contactObject
+{
+    Contact *contact = [Contact new];
+    contact.email = contactObject[@"email"];
+    contact.firstName = contactObject[@"firstName"];
+    contact.lastName = contactObject[@"LastName"];
+    contact.telephoneNumber = contactObject[@"telephoneNumber"];
+    return contact;
+}
+
 + (void)fetchContacts:(void(^)(NSArray *contacts))completion
 {
+    NSMutableArray *fetchedContacts = [NSMutableArray new];
     PFQuery *query = [PFQuery queryWithClassName:@"contactsToAlert"];
     [query orderByDescending:@"createdAt"];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
@@ -67,7 +76,11 @@
             completion(nil);
         }
         else {
-            completion(contacts);
+            for (PFObject *contactObject in contacts) {
+                Contact *contact = [DatabaseManager getContactFromPFObject:contactObject];
+                [fetchedContacts addObject:contact];
+            }
+            completion((NSArray *) fetchedContacts);
         }
     }];
 }

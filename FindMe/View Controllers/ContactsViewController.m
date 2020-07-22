@@ -7,7 +7,6 @@
 //
 
 #import "ContactsViewController.h"
-#import "MainTabBarViewController.h"
 #import "ContactCell.h"
 #import "DatabaseManager.h"
 

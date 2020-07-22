@@ -62,7 +62,6 @@
         NSURL *settingURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
         [application openURL:settingURL options:@{} completionHandler:^(BOOL success) {
             if (success) {
-                NSLog(@"settings opened");
             }
         }];
     }];

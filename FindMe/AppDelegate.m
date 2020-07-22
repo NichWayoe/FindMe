@@ -20,9 +20,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [GMSServices provideAPIKey:@"AIzaSyA_gwuh6L1CHtma7D0FC6tzfF3zDIKMGUU"];
+    [GMSServices provideAPIKey:@""];
     ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-             
              configuration.applicationId = @"myAppId";
              configuration.server = @"https://findmern.herokuapp.com/parse";
          }];
