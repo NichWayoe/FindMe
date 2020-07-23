@@ -23,7 +23,7 @@
     else {
         
     }
-    [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+    [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!succeeded && error) {
             completion(error);
         }
@@ -85,7 +85,7 @@
     }];
 }
 
-+ (void)logOutUser:(void(^)(NSError * error))completion
++ (void)logOutUser:(void(^)(NSError *error))completion
 {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         if (error) {
@@ -97,9 +97,9 @@
     }];
 }
 
-+ (void)logInUser:(NSString *)username withPassword:(NSString *)password withCompletion:(void(^)(NSError * error))completion
++ (void)logInUser:(NSString *)username withPassword:(NSString *)password withCompletion:(void(^)(NSError *error))completion
 {
-    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
+    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *user, NSError *error) {
         if (error) {
             completion(error);
         }

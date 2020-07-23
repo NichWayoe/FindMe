@@ -36,7 +36,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     self.location = [self.locationManager getLocation];
-    if (self.location != nil) {
+    if (self.location) {
         GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:self.location.coordinate zoom:15];
         [self.mapView setCamera:camera];
     }

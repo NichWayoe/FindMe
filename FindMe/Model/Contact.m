@@ -16,13 +16,13 @@
 {
     self = [super init];
     if (self) {
-        if (contact.givenName != nil) {
+        if (contact.givenName) {
             self.firstName = contact.givenName;
         }
         else {
             
         }
-        if (contact.familyName != nil) {
+        if (contact.familyName) {
             self.lastName = contact.familyName;
         }
         else {
