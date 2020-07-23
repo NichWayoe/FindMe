@@ -18,7 +18,7 @@
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions
 {
     [DatabaseManager checkForPersistentUser:^(bool isUserloggedIn) {
-        if(isUserloggedIn) {
+        if (isUserloggedIn) {
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"Home"];
         }

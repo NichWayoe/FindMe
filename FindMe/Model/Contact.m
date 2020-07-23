@@ -16,19 +16,32 @@
 {
     self = [super init];
     if (self) {
-        self.firstName = contact.givenName;
-        if (contact.familyName) {
+        if (contact.givenName != nil) {
+            self.firstName = contact.givenName;
+        }
+        else {
+            
+        }
+        if (contact.familyName != nil) {
             self.lastName = contact.familyName;
         }
         else {
             
         }
-        if (contact.emailAddresses) {
+        NSString *emailRegEx = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+        NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
+        if ([emailTest evaluateWithObject:contact.emailAddresses.firstObject.value]) {
             self.email = contact.emailAddresses.firstObject.value;
         }
         else {
         }
-        self.telephoneNumber = contact.phoneNumbers.firstObject.value.stringValue;
+        NSString *phoneRegrex = @"^\\d{3}-\\d{3}-\\d{4}$";
+        NSPredicate *phoneNumberTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegrex];
+        if ([phoneNumberTest evaluateWithObject:contact.phoneNumbers.firstObject.value.stringValue]) {
+            self.telephoneNumber = contact.phoneNumbers.firstObject.value.stringValue;
+        }
+        else {
+        }
     }
     return self;
 }

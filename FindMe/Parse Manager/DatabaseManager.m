@@ -43,7 +43,7 @@
             contactsToAlert[@"telephoneNumber"] = contact.telephoneNumber;
             contactsToAlert[@"email"] = contact.email;
             [contactsToAlert saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                if(!succeeded && error ) {
+                if (!succeeded && error ) {
                 }
                 else {
                 }

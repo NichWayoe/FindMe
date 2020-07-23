@@ -34,7 +34,7 @@
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
     [DatabaseManager logInUser:username withPassword:password withCompletion:^(NSError * _Nonnull error) {
-        if(!error) {
+        if (!error) {
             [self performSegueWithIdentifier:@"homeSegue" sender:nil];
         }
         else {
