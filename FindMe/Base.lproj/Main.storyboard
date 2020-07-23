@@ -279,60 +279,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ3-K6-2h0">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="728"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="728" id="7sQ-ux-1cI"/>
-                                    <constraint firstAttribute="width" constant="414" id="aBh-uX-C3D"/>
-                                </constraints>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="90" id="bYG-KK-oQ1">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="90"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bYG-KK-oQ1" id="5vZ-fW-3Ve">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3LS-NT-goF">
-                                <rect key="frame" x="0.0" y="736" width="414" height="94"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Si1-wJ-6Zh">
-                                        <rect key="frame" x="34" y="0.0" width="346" height="94"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button" image="square.and.pencil" catalog="system"/>
-                                        <connections>
-                                            <action selector="onFindMe:" destination="3pB-0z-X24" eventType="touchUpInside" id="usa-kM-frM"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUB-wl-yrZ">
+                                <rect key="frame" x="113" y="356" width="150" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <state key="normal" title="START"/>
+                                <state key="selected" title="STOP"/>
+                                <connections>
+                                    <action selector="onFindMe:" destination="3pB-0z-X24" eventType="touchUpInside" id="2Bm-Nd-j8r"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="3LS-NT-goF" firstAttribute="leading" secondItem="X0L-9O-2wJ" secondAttribute="leading" id="8ld-ni-3oX"/>
-                            <constraint firstItem="ZJ3-K6-2h0" firstAttribute="leading" secondItem="X0L-9O-2wJ" secondAttribute="leading" id="CQh-PA-7nr"/>
-                            <constraint firstAttribute="bottom" secondItem="3LS-NT-goF" secondAttribute="bottom" constant="66" id="Rje-Wu-7mI"/>
-                            <constraint firstItem="ZJ3-K6-2h0" firstAttribute="top" secondItem="t6r-wR-pyu" secondAttribute="top" id="VRo-xX-uUI"/>
-                            <constraint firstItem="3LS-NT-goF" firstAttribute="trailing" secondItem="X0L-9O-2wJ" secondAttribute="trailing" id="ZAO-Jz-dpn"/>
-                            <constraint firstItem="3LS-NT-goF" firstAttribute="top" secondItem="ZJ3-K6-2h0" secondAttribute="bottom" constant="8" id="jyR-u7-0Uc"/>
-                            <constraint firstItem="ZJ3-K6-2h0" firstAttribute="trailing" secondItem="X0L-9O-2wJ" secondAttribute="trailing" id="krP-Hv-mve"/>
-                            <constraint firstItem="3LS-NT-goF" firstAttribute="top" secondItem="ZJ3-K6-2h0" secondAttribute="bottom" constant="8" id="n34-Br-bP4"/>
-                        </constraints>
+                        <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="X0L-9O-2wJ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="FindMe" id="YQF-Ar-5iv"/>
                     <connections>
-                        <outlet property="tableView" destination="ZJ3-K6-2h0" id="NqW-kC-BEa"/>
+                        <outlet property="trackingButton" destination="fUB-wl-yrZ" id="W45-UG-aWV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zZs-TD-SeM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1606" y="2715"/>
+            <point key="canvasLocation" x="-1607.2463768115942" y="2714.7321428571427"/>
         </scene>
         <!--Map-->
         <scene sceneID="d4f-0X-J0z">
@@ -531,6 +501,5 @@
     <resources>
         <image name="person.crop.circle.badge.plus" catalog="system" width="128" height="101"/>
         <image name="photo" catalog="system" width="128" height="93"/>
-        <image name="square.and.pencil" catalog="system" width="128" height="118"/>
     </resources>
 </document>

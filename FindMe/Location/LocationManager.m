@@ -34,7 +34,7 @@
     if (self != nil) {
         self.locationManager = [CLLocationManager new];
         self.locationManager.delegate = self;
-        self.locationManager.distanceFilter = 5;
+        self.locationManager.distanceFilter = 100;
         self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
     }
     return self;
@@ -69,8 +69,13 @@
         [self.locationManager startUpdatingLocation];
     }
     else {
-        
+        [self requestLocationPermission];
     }
+}
+
+- (void)stopTracking
+{
+    [self.locationManager stopUpdatingLocation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
