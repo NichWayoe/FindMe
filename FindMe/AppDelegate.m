@@ -22,11 +22,9 @@
 {
     [GMSServices provideAPIKey:@""];
     ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-             
              configuration.applicationId = @"myAppId";
              configuration.server = @"https://findmern.herokuapp.com/parse";
          }];
-         
          [Parse initializeWithConfiguration:config];
     return YES;
 }

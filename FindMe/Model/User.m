@@ -2,7 +2,7 @@
 //  User.m
 //  FindMe
 //
-//  Created by Nicholas Wayoe on 7/13/20.
+//  Created by Nicholas Wayoe on 7/22/20.
 //  Copyright © 2020 Nicholas Wayoe. All rights reserved.
 //
 
@@ -10,15 +10,22 @@
 
 @implementation User
 
-    @dynamic firstName;
-    @dynamic lastName;
-    @dynamic email;
-    @dynamic password;
-    @dynamic profileImage;
-
-+ (nonnull NSString *)parseClassName
+- (instancetype)initWithDictionary:(NSDictionary *)userDetails
 {
-    return @"User";
+    self = [super init];
+    if (self) {
+        self.username = userDetails[@"username"];
+        self.password = userDetails[@"password"];
+        self.firstName = userDetails[@"firstName"];
+        self.lastName = userDetails[@"lastName"];
+        if (userDetails[@"profilePhotoData"]) {
+            self.profileImageData = userDetails[@"profilePhotoData"];
+        }
+        else {
+            
+        }
+    }
+    return self;
 }
 
 @end

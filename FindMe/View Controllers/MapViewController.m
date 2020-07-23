@@ -36,35 +36,38 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     self.location = [self.locationManager getLocation];
-    if (self.location != nil) {
+    if (self.location) {
         GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:self.location.coordinate zoom:15];
         [self.mapView setCamera:camera];
     }
     if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Permission not Allowed"
-                                                                       message:@"We need your permission to show you on the map. TO allow, open settings and enable locations"
-                                                                preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
-                                                               style:UIAlertActionStyleDefault
-                                                             handler:^(UIAlertAction * _Nonnull action) {
-        }];
-        UIAlertAction *settingAction = [UIAlertAction actionWithTitle:@"Open Settings"
-                                                                style:UIAlertActionStyleDefault
-                                                              handler:^(UIAlertAction * _Nonnull action)
-                                        {
-            UIApplication *application = [UIApplication sharedApplication];
-            NSURL *settingURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-            [application openURL:settingURL options:@{} completionHandler:^(BOOL success) {
-                if (success) {
-                    NSLog(@"settings opened");
-                }
-            }];
-        }];
-        [alert addAction:settingAction];
-        [alert addAction:cancelAction];
-        [self presentViewController:alert animated:YES completion:^{
-        }];
+        [self showAlert];
+        
     }
+}
+
+- (void)showAlert
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Permission not Allowed"
+                                                                   message:@"We need your permission to show you on the map. TO allow, open settings and enable locations"
+                                                            preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    UIAlertAction *settingAction = [UIAlertAction actionWithTitle:@"Open Settings"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * _Nonnull action) {
+        UIApplication *application = [UIApplication sharedApplication];
+        NSURL *settingURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        [application openURL:settingURL options:@{} completionHandler:^(BOOL success) {
+            if (success) {
+            }
+        }];
+    }];
+    [alert addAction:settingAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

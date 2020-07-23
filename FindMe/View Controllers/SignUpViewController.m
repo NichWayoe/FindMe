@@ -7,7 +7,8 @@
 //
 
 #import "SignUpViewController.h"
-#import "Parse/Parse.h"
+#import "DatabaseManager.h"
+#import "User.h"
 
 @interface SignUpViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -34,19 +35,20 @@
     [super viewDidLoad];
     CGFloat contentWidth = self.scrollView.bounds.size.width;
     CGFloat contentHeight = self.scrollView.bounds.size.height;
+    [self setTextFields];
     self.scrollView.contentSize = CGSizeMake(contentWidth, contentHeight);
 }
 
--(void)setTextFields
+- (void)setTextFields
 {
     [self hideAlertLabels];
     [self registerForKeyboardNotifications];
-    [self createBottomBoarder:self.firstNameField];
-    [self createBottomBoarder:self.lastNameField];
-    [self createBottomBoarder:self.emailField];
-    [self createBottomBoarder:self.passwordField];
-    [self createBottomBoarder:self.userNameField];
-    [self createBottomBoarder:self.confirmPasswordField];
+    [self createBottomBorder:self.firstNameField];
+    [self createBottomBorder:self.lastNameField];
+    [self createBottomBorder:self.emailField];
+    [self createBottomBorder:self.passwordField];
+    [self createBottomBorder:self.userNameField];
+    [self createBottomBorder:self.confirmPasswordField];
     self.profilePhoto.layer.cornerRadius = 50;
 }
 
@@ -72,7 +74,6 @@
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
     else {
-        NSLog(@"Camera 🚫 available so we will use photo library instead");
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
     [self presentViewController:imagePickerVC animated:YES completion:nil];
@@ -91,36 +92,27 @@
 
 - (IBAction)onRegister:(id)sender
 {
-    PFUser *newUser = [PFUser user];
-    newUser.username = self.userNameField.text;
-    newUser.password = self.passwordField.text;
-    newUser[@"firstName"] = self.firstNameField.text;
-    newUser[@"lastName"] = self.lastNameField.text;
-    
+    NSData *profilePhotoData;
     if (self.profilePhoto.image) {
-        NSData *profilePhotoData =  UIImagePNGRepresentation(self.profilePhoto.image);
-        if (profilePhotoData) {
-            newUser[@"profilePhoto"] = [PFFileObject fileObjectWithData:profilePhotoData];
-        }
+        profilePhotoData =  UIImagePNGRepresentation(self.profilePhoto.image);
     }
-    
-    [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+    else {
+        profilePhotoData = nil;
+    }
+    NSDictionary *userDetails = @{
+        @"username": self.userNameField.text,
+        @"firstName": self.firstNameField.text,
+        @"lastName": self.lastNameField.text,
+        @"email": self.emailField.text,
+        @"password": self.passwordField.text,
+        @"profileImage": profilePhotoData
+    };
+    User *user= [[User alloc] initWithDictionary:userDetails];
+    [DatabaseManager saveUser:user withCompletion:^(NSError * _Nonnull error) {
         if (error != nil) {
-            NSLog(@"Error: %@", error.localizedDescription);
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sign Up Failed"
-                                                                           message:error.localizedDescription
-                                                                    preferredStyle:(UIAlertControllerStyleAlert)];
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"try again"
-                                                               style:UIAlertActionStyleDefault
-                                       
-                                                             handler:^(UIAlertAction * _Nonnull action) {
-            }];
-            [alert addAction:okAction];
-            [self presentViewController:alert animated:YES completion:^{
-            }];
+            [self showAlert:(error)];
         }
         else {
-            NSLog(@"User registered successfully");
             [self performSegueWithIdentifier:@"homeSegue" sender:nil];
         }
     }];
@@ -152,7 +144,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification object:nil];
@@ -212,4 +203,18 @@
         self.confirmPasswordStatus.textColor = [UIColor redColor];
     }
 }
+
+- (void)showAlert:(NSError *)error
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sign Up Failed"
+                                                                   message:error.localizedDescription
+                                                            preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"try again"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:okAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 @end

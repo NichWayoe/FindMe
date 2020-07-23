@@ -6,17 +6,20 @@
 //  Copyright © 2020 Nicholas Wayoe. All rights reserved.
 //
 
-#import <Parse/Parse.h>
+#import "User.h"
+@import Contacts;
+@import ContactsUI;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Contact : PFObject<PFSubclassing>
+@interface Contact : NSObject
 
-    @property (nonatomic, strong) NSString *email;
-    @property (nonatomic, strong) NSString *name;
-    @property (nonatomic, strong) PFUser *user;
-    @property (nonatomic, strong) NSString *telephoneNumber;
+@property (nonatomic, strong) NSString *email;
+@property (nonatomic, strong) NSString *firstName;
+@property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, strong) NSString *telephoneNumber;
+
++ (NSMutableArray *)contactsWithArray:(NSArray *)selectedContacts;
 
 @end
-
 NS_ASSUME_NONNULL_END

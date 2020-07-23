@@ -8,7 +8,7 @@
 
 #import "LocationManager.h"
 
-@interface LocationManager()
+@interface LocationManager ()
 
 @property (strong,nonatomic) CLLocationManager *locationManager;
 typedef NS_ENUM(NSInteger, locationPermissionStatus) {
@@ -52,17 +52,17 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
         return self.locationManager.location;
     }
     else {
-          return nil;
+        return nil;
     }
 }
 
 - (void)requestLocationPermission
 {
-    if (CLLocationManager.locationServicesEnabled){
+    if (CLLocationManager.locationServicesEnabled) {
         if (self.currentLocationPermission == notDetermined) {
-            [self.locationManager requestWhenInUseAuthorization];}
-        
-        else if (self.currentLocationPermission == allowedWhenInUse){
+            [self.locationManager requestWhenInUseAuthorization];
+        }
+        else if (self.currentLocationPermission == allowedWhenInUse) {
             [self.locationManager requestAlwaysAuthorization];
         }
         else {
@@ -74,7 +74,7 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
     }
 }
 
--(void)beginTracking
+- (void)beginTracking
 {
     if (self.currentLocationPermission == allowedAlways) {
         [self.locationManager startUpdatingLocation];
@@ -82,18 +82,16 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
     else {
         
     }
-        
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    NSLog(@"Location service failed with error %@", error);
+    
 }
 
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
     if (locations.count >= 1) {
-    NSLog(@"%@", [locations lastObject]);
     }
     else {
         
