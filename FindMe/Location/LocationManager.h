@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)shared;
 - (void)requestLocationPermission;
-- (CLLocation* )getLocation;
+- (void)getLocation:(void(^)(CLLocation *location))completion;
 - (void)beginTracking;
 
 @end

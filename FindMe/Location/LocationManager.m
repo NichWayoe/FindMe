@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
     notDetermined
 };
 @property (nonatomic, assign) locationPermissionStatus currentLocationPermission;
+@property (strong, nonatomic) CLLocation *location;
 
 @end
 
@@ -46,13 +47,14 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
     return self;
 }
 
-- (CLLocation* )getLocation
+- (void)getLocation:(void(^)(CLLocation *location))completion
 {
+    [self requestLocationPermission];
     if ((self.currentLocationPermission == allowedWhenInUse) || (self.currentLocationPermission == allowedAlways)) {
-        return self.locationManager.location;
+        completion(self.location);
     }
     else {
-        return nil;
+        completion(nil);
     }
 }
 
@@ -94,8 +96,20 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
     if (locations.count >= 1) {
     }
     else {
-        
     }
+}
+
+- (void)broadcastNotification
+{
+    CLLocation *location;
+    if (self.currentLocationPermission == allowedAlways || self.currentLocationPermission == allowedWhenInUse) {
+        location = self.locationManager.location;
+    }
+    else {
+        location = nil;
+    }
+    NSDictionary *userInfo = @{@"location": self.locationManager.location};
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationNotification" object:nil userInfo:userInfo];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
@@ -112,9 +126,11 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
             break;
         case kCLAuthorizationStatusAuthorizedAlways:
             self.currentLocationPermission = allowedAlways;
+            [self broadcastNotification];
             break;
         case kCLAuthorizationStatusAuthorizedWhenInUse:
             self.currentLocationPermission = allowedWhenInUse;
+            [self broadcastNotification];
             break;
     }
 }

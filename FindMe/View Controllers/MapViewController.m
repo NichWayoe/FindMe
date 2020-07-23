@@ -13,7 +13,6 @@
 @interface MapViewController () <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) LocationManager *locationManager;
-@property (strong, nonatomic) CLLocation *location;
 @property (strong,nonatomic) GMSMapView *mapView;
 
 @end
@@ -23,26 +22,34 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self registerForNotifications];
     self.locationManager = LocationManager.shared;
     self.mapView = [[GMSMapView alloc] initWithFrame:self.view.frame];
     self.mapView.mapType = kGMSTypeNormal;
     self.mapView.settings.myLocationButton = YES;
     self.mapView.settings.compassButton = YES;
+    [self.locationManager requestLocationPermission];
     self.mapView.myLocationEnabled = YES;
     [self.view addSubview:self.mapView];
-    [self.locationManager requestLocationPermission];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)registerForNotifications
 {
-    self.location = [self.locationManager getLocation];
-    if (self.location) {
-        GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:self.location.coordinate zoom:15];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateLocation:)
+                                                 name:@"LocationNotification"
+                                               object:nil];
+}
+
+- (void)updateLocation:(NSNotification *)notification
+{
+    NSDictionary* info = [notification userInfo];
+    CLLocation *location = [info objectForKey:@"location"];
+    if (location) {
+        GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:location.coordinate zoom:15];
         [self.mapView setCamera:camera];
     }
-    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
-        [self showAlert];
-        
+    else {
     }
 }
 

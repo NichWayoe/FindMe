@@ -22,11 +22,11 @@
 {
     [super viewDidLoad];
     self.mylocation = LocationManager.shared;
-    [self.mylocation beginTracking];
 }
 
 - (IBAction)onFindMe:(id)sender
 {
+    [self.mylocation beginTracking];
 }
 
 @end
