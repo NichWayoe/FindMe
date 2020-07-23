@@ -11,13 +11,6 @@
 @interface LocationManager ()
 
 @property (strong,nonatomic) CLLocationManager *locationManager;
-typedef NS_ENUM(NSInteger, locationPermissionStatus) {
-    allowedWhenInUse,
-    restricted,
-    denied,
-    allowedAlways,
-    notDetermined
-};
 @property (nonatomic, assign) locationPermissionStatus currentLocationPermission;
 @property (strong, nonatomic) CLLocation *location;
 
@@ -47,15 +40,9 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
     return self;
 }
 
-- (void)getLocation:(void(^)(CLLocation *location))completion
+- (void)getAuthorisationStatus:(void(^)(locationPermissionStatus status))completion
 {
-    [self requestLocationPermission];
-    if ((self.currentLocationPermission == allowedWhenInUse) || (self.currentLocationPermission == allowedAlways)) {
-        completion(self.location);
-    }
-    else {
-        completion(nil);
-    }
+    completion(self.currentLocationPermission);
 }
 
 - (void)requestLocationPermission
@@ -101,15 +88,19 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
 
 - (void)broadcastNotification
 {
-    CLLocation *location;
-    if (self.currentLocationPermission == allowedAlways || self.currentLocationPermission == allowedWhenInUse) {
-        location = self.locationManager.location;
+    if ((self.currentLocationPermission == allowedAlways) || (self.currentLocationPermission == allowedWhenInUse)) {
+        CLLocation *location = self.locationManager.location;
+        NSDictionary *userInfo = @{
+            @"location": location
+        };
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationNotification" object:nil userInfo:userInfo];
     }
     else {
-        location = nil;
+        NSDictionary *userInfo = @{
+            @"location": [NSNull null]
+        };
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationNotification" object:nil userInfo:userInfo];
     }
-    NSDictionary *userInfo = @{@"location": self.locationManager.location};
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationNotification" object:nil userInfo:userInfo];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
@@ -120,6 +111,7 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
             break;
         case kCLAuthorizationStatusDenied:
             self.currentLocationPermission = denied;
+            [self broadcastNotification];
             break;
         case kCLAuthorizationStatusNotDetermined:
             self.currentLocationPermission = notDetermined;

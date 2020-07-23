@@ -12,10 +12,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LocationManager : NSObject <CLLocationManagerDelegate>
 
+typedef NS_ENUM(NSInteger, locationPermissionStatus) {
+    allowedWhenInUse,
+    restricted,
+    denied,
+    allowedAlways,
+    notDetermined
+};
+
 + (instancetype)shared;
 - (void)requestLocationPermission;
-- (void)getLocation:(void(^)(CLLocation *location))completion;
 - (void)beginTracking;
+- (void)getAuthorisationStatus:(void(^)(locationPermissionStatus status))completion;
 
 @end
 

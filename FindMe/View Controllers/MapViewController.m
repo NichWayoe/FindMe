@@ -45,12 +45,30 @@
 {
     NSDictionary* info = [notification userInfo];
     CLLocation *location = [info objectForKey:@"location"];
-    if (location) {
+    if (![location isEqual:[NSNull null]]) {
         GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:location.coordinate zoom:15];
         [self.mapView setCamera:camera];
     }
     else {
+        [self showAlert];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.locationManager getAuthorisationStatus:^(locationPermissionStatus status) {
+        if (status == denied) {
+            [self showAlert];
+        }
+        else if (status == notDetermined) {
+            [self.locationManager requestLocationPermission];
+        }
+        else if (status == restricted) {
+            [self showAlert];
+        }
+        else {
+            return;
+        }
+    }];
 }
 
 - (void)showAlert
