@@ -24,13 +24,9 @@
     [super viewDidLoad];
     self.locationManager = LocationManager.shared;
     self.locationManager.delegate = self;
-    self.mapView = [[GMSMapView alloc] initWithFrame:self.view.frame];
-    self.mapView.mapType = kGMSTypeNormal;
-    self.mapView.settings.myLocationButton = YES;
-    self.mapView.settings.compassButton = YES;
+    [self defaultMapView];
     [self.locationManager requestLocationPermission];
-    self.mapView.myLocationEnabled = YES;
-    [self.view addSubview:self.mapView];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -50,15 +46,26 @@
     }];
 }
 
-- (void)updateLocation:(CLLocation *)location
+- (void)updateCameraPositionWithLocation:(CLLocation *)location
 {
-    if (![location isEqual:[NSNull null]]) {
+    if (location) {
         GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:location.coordinate zoom:15];
         [self.mapView setCamera:camera];
     }
     else {
         [self showAlert];
     }
+}
+
+- (void)defaultMapView
+{
+    self.mapView = [[GMSMapView alloc] initWithFrame:self.view.frame];
+    self.mapView.mapType = kGMSTypeNormal;
+    self.mapView.settings.myLocationButton = YES;
+    self.mapView.settings.compassButton = YES;
+    [self.locationManager requestLocationPermission];
+    self.mapView.myLocationEnabled = YES;
+    [self.view addSubview:self.mapView];
 }
 
 - (void)showAlert

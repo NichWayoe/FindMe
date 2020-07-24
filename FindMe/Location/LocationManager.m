@@ -105,11 +105,11 @@
             break;
         case kCLAuthorizationStatusAuthorizedAlways:
             self.currentLocationPermission = AllowedAlways;
-            [self.delegate updateLocation:self.locationManager.location];
+            [self.delegate updateCameraPositionWithLocation:self.locationManager.location];
             break;
         case kCLAuthorizationStatusAuthorizedWhenInUse:
             self.currentLocationPermission = AllowedWhenInUse;
-            [self.delegate updateLocation:self.locationManager.location];
+            [self.delegate updateCameraPositionWithLocation:self.locationManager.location];
             break;
     }
 }

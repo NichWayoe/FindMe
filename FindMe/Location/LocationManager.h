@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol LocationManagerDelegate <NSObject>
 
-- (void)updateLocation:(CLLocation *)location;
+- (void)updateCameraPositionWithLocation:(CLLocation *)location;
 
 @end
 
