@@ -11,7 +11,7 @@
 @interface LocationManager ()
 
 @property (strong,nonatomic) CLLocationManager *locationManager;
-@property (nonatomic, assign) locationPermissionStatus currentLocationPermission;
+@property (nonatomic, assign) LocationPermissionStatus currentLocationPermission;
 @property (strong, nonatomic) CLLocation *location;
 
 @end
@@ -40,7 +40,7 @@
     return self;
 }
 
-- (void)getAuthorisationStatus:(void(^)(locationPermissionStatus status))completion
+- (void)getAuthorisationStatus:(void(^)(LocationPermissionStatus status))completion
 {
     completion(self.currentLocationPermission);
 }
@@ -48,10 +48,10 @@
 - (void)requestLocationPermission
 {
     if (CLLocationManager.locationServicesEnabled) {
-        if (self.currentLocationPermission == notDetermined) {
+        if (self.currentLocationPermission == NotDetermined) {
             [self.locationManager requestWhenInUseAuthorization];
         }
-        else if (self.currentLocationPermission == allowedWhenInUse) {
+        else if (self.currentLocationPermission == AllowedWhenInUse) {
             [self.locationManager requestAlwaysAuthorization];
         }
         else {
@@ -65,7 +65,7 @@
 
 - (void)beginTracking
 {
-    if (self.currentLocationPermission == allowedAlways) {
+    if (self.currentLocationPermission == AllowedAlways) {
         [self.locationManager startUpdatingLocation];
     }
     else {
@@ -91,43 +91,25 @@
     }
 }
 
-- (void)broadcastNotification
-{
-    if ((self.currentLocationPermission == allowedAlways) || (self.currentLocationPermission == allowedWhenInUse)) {
-        CLLocation *location = self.locationManager.location;
-        NSDictionary *userInfo = @{
-            @"location": location
-        };
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationNotification" object:nil userInfo:userInfo];
-    }
-    else {
-        NSDictionary *userInfo = @{
-            @"location": [NSNull null]
-        };
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationNotification" object:nil userInfo:userInfo];
-    }
-}
-
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
     switch (status) {
         case kCLAuthorizationStatusRestricted:
-            self.currentLocationPermission = restricted;
+            self.currentLocationPermission = Restricted;
             break;
         case kCLAuthorizationStatusDenied:
-            self.currentLocationPermission = denied;
-            [self broadcastNotification];
+            self.currentLocationPermission = Denied;
             break;
         case kCLAuthorizationStatusNotDetermined:
-            self.currentLocationPermission = notDetermined;
+            self.currentLocationPermission = NotDetermined;
             break;
         case kCLAuthorizationStatusAuthorizedAlways:
-            self.currentLocationPermission = allowedAlways;
-            [self broadcastNotification];
+            self.currentLocationPermission = AllowedAlways;
+            [self.delegate updateLocation:self.locationManager.location];
             break;
         case kCLAuthorizationStatusAuthorizedWhenInUse:
-            self.currentLocationPermission = allowedWhenInUse;
-            [self broadcastNotification];
+            self.currentLocationPermission = AllowedWhenInUse;
+            [self.delegate updateLocation:self.locationManager.location];
             break;
     }
 }

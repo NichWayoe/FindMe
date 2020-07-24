@@ -10,21 +10,29 @@
 @import CoreLocation;
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol LocationManagerDelegate <NSObject>
+
+- (void)updateLocation:(CLLocation *)location;
+
+@end
+
 @interface LocationManager : NSObject <CLLocationManagerDelegate>
 
-typedef NS_ENUM(NSInteger, locationPermissionStatus) {
-    allowedWhenInUse,
-    restricted,
-    denied,
-    allowedAlways,
-    notDetermined
+typedef NS_ENUM(NSInteger, LocationPermissionStatus) {
+    AllowedWhenInUse,
+    Restricted,
+    Denied,
+    AllowedAlways,
+    NotDetermined
 };
 
 + (instancetype)shared;
 - (void)requestLocationPermission;
 - (void)beginTracking;
 - (void)stopTracking;
-- (void)getAuthorisationStatus:(void(^)(locationPermissionStatus status))completion;
+- (void)getAuthorisationStatus:(void(^)(LocationPermissionStatus status))completion;
+
+@property (nonatomic, weak) id<LocationManagerDelegate>delegate;
 
 @end
 

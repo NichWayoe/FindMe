@@ -10,7 +10,7 @@
 #import "LocationManager.h"
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface MapViewController () <CLLocationManagerDelegate>
+@interface MapViewController () <LocationManagerDelegate>
 
 @property (strong, nonatomic) LocationManager *locationManager;
 @property (strong,nonatomic) GMSMapView *mapView;
@@ -22,8 +22,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self registerForNotifications];
     self.locationManager = LocationManager.shared;
+    self.locationManager.delegate = self;
     self.mapView = [[GMSMapView alloc] initWithFrame:self.view.frame];
     self.mapView.mapType = kGMSTypeNormal;
     self.mapView.settings.myLocationButton = YES;
@@ -33,18 +33,25 @@
     [self.view addSubview:self.mapView];
 }
 
-- (void)registerForNotifications
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateLocation:)
-                                                 name:@"LocationNotification"
-                                               object:nil];
+- (void)viewWillAppear:(BOOL)animated {
+    [self.locationManager getAuthorisationStatus:^(LocationPermissionStatus status) {
+        if (status == Denied) {
+            [self showAlert];
+        }
+        else if (status == NotDetermined) {
+            [self.locationManager requestLocationPermission];
+        }
+        else if (status == Restricted) {
+            [self showAlert];
+        }
+        else {
+            return;
+        }
+    }];
 }
 
-- (void)updateLocation:(NSNotification *)notification
+- (void)updateLocation:(CLLocation *)location
 {
-    NSDictionary* info = [notification userInfo];
-    CLLocation *location = [info objectForKey:@"location"];
     if (![location isEqual:[NSNull null]]) {
         GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:location.coordinate zoom:15];
         [self.mapView setCamera:camera];
@@ -52,23 +59,6 @@
     else {
         [self showAlert];
     }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [self.locationManager getAuthorisationStatus:^(locationPermissionStatus status) {
-        if (status == denied) {
-            [self showAlert];
-        }
-        else if (status == notDetermined) {
-            [self.locationManager requestLocationPermission];
-        }
-        else if (status == restricted) {
-            [self showAlert];
-        }
-        else {
-            return;
-        }
-    }];
 }
 
 - (void)showAlert
