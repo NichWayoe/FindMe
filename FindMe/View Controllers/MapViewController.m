@@ -25,36 +25,42 @@
     self.locationManager = LocationManager.shared;
     self.locationManager.delegate = self;
     [self defaultMapView];
-    [self.locationManager requestLocationPermission];
-    
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [self.locationManager getAuthorisationStatus:^(LocationPermissionStatus status) {
-        if (status == Denied) {
+- (void)viewDidAppear:(BOOL)animated{
+    switch ([self.locationManager authorisationStatus]) {
+        case Denied:
+        case Restricted:
             [self showAlert];
-        }
-        else if (status == NotDetermined) {
+            break;
+        case NotDetermined:
             [self.locationManager requestLocationPermission];
-        }
-        else if (status == Restricted) {
-            [self showAlert];
-        }
-        else {
-            return;
-        }
-    }];
+            break;
+        case AllowedAlways:
+        case AllowedWhenInUse:
+            [self updateCameraPositionForMapVIew:[self.locationManager location]];
+    }
 }
 
-- (void)updateCameraPositionWithLocation:(CLLocation *)location
+- (void)authorisationStatusDidChange:(LocationPermissionStatus)status
 {
-    if (location) {
-        GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:location.coordinate zoom:15];
-        [self.mapView setCamera:camera];
+    switch (status) {
+        case Denied:
+        case Restricted:
+            [self showAlert];
+            break;
+        case NotDetermined:
+            break;
+        case AllowedAlways:
+        case AllowedWhenInUse:
+            [self updateCameraPositionForMapVIew:[self.locationManager location]];
     }
-    else {
-        [self showAlert];
-    }
+}
+
+- (void)updateCameraPositionForMapVIew:(CLLocation *)location
+{
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:location.coordinate zoom:15];
+    [self.mapView setCamera:camera];
 }
 
 - (void)defaultMapView

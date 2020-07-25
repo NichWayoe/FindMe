@@ -40,22 +40,30 @@
     return self;
 }
 
-- (void)getAuthorisationStatus:(void(^)(LocationPermissionStatus status))completion
+- (LocationPermissionStatus)authorisationStatus
 {
-    completion(self.currentLocationPermission);
+    return self.currentLocationPermission;
+}
+
+- (CLLocation *)location;
+{
+    return self.locationManager.location;
 }
 
 - (void)requestLocationPermission
 {
     if (CLLocationManager.locationServicesEnabled) {
-        if (self.currentLocationPermission == NotDetermined) {
-            [self.locationManager requestWhenInUseAuthorization];
-        }
-        else if (self.currentLocationPermission == AllowedWhenInUse) {
-            [self.locationManager requestAlwaysAuthorization];
-        }
-        else {
-            
+        switch (self.currentLocationPermission) {
+            case NotDetermined:
+                [self.locationManager requestWhenInUseAuthorization];
+                break;
+            case AllowedWhenInUse:
+                [self.locationManager requestAlwaysAuthorization];
+            case AllowedAlways:
+                break;
+            case Restricted:
+            case Denied:
+                break;
         }
     }
     else {
@@ -102,16 +110,16 @@
             break;
         case kCLAuthorizationStatusNotDetermined:
             self.currentLocationPermission = NotDetermined;
+            [self.locationManager requestWhenInUseAuthorization];
             break;
         case kCLAuthorizationStatusAuthorizedAlways:
             self.currentLocationPermission = AllowedAlways;
-            [self.delegate updateCameraPositionWithLocation:self.locationManager.location];
             break;
         case kCLAuthorizationStatusAuthorizedWhenInUse:
             self.currentLocationPermission = AllowedWhenInUse;
-            [self.delegate updateCameraPositionWithLocation:self.locationManager.location];
             break;
     }
+    [self.delegate authorisationStatusDidChange:self.currentLocationPermission];
 }
 
 @end

@@ -12,12 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol LocationManagerDelegate <NSObject>
 
-- (void)updateCameraPositionWithLocation:(CLLocation *)location;
-
-@end
-
-@interface LocationManager : NSObject <CLLocationManagerDelegate>
-
 typedef NS_ENUM(NSInteger, LocationPermissionStatus) {
     AllowedWhenInUse,
     Restricted,
@@ -26,11 +20,18 @@ typedef NS_ENUM(NSInteger, LocationPermissionStatus) {
     NotDetermined
 };
 
+- (void)authorisationStatusDidChange:(LocationPermissionStatus )status;
+
+@end
+
+@interface LocationManager : NSObject <CLLocationManagerDelegate>
+
 + (instancetype)shared;
 - (void)requestLocationPermission;
 - (void)beginTracking;
 - (void)stopTracking;
-- (void)getAuthorisationStatus:(void(^)(LocationPermissionStatus status))completion;
+- (CLLocation *)location;
+- (LocationPermissionStatus)authorisationStatus;
 
 @property (nonatomic, weak) id<LocationManagerDelegate>delegate;
 

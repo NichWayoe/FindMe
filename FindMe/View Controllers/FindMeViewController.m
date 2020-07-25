@@ -24,33 +24,32 @@
     self.mylocation = LocationManager.shared;
     self.trackingButton.backgroundColor =[UIColor redColor];
     self.trackingButton.layer.cornerRadius = 75;
-    [self setUnSelectedStateOfTrackingButton];
 }
 
 - (IBAction)onFindMe:(id)sender
 {
     if (!self.trackingButton.isSelected) {
-        [self setSelectedStateOfTrackingButton];
+        [self designTrackingButtonWithState:@"selected"];
         [self.mylocation beginTracking];
     }
     else {
-        [self setUnSelectedStateOfTrackingButton];
+        [self designTrackingButtonWithState:@"unselected"];
         [self.mylocation stopTracking];
     }
 }
 
-- (void)setSelectedStateOfTrackingButton
+- (void)designTrackingButtonWithState:(NSString *)state
 {
-    self.trackingButton.selected = YES;
-    self.trackingButton.highlighted = NO;
-    self.trackingButton.backgroundColor = [UIColor greenColor];
-}
-
-- (void)setUnSelectedStateOfTrackingButton
-{
-    self.trackingButton.selected = NO;
-    self.trackingButton.highlighted = NO;
-    self.trackingButton.backgroundColor = [UIColor redColor];
+    if ([state isEqualToString:@"selected"]) {
+        self.trackingButton.selected = YES;
+        self.trackingButton.highlighted = NO;
+        self.trackingButton.backgroundColor = [UIColor greenColor];
+    }
+    else {
+        self.trackingButton.selected = NO;
+        self.trackingButton.highlighted = NO;
+        self.trackingButton.backgroundColor = [UIColor redColor];
+    }
 }
 
 @end
