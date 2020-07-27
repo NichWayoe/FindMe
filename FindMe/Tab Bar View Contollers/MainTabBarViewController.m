@@ -16,11 +16,11 @@
 
 @interface MainTabBarViewController () <CNContactPickerDelegate, CNContactViewControllerDelegate>
 
-typedef NS_ENUM(NSInteger, childViewControllers) {
-    findMeViewController = 0,
-    mapViewController,
-    contactsViewController,
-    profileViewController,
+typedef NS_ENUM(NSInteger, ChildViewControllers) {
+    FindMeViewController = 0,
+    MapViewController,
+    ContactsViewController,
+    ProfileViewController,
 };
 
 @end
@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, childViewControllers) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.selectedIndex = mapViewController;
+    self.selectedIndex = MapViewController;
 }
 
 - (IBAction)onTapAddContact:(id)sender
@@ -52,7 +52,7 @@ typedef NS_ENUM(NSInteger, childViewControllers) {
                 
             }
         }];
-        self.selectedIndex = contactsViewController;
+        self.selectedIndex = ContactsViewController;
     }
     else {
         

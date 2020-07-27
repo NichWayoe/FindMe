@@ -18,8 +18,8 @@
         self.password = userDetails[@"password"];
         self.firstName = userDetails[@"firstName"];
         self.lastName = userDetails[@"lastName"];
-        if (userDetails[@"profilePhotoData"]) {
-            self.profileImageData = userDetails[@"profilePhotoData"];
+        if (userDetails[@"profileImage"]) {
+            self.profileImageData = userDetails[@"profileImage"];
         }
         else {
             
