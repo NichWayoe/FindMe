@@ -27,18 +27,32 @@
     self.locationManager.delegate = self;
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    switch ([self.locationManager authorisationStatus]) {
-        case Denied:
-        case Restricted:
-            [self showAlert];
-            break;
-        case NotDetermined:
-            [self.locationManager requestLocationPermission];
-            break;
-        case AllowedAlways:
-        case AllowedWhenInUse:
-            [self updateCameraPositionForMapVIew:[self.locationManager location]];
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self resolveLocation];
+}
+
+- (void)resolveLocation
+{
+    if ([self.locationManager canGetLocation]) {
+        switch ([self.locationManager authorisationStatus]) {
+            case Denied:
+            case Restricted:
+                [self showAlert];
+                break;
+            case NotDetermined:
+                break;
+            case AllowedAlways:
+            case AllowedWhenInUse:
+                [self updateCameraPositionForMapVIew:[self.locationManager location]];
+                break;
+        }
+    }
+    else {
+        [self showAlert];
+        
     }
 }
 
@@ -99,3 +113,4 @@
 }
 
 @end
+

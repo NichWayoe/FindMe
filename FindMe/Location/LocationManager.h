@@ -32,6 +32,7 @@ typedef NS_ENUM(NSInteger, LocationPermissionStatus) {
 - (void)stopTracking;
 - (CLLocation *)location;
 - (LocationPermissionStatus)authorisationStatus;
+- (BOOL)canGetLocation;
 
 @property (nonatomic, weak) id<LocationManagerDelegate>delegate;
 

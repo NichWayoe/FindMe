@@ -70,6 +70,11 @@
     }
 }
 
+- (BOOL)canGetLocation
+{
+    return [CLLocationManager locationServicesEnabled];
+}
+
 - (void)beginTracking
 {
     if (self.currentLocationPermission == AllowedAlways) {
