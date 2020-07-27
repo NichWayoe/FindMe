@@ -22,7 +22,7 @@
 {
     [super viewDidLoad];
     self.mylocation = LocationManager.shared;
-    self.trackingButton.backgroundColor =[UIColor redColor];
+    self.trackingButton.backgroundColor = [UIColor redColor];
     self.trackingButton.layer.cornerRadius = 75;
 }
 
