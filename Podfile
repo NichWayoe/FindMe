@@ -9,6 +9,9 @@ target 'FindMe' do
   pod 'Parse'
   pod 'GoogleMaps'
   pod 'Parse/UI'
+  pod 'mailgun', '~> 1.0'
+  pod 'AFNetworking'
+
  
 
   target 'FindMeTests' do
