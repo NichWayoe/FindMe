@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UIImageView *contactProfileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *contactNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *contactPhoneNumberLabel;
 @property(nonatomic,strong)Contact *contact;
+@property (weak, nonatomic) IBOutlet UILabel *emailField;
 
 @end
 

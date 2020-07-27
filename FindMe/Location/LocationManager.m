@@ -60,14 +60,13 @@
             case AllowedWhenInUse:
                 [self.locationManager requestAlwaysAuthorization];
             case AllowedAlways:
-                break;
             case Restricted:
             case Denied:
                 break;
         }
     }
     else {
-        
+        return;
     }
 }
 
@@ -93,10 +92,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
-    if (locations.count >= 1) {
-    }
-    else {
-    }
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status

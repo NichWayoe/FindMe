@@ -22,12 +22,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self defaultMapView];
     self.locationManager = LocationManager.shared;
     self.locationManager.delegate = self;
-    [self defaultMapView];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     switch ([self.locationManager authorisationStatus]) {
         case Denied:
         case Restricted:

@@ -23,8 +23,10 @@
 - (void)setContact:(Contact *)contact
 {
     _contact = contact;
+    self.contactProfileImageView.layer.cornerRadius = 25;
     self.contactNameLabel.text = [contact.lastName stringByAppendingString:contact.firstName];
-    self.contactPhoneNumberLabel.text = contact.telephoneNumber;
+    self.emailField.text = contact.email;
+    self.contactProfileImageView.image = [UIImage imageWithData:contact.profileImageData];
 }
 
 @end
