@@ -11,7 +11,7 @@
 
 @interface FindMeViewController ()
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *trackingButton;
 @property (strong, nonatomic) LocationManager *mylocation;
 
 @end
@@ -22,11 +22,34 @@
 {
     [super viewDidLoad];
     self.mylocation = LocationManager.shared;
-    [self.mylocation beginTracking];
+    self.trackingButton.backgroundColor =[UIColor redColor];
+    self.trackingButton.layer.cornerRadius = 75;
 }
 
 - (IBAction)onFindMe:(id)sender
 {
+    if (!self.trackingButton.isSelected) {
+        [self designTrackingButtonWithState:@"selected"];
+        [self.mylocation beginTracking];
+    }
+    else {
+        [self designTrackingButtonWithState:@"unselected"];
+        [self.mylocation stopTracking];
+    }
+}
+
+- (void)designTrackingButtonWithState:(NSString *)state
+{
+    if ([state isEqualToString:@"selected"]) {
+        self.trackingButton.selected = YES;
+        self.trackingButton.highlighted = NO;
+        self.trackingButton.backgroundColor = [UIColor greenColor];
+    }
+    else {
+        self.trackingButton.selected = NO;
+        self.trackingButton.highlighted = NO;
+        self.trackingButton.backgroundColor = [UIColor redColor];
+    }
 }
 
 @end

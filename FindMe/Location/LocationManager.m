@@ -11,14 +11,8 @@
 @interface LocationManager ()
 
 @property (strong,nonatomic) CLLocationManager *locationManager;
-typedef NS_ENUM(NSInteger, locationPermissionStatus) {
-    allowedWhenInUse,
-    restricted,
-    denied,
-    allowedAlways,
-    notDetermined
-};
-@property (nonatomic, assign) locationPermissionStatus currentLocationPermission;
+@property (nonatomic, assign) LocationPermissionStatus currentLocationPermission;
+@property (strong, nonatomic) CLLocation *location;
 
 @end
 
@@ -40,48 +34,55 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
     if (self != nil) {
         self.locationManager = [CLLocationManager new];
         self.locationManager.delegate = self;
-        self.locationManager.distanceFilter = 5;
+        self.locationManager.distanceFilter = 100;
         self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
     }
     return self;
 }
 
-- (CLLocation* )getLocation
+- (LocationPermissionStatus)authorisationStatus
 {
-    if ((self.currentLocationPermission == allowedWhenInUse) || (self.currentLocationPermission == allowedAlways)) {
-        return self.locationManager.location;
-    }
-    else {
-        return nil;
-    }
+    return self.currentLocationPermission;
+}
+
+- (CLLocation *)location;
+{
+    return self.locationManager.location;
 }
 
 - (void)requestLocationPermission
 {
     if (CLLocationManager.locationServicesEnabled) {
-        if (self.currentLocationPermission == notDetermined) {
-            [self.locationManager requestWhenInUseAuthorization];
-        }
-        else if (self.currentLocationPermission == allowedWhenInUse) {
-            [self.locationManager requestAlwaysAuthorization];
-        }
-        else {
-            
+        switch (self.currentLocationPermission) {
+            case NotDetermined:
+                [self.locationManager requestWhenInUseAuthorization];
+                break;
+            case AllowedWhenInUse:
+                [self.locationManager requestAlwaysAuthorization];
+            case AllowedAlways:
+            case Restricted:
+            case Denied:
+                break;
         }
     }
     else {
-        
+        return;
     }
 }
 
 - (void)beginTracking
 {
-    if (self.currentLocationPermission == allowedAlways) {
+    if (self.currentLocationPermission == AllowedAlways) {
         [self.locationManager startUpdatingLocation];
     }
     else {
-        
+        [self requestLocationPermission];
     }
+}
+
+- (void)stopTracking
+{
+    [self.locationManager stopUpdatingLocation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -91,32 +92,30 @@ typedef NS_ENUM(NSInteger, locationPermissionStatus) {
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
-    if (locations.count >= 1) {
-    }
-    else {
-        
-    }
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
     switch (status) {
         case kCLAuthorizationStatusRestricted:
-            self.currentLocationPermission = restricted;
+            self.currentLocationPermission = Restricted;
             break;
         case kCLAuthorizationStatusDenied:
-            self.currentLocationPermission = denied;
+            self.currentLocationPermission = Denied;
             break;
         case kCLAuthorizationStatusNotDetermined:
-            self.currentLocationPermission = notDetermined;
+            self.currentLocationPermission = NotDetermined;
+            [self.locationManager requestWhenInUseAuthorization];
             break;
         case kCLAuthorizationStatusAuthorizedAlways:
-            self.currentLocationPermission = allowedAlways;
+            self.currentLocationPermission = AllowedAlways;
             break;
         case kCLAuthorizationStatusAuthorizedWhenInUse:
-            self.currentLocationPermission = allowedWhenInUse;
+            self.currentLocationPermission = AllowedWhenInUse;
             break;
     }
+    [self.delegate authorisationStatusDidChange:self.currentLocationPermission];
 }
 
 @end

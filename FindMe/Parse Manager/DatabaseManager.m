@@ -32,6 +32,25 @@
     }];
 }
 
++ (User *)getCurrentUser
+{
+    PFUser *user = [PFUser currentUser];
+    User *currentUser = [User new];
+    currentUser.firstName = user[@"firstName"];
+    currentUser.lastName = user[@"lastName"];
+    currentUser.email = user[@"email"];
+    currentUser.username = user[@"username"];
+    PFFileObject *userProfileImage = user[@"profileImage"];
+    [userProfileImage getDataInBackgroundWithBlock:^(NSData * _Nullable ImageData, NSError * _Nullable error) {
+        if (!error) {
+            currentUser.profileImageData = ImageData;
+        }
+        else {
+        }
+    }];
+    return currentUser;
+}
+
 + (void)uploadContacts:(NSArray *)contacts withCompletion:(void(^)(NSError *error))completion
 {
     PFObject *contactsToAlert = [PFObject objectWithClassName:@"contactsToAlert"];
@@ -40,8 +59,10 @@
             contactsToAlert[@"user"] = [PFUser currentUser];
             contactsToAlert[@"firstName"] = contact.firstName;
             contactsToAlert[@"LastName"] = contact.lastName;
-            contactsToAlert[@"telephoneNumber"] = contact.telephoneNumber;
             contactsToAlert[@"email"] = contact.email;
+            if (contact.profileImageData) {
+                contactsToAlert[@"profileImage"] = [PFFileObject fileObjectWithData:contact.profileImageData];
+            }
             [contactsToAlert saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (!succeeded && error ) {
                 }
@@ -61,7 +82,12 @@
     contact.email = contactObject[@"email"];
     contact.firstName = contactObject[@"firstName"];
     contact.lastName = contactObject[@"LastName"];
-    contact.telephoneNumber = contactObject[@"telephoneNumber"];
+    PFFileObject *contactImageFile = contactObject[@"profileImage"];
+    [contactImageFile getDataInBackgroundWithBlock:^(NSData * _Nullable ImageData, NSError * _Nullable error) {
+        if (!error) {
+            contact.profileImageData = ImageData;
+        }
+    }];
     return contact;
 }
 
@@ -118,4 +144,5 @@
         completion(NO);
     }
 }
+
 @end

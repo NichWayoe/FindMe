@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "LocationManager.h"
 #import "Parse/Parse.h"
 @import GoogleMaps;
 
@@ -20,7 +19,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [GMSServices provideAPIKey:@""];
     ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
              configuration.applicationId = @"myAppId";
              configuration.server = @"https://findmern.herokuapp.com/parse";

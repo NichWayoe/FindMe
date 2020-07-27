@@ -20,13 +20,13 @@
             self.firstName = contact.givenName;
         }
         else {
-            
+            self.firstName = @"";
         }
         if (contact.familyName) {
             self.lastName = contact.familyName;
         }
         else {
-            
+            self.firstName = @"";
         }
         NSString *emailRegEx = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
         NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
@@ -34,13 +34,13 @@
             self.email = contact.emailAddresses.firstObject.value;
         }
         else {
+            self.email = @"";
         }
-        NSString *phoneRegrex = @"^\\d{3}-\\d{3}-\\d{4}$";
-        NSPredicate *phoneNumberTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegrex];
-        if ([phoneNumberTest evaluateWithObject:contact.phoneNumbers.firstObject.value.stringValue]) {
-            self.telephoneNumber = contact.phoneNumbers.firstObject.value.stringValue;
+        if (contact.imageDataAvailable) {
+            self.profileImageData = contact.thumbnailImageData;
         }
         else {
+            
         }
     }
     return self;

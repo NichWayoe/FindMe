@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *email;
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
-@property (nonatomic, strong) NSString *telephoneNumber;
+@property (nonatomic, strong) NSData *profileImageData;
 
 + (NSMutableArray *)contactsWithArray:(NSArray *)selectedContacts;
 

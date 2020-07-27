@@ -10,10 +10,9 @@
 #import "LocationManager.h"
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface MapViewController () <CLLocationManagerDelegate>
+@interface MapViewController () <LocationManagerDelegate>
 
 @property (strong, nonatomic) LocationManager *locationManager;
-@property (strong, nonatomic) CLLocation *location;
 @property (strong,nonatomic) GMSMapView *mapView;
 
 @end
@@ -23,27 +22,56 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self defaultMapView];
     self.locationManager = LocationManager.shared;
+    self.locationManager.delegate = self;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    switch ([self.locationManager authorisationStatus]) {
+        case Denied:
+        case Restricted:
+            [self showAlert];
+            break;
+        case NotDetermined:
+            [self.locationManager requestLocationPermission];
+            break;
+        case AllowedAlways:
+        case AllowedWhenInUse:
+            [self updateCameraPositionForMapVIew:[self.locationManager location]];
+    }
+}
+
+- (void)authorisationStatusDidChange:(LocationPermissionStatus)status
+{
+    switch (status) {
+        case Denied:
+        case Restricted:
+            [self showAlert];
+            break;
+        case NotDetermined:
+            break;
+        case AllowedAlways:
+        case AllowedWhenInUse:
+            [self updateCameraPositionForMapVIew:[self.locationManager location]];
+    }
+}
+
+- (void)updateCameraPositionForMapVIew:(CLLocation *)location
+{
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:location.coordinate zoom:15];
+    [self.mapView setCamera:camera];
+}
+
+- (void)defaultMapView
+{
     self.mapView = [[GMSMapView alloc] initWithFrame:self.view.frame];
     self.mapView.mapType = kGMSTypeNormal;
     self.mapView.settings.myLocationButton = YES;
     self.mapView.settings.compassButton = YES;
+    [self.locationManager requestLocationPermission];
     self.mapView.myLocationEnabled = YES;
     [self.view addSubview:self.mapView];
-    [self.locationManager requestLocationPermission];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    self.location = [self.locationManager getLocation];
-    if (self.location) {
-        GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:self.location.coordinate zoom:15];
-        [self.mapView setCamera:camera];
-    }
-    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
-        [self showAlert];
-        
-    }
 }
 
 - (void)showAlert
