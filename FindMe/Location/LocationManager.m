@@ -16,6 +16,7 @@
 @property (nonatomic, assign) LocationPermissionStatus currentLocationPermission;
 @property (strong, nonatomic) CLLocation *location;
 @property (strong, nonatomic) CLGeocoder *geocoder;
+@property (nonatomic) BOOL isTracking;
 
 @end
 
@@ -81,17 +82,24 @@
 
 - (void)beginTracking
 {
-    if (self.currentLocationPermission == AllowedAlways) {
+    if (!self.isTracking) {
         [self.locationManager startUpdatingLocation];
+        self.isTracking  = YES;
     }
     else {
-        [self requestLocationPermission];
+        return;
     }
 }
 
 - (void)stopTracking
 {
-    [self.locationManager stopUpdatingLocation];
+    if (self.isTracking) {
+        [self.locationManager stopUpdatingLocation];
+        self.isTracking = NO;
+    }
+    else {
+        return;
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
