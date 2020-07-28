@@ -30,6 +30,9 @@
 		2B42BCBD24C0FB6A007241E1 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42BCBC24C0FB6A007241E1 /* MainTabBarViewController.m */; };
 		2B84E93D24C8B59800E8E701 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E93C24C8B59800E8E701 /* User.m */; };
 		2B84E94924CF9B7B00E8E701 /* AlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E94824CF9B7B00E8E701 /* AlertManager.m */; };
+		2B84E94F24D083EB00E8E701 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E94E24D083EB00E8E701 /* AboutViewController.m */; };
+		2B84E95224D0875200E8E701 /* LabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E95124D0875200E8E701 /* LabelCell.m */; };
+		2B84E95524D0892500E8E701 /* UserDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E95424D0892500E8E701 /* UserDetailCell.m */; };
 		2BAF03D024C7759600AF8875 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BAF03CF24C7759600AF8875 /* DatabaseManager.m */; };
 		63170F27A5992BCDC1232525 /* Pods_FindMeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0588228D9238D0DAC892449 /* Pods_FindMeTests.framework */; };
 		6BBB36CEEDA8BE35CC329333 /* Pods_FindMe_FindMeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A279E2C2B4A7E42657E6C695 /* Pods_FindMe_FindMeUITests.framework */; };
@@ -97,6 +100,12 @@
 		2B84E93C24C8B59800E8E701 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		2B84E94724CF9B7B00E8E701 /* AlertManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertManager.h; sourceTree = "<group>"; };
 		2B84E94824CF9B7B00E8E701 /* AlertManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertManager.m; sourceTree = "<group>"; };
+		2B84E94D24D083EB00E8E701 /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		2B84E94E24D083EB00E8E701 /* AboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		2B84E95024D0875200E8E701 /* LabelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LabelCell.h; sourceTree = "<group>"; };
+		2B84E95124D0875200E8E701 /* LabelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LabelCell.m; sourceTree = "<group>"; };
+		2B84E95324D0892500E8E701 /* UserDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserDetailCell.h; sourceTree = "<group>"; };
+		2B84E95424D0892500E8E701 /* UserDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserDetailCell.m; sourceTree = "<group>"; };
 		2BAF03CE24C7759600AF8875 /* DatabaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
 		2BAF03CF24C7759600AF8875 /* DatabaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
 		2C41A87BB1A17F9D32D295D3 /* Pods-FindMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindMe.release.xcconfig"; path = "Target Support Files/Pods-FindMe/Pods-FindMe.release.xcconfig"; sourceTree = "<group>"; };
@@ -143,6 +152,10 @@
 			children = (
 				2B17C1FA24C63A5D00A1551F /* ContactCell.h */,
 				2B17C1FB24C63A5D00A1551F /* ContactCell.m */,
+				2B84E95024D0875200E8E701 /* LabelCell.h */,
+				2B84E95124D0875200E8E701 /* LabelCell.m */,
+				2B84E95324D0892500E8E701 /* UserDetailCell.h */,
+				2B84E95424D0892500E8E701 /* UserDetailCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -236,6 +249,8 @@
 				2B42BC9E24BE153C007241E1 /* ProfileViewController.m */,
 				2B42BCA024BE1552007241E1 /* MapViewController.h */,
 				2B42BCA124BE1552007241E1 /* MapViewController.m */,
+				2B84E94D24D083EB00E8E701 /* AboutViewController.h */,
+				2B84E94E24D083EB00E8E701 /* AboutViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -577,6 +592,7 @@
 			files = (
 				2B42BCB624BFEE9B007241E1 /* LocationManager.m in Sources */,
 				2B42BC9C24BE1528007241E1 /* FindMeViewController.m in Sources */,
+				2B84E95224D0875200E8E701 /* LabelCell.m in Sources */,
 				2B42BC9924BE1510007241E1 /* ContactsViewController.m in Sources */,
 				2B42BC4F24BCFB77007241E1 /* AppDelegate.m in Sources */,
 				2B42BC9F24BE153C007241E1 /* ProfileViewController.m in Sources */,
@@ -586,10 +602,12 @@
 				2B42BC6024BCFB78007241E1 /* main.m in Sources */,
 				2B42BC8824BD2FA6007241E1 /* Contact.m in Sources */,
 				2B42BC9024BE141A007241E1 /* SignUpViewController.m in Sources */,
+				2B84E95524D0892500E8E701 /* UserDetailCell.m in Sources */,
 				2B42BC5224BCFB77007241E1 /* SceneDelegate.m in Sources */,
 				2B84E94924CF9B7B00E8E701 /* AlertManager.m in Sources */,
 				2B17C1FC24C63A5D00A1551F /* ContactCell.m in Sources */,
 				2BAF03D024C7759600AF8875 /* DatabaseManager.m in Sources */,
+				2B84E94F24D083EB00E8E701 /* AboutViewController.m in Sources */,
 				2B42BCA224BE1552007241E1 /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

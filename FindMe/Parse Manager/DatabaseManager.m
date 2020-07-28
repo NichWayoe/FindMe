@@ -17,6 +17,7 @@
     newUser.password = user.password;
     newUser[@"firstName"] = user.firstName;
     newUser[@"lastName"] = user.lastName;
+    newUser[@"email"] = user.email;
     if (user.profileImageData) {
         newUser[@"profilePhoto"] = [PFFileObject fileObjectWithData:user.profileImageData];
     }

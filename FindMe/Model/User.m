@@ -15,6 +15,7 @@
     self = [super init];
     if (self) {
         self.username = userDetails[@"username"];
+        self.email = userDetails[@"email"];
         self.password = userDetails[@"password"];
         self.firstName = userDetails[@"firstName"];
         self.lastName = userDetails[@"lastName"];
