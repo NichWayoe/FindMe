@@ -1,25 +1,25 @@
 //
-//  AboutTViewController.m
+//  AboutViewController.m
 //  FindMe
 //
 //  Created by Nicholas Wayoe on 7/28/20.
 //  Copyright © 2020 Nicholas Wayoe. All rights reserved.
 //
 
-#import "AboutTViewController.h"
+#import "AboutViewController.h"
 #import "DatabaseManager.h"
 #import "User.h"
 #import "LabelCell.h"
 #import "UserDetailCell.h"
 
-@interface AboutTViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface AboutViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *labels;
 @property (strong, nonatomic) NSArray *userDetails;
 
 @end
 
-@implementation AboutTViewController
+@implementation AboutViewController
 
 - (void)viewDidLoad
 {

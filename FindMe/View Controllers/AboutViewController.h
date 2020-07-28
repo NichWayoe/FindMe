@@ -1,5 +1,5 @@
 //
-//  AboutTViewController.h
+//  AboutViewController.h
 //  FindMe
 //
 //  Created by Nicholas Wayoe on 7/28/20.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AboutTViewController : UIViewController
+@interface AboutViewController : UIViewController
 
 @end
 
