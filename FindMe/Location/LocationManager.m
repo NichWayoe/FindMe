@@ -55,6 +55,24 @@
     return self.locationManager.location;
 }
 
++ (NSString *)makeStringFromPlacemarkAndContact:(CLPlacemark *)decodedLocation
+{
+    NSString *message = [NSString stringWithFormat: @" \
+                         Address : %@ %@ %@ \
+                         \
+                         city : %@ \
+                         \
+                         Neighbourhood: %@ \
+                         \
+                         State : %@ \
+                         \
+                         Country : %@ \
+                         \
+                         Your are receiving this notification because put you as emergency Contact. \
+                         ", decodedLocation.subThoroughfare, decodedLocation.thoroughfare, decodedLocation.postalCode, decodedLocation.locality, decodedLocation.subLocality, decodedLocation.administrativeArea, decodedLocation.country];
+    return message;
+}
+
 - (void)requestLocationPermission
 {
     if (CLLocationManager.locationServicesEnabled) {
@@ -111,10 +129,11 @@
 {
     [self decodeLocation:[locations lastObject] withCompletion:^(CLPlacemark *decodedLocation) {
         if (decodedLocation) {
+            NSString *message = [LocationManager makeStringFromPlacemarkAndContact:decodedLocation];
             [DatabaseManager fetchContacts:^(NSArray * _Nonnull contacts) {
                 if (contacts.count > 1) {
                     for (Contact *contact in contacts) {
-                        [AlertManager makeStringFromPlacemarkAndSendEmail:decodedLocation withContact:contact];
+                        [AlertManager sendEmail:contact.firstName toEmail:contact.email withMessage:message];
                     }
                 }
                 else {
