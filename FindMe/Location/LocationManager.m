@@ -7,12 +7,16 @@
 //
 
 #import "LocationManager.h"
+#import "DatabaseManager.h"
+#import "AlertManager.h"
 
 @interface LocationManager ()
 
 @property (strong,nonatomic) CLLocationManager *locationManager;
 @property (nonatomic, assign) LocationPermissionStatus currentLocationPermission;
 @property (strong, nonatomic) CLLocation *location;
+@property (strong, nonatomic) CLGeocoder *geocoder;
+@property (nonatomic) BOOL isTracking;
 
 @end
 
@@ -34,6 +38,7 @@
     if (self != nil) {
         self.locationManager = [CLLocationManager new];
         self.locationManager.delegate = self;
+        self.geocoder = [CLGeocoder new];
         self.locationManager.distanceFilter = 100;
         self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
     }
@@ -48,6 +53,24 @@
 - (CLLocation *)location;
 {
     return self.locationManager.location;
+}
+
++ (NSString *)makeStringFromPlacemarkAndContact:(CLPlacemark *)decodedLocation
+{
+    NSString *message = [NSString stringWithFormat: @" \
+                         Address : %@ %@ %@ \
+                         \
+                         city : %@ \
+                         \
+                         Neighbourhood: %@ \
+                         \
+                         State : %@ \
+                         \
+                         Country : %@ \
+                         \
+                         Your are receiving this notification because put you as emergency Contact. \
+                         ", decodedLocation.subThoroughfare, decodedLocation.thoroughfare, decodedLocation.postalCode, decodedLocation.locality, decodedLocation.subLocality, decodedLocation.administrativeArea, decodedLocation.country];
+    return message;
 }
 
 - (void)requestLocationPermission
@@ -77,17 +100,24 @@
 
 - (void)beginTracking
 {
-    if (self.currentLocationPermission == AllowedAlways) {
+    if (!self.isTracking) {
         [self.locationManager startUpdatingLocation];
+        self.isTracking  = YES;
     }
     else {
-        [self requestLocationPermission];
+        return;
     }
 }
 
 - (void)stopTracking
 {
-    [self.locationManager stopUpdatingLocation];
+    if (self.isTracking) {
+        [self.locationManager stopUpdatingLocation];
+        self.isTracking = NO;
+    }
+    else {
+        return;
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -97,8 +127,38 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
-    
+    [self decodeLocation:[locations lastObject] withCompletion:^(CLPlacemark *decodedLocation) {
+        if (decodedLocation) {
+            NSString *message = [LocationManager makeStringFromPlacemarkAndContact:decodedLocation];
+            [DatabaseManager fetchContacts:^(NSArray * _Nonnull contacts) {
+                if (contacts.count > 1) {
+                    for (Contact *contact in contacts) {
+                        [AlertManager sendEmail:contact.firstName toEmail:contact.email withMessage:message];
+                    }
+                }
+                else {
+                    return;
+                }
+            }];
+        }
+        else {
+            return;
+        }
+    }];
 }
+
+- (void)decodeLocation:(CLLocation *)location withCompletion:(void(^)(CLPlacemark *decodedLocation))completion
+{
+    [self.geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (!error) {
+            completion([placemarks firstObject]);
+        }
+        else {
+            completion(nil);
+        }
+    }];
+}
+
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {

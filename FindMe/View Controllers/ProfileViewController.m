@@ -29,6 +29,7 @@ typedef NS_ENUM(NSInteger, Childviews) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     User* user = [DatabaseManager getCurrentUser];
     self.usernameLabel.text = user.username;
     self.profileImageView.image = [UIImage imageWithData:user.profileImageData];

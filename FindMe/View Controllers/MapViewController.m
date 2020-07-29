@@ -22,6 +22,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self defaultMapView];
     self.locationManager = LocationManager.shared;
     self.locationManager.delegate = self;
