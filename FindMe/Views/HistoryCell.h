@@ -1,5 +1,5 @@
 //
-//  UserDetailCell.h
+//  HistoryCell.h
 //  FindMe
 //
 //  Created by Nicholas Wayoe on 7/28/20.
@@ -10,9 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UserDetailCell : UITableViewCell
-
-@property (weak, nonatomic) IBOutlet UILabel *detailLabel;
+@interface HistoryCell : UITableViewCell
 
 @end
 

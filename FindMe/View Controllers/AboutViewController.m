@@ -13,6 +13,7 @@
 #import "UserDetailCell.h"
 
 @interface AboutViewController () <UITableViewDataSource, UITableViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *labels;
 @property (strong, nonatomic) NSArray *userDetails;
@@ -42,7 +43,6 @@
         userDetailCell.detailLabel.text = self.userDetails[indexPath.row];
         return userDetailCell;
     }
-    
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section

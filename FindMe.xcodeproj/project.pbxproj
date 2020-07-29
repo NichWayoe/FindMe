@@ -33,6 +33,8 @@
 		2B84E94F24D083EB00E8E701 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E94E24D083EB00E8E701 /* AboutViewController.m */; };
 		2B84E95224D0875200E8E701 /* LabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E95124D0875200E8E701 /* LabelCell.m */; };
 		2B84E95524D0892500E8E701 /* UserDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E95424D0892500E8E701 /* UserDetailCell.m */; };
+		2B84E95824D0BB4F00E8E701 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E95724D0BB4F00E8E701 /* HistoryViewController.m */; };
+		2B84E95B24D0BBA300E8E701 /* HistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E95A24D0BBA300E8E701 /* HistoryCell.m */; };
 		2BAF03D024C7759600AF8875 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BAF03CF24C7759600AF8875 /* DatabaseManager.m */; };
 		63170F27A5992BCDC1232525 /* Pods_FindMeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0588228D9238D0DAC892449 /* Pods_FindMeTests.framework */; };
 		6BBB36CEEDA8BE35CC329333 /* Pods_FindMe_FindMeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A279E2C2B4A7E42657E6C695 /* Pods_FindMe_FindMeUITests.framework */; };
@@ -106,6 +108,10 @@
 		2B84E95124D0875200E8E701 /* LabelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LabelCell.m; sourceTree = "<group>"; };
 		2B84E95324D0892500E8E701 /* UserDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserDetailCell.h; sourceTree = "<group>"; };
 		2B84E95424D0892500E8E701 /* UserDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserDetailCell.m; sourceTree = "<group>"; };
+		2B84E95624D0BB4F00E8E701 /* HistoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
+		2B84E95724D0BB4F00E8E701 /* HistoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
+		2B84E95924D0BBA300E8E701 /* HistoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryCell.h; sourceTree = "<group>"; };
+		2B84E95A24D0BBA300E8E701 /* HistoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryCell.m; sourceTree = "<group>"; };
 		2BAF03CE24C7759600AF8875 /* DatabaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
 		2BAF03CF24C7759600AF8875 /* DatabaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
 		2C41A87BB1A17F9D32D295D3 /* Pods-FindMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindMe.release.xcconfig"; path = "Target Support Files/Pods-FindMe/Pods-FindMe.release.xcconfig"; sourceTree = "<group>"; };
@@ -156,6 +162,8 @@
 				2B84E95124D0875200E8E701 /* LabelCell.m */,
 				2B84E95324D0892500E8E701 /* UserDetailCell.h */,
 				2B84E95424D0892500E8E701 /* UserDetailCell.m */,
+				2B84E95924D0BBA300E8E701 /* HistoryCell.h */,
+				2B84E95A24D0BBA300E8E701 /* HistoryCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -251,6 +259,8 @@
 				2B42BCA124BE1552007241E1 /* MapViewController.m */,
 				2B84E94D24D083EB00E8E701 /* AboutViewController.h */,
 				2B84E94E24D083EB00E8E701 /* AboutViewController.m */,
+				2B84E95624D0BB4F00E8E701 /* HistoryViewController.h */,
+				2B84E95724D0BB4F00E8E701 /* HistoryViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -593,6 +603,7 @@
 				2B42BCB624BFEE9B007241E1 /* LocationManager.m in Sources */,
 				2B42BC9C24BE1528007241E1 /* FindMeViewController.m in Sources */,
 				2B84E95224D0875200E8E701 /* LabelCell.m in Sources */,
+				2B84E95824D0BB4F00E8E701 /* HistoryViewController.m in Sources */,
 				2B42BC9924BE1510007241E1 /* ContactsViewController.m in Sources */,
 				2B42BC4F24BCFB77007241E1 /* AppDelegate.m in Sources */,
 				2B42BC9F24BE153C007241E1 /* ProfileViewController.m in Sources */,
@@ -604,6 +615,7 @@
 				2B42BC9024BE141A007241E1 /* SignUpViewController.m in Sources */,
 				2B84E95524D0892500E8E701 /* UserDetailCell.m in Sources */,
 				2B42BC5224BCFB77007241E1 /* SceneDelegate.m in Sources */,
+				2B84E95B24D0BBA300E8E701 /* HistoryCell.m in Sources */,
 				2B84E94924CF9B7B00E8E701 /* AlertManager.m in Sources */,
 				2B17C1FC24C63A5D00A1551F /* ContactCell.m in Sources */,
 				2BAF03D024C7759600AF8875 /* DatabaseManager.m in Sources */,
