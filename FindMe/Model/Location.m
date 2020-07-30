@@ -10,4 +10,17 @@
 
 @implementation Location
 
+- (instancetype)initWithPlacemark:(CLPlacemark *)decodedLocation
+{
+    self = [super init];
+    if (self) {
+        self.city = decodedLocation.locality;
+        self.state = decodedLocation.administrativeArea;
+        self.country = decodedLocation.country;
+        self.neighbourhood = decodedLocation.subLocality;
+        self.address = [ NSString stringWithFormat:@"%@ %@ %@",decodedLocation.subThoroughfare, decodedLocation.thoroughfare, decodedLocation.postalCode];
+    }
+    return self;
+}
+
 @end

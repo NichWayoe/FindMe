@@ -7,10 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+@import CoreLocation;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Location : NSObject
+
+@property (nonatomic, strong) NSString *city;
+@property (nonatomic, strong) NSString *address;
+@property (nonatomic, strong) NSString *state;
+@property (nonatomic, strong) NSString *neighbourhood;
+@property (nonatomic, strong) NSString *country;
+
+- (instancetype)initWithPlacemark:(CLPlacemark *)decodedLocation;
 
 @end
 
