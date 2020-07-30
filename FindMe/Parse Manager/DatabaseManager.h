@@ -20,9 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)logOutUser:(void(^)(NSError * error))completion;
 + (void)logInUser:(NSString *)usernane withPassword:(NSString *)password withCompletion:(void(^)(NSError * error))completion;
 + (void)uploadContacts:(NSArray *)contacts withCompletion:(void(^)(NSError *error))completion;
-+ (Contact *)getContactFromPFObject: (PFObject *)contactObject;
++ (void)contactFromPFObject:(PFObject *)contactObject withCompletion:(void(^)(Contact* contact))completion;
 + (void)checkForPersistentUser: (void(^)(bool isUserloggedIn))completion;
-+ (User *)getCurrentUser;
++ (void)currentUser:(void(^)(User *user))completion;
++ (void)uploadTrackedLocations:(NSMutableArray *)locations withStartDate:(NSDate *)startDate;
 
 @end
 NS_ASSUME_NONNULL_END

@@ -7,6 +7,7 @@
 //
 
 #import "DatabaseManager.h"
+#import "DateTools.h"
 
 @implementation DatabaseManager
 
@@ -19,7 +20,8 @@
     newUser[@"lastName"] = user.lastName;
     newUser[@"email"] = user.email;
     if (user.profileImageData) {
-        newUser[@"profilePhoto"] = [PFFileObject fileObjectWithData:user.profileImageData];
+        PFFileObject *imageFile = [PFFileObject fileObjectWithName:@"profileImage.png" data:user.profileImageData];
+        newUser[@"profilePhoto"] = imageFile;
     }
     else {
         
@@ -33,7 +35,7 @@
     }];
 }
 
-+ (User *)getCurrentUser
++ (void)currentUser:(void(^)(User *user))completion
 {
     PFUser *user = [PFUser currentUser];
     User *currentUser = [User new];
@@ -41,15 +43,16 @@
     currentUser.lastName = user[@"lastName"];
     currentUser.email = user[@"email"];
     currentUser.username = user[@"username"];
-    PFFileObject *userProfileImage = user[@"profileImage"];
+    PFFileObject *userProfileImage = user[@"profilePhoto"];
     [userProfileImage getDataInBackgroundWithBlock:^(NSData * _Nullable ImageData, NSError * _Nullable error) {
         if (!error) {
             currentUser.profileImageData = ImageData;
+            completion(currentUser);
         }
         else {
         }
     }];
-    return currentUser;
+    completion(currentUser);
 }
 
 + (void)uploadContacts:(NSArray *)contacts withCompletion:(void(^)(NSError *error))completion
@@ -62,7 +65,8 @@
             contactsToAlert[@"LastName"] = contact.lastName;
             contactsToAlert[@"email"] = contact.email;
             if (contact.profileImageData) {
-                contactsToAlert[@"profileImage"] = [PFFileObject fileObjectWithData:contact.profileImageData];
+                PFFileObject *imageFile = [PFFileObject fileObjectWithName:@"profileImage.png" data:contact.profileImageData];
+                contactsToAlert[@"profileImage"] = imageFile;
             }
             [contactsToAlert saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (!succeeded && error ) {
@@ -77,7 +81,17 @@
     }
 }
 
-+ (Contact *)getContactFromPFObject: (PFObject *)contactObject
++ (void)uploadTrackedLocations:(NSMutableArray *)locations withStartDate:(NSDate *)startDate;
+{
+    PFObject *trackings = [PFObject objectWithClassName:@"Trackings"];
+    trackings[@"user"] = [PFUser currentUser];
+    trackings[@"locations"] = locations;
+    trackings[@"duration"] = [startDate shortTimeAgoSinceNow];
+    trackings[@"dateStarted"] = startDate;
+    [trackings saveInBackground];
+}
+
++ (void)contactFromPFObject:(PFObject *)contactObject withCompletion:(void(^)(Contact* contact))completion
 {
     Contact *contact = [Contact new];
     contact.email = contactObject[@"email"];
@@ -87,13 +101,14 @@
     [contactImageFile getDataInBackgroundWithBlock:^(NSData * _Nullable ImageData, NSError * _Nullable error) {
         if (!error) {
             contact.profileImageData = ImageData;
+            completion(contact);
         }
     }];
-    return contact;
 }
 
 + (void)fetchContacts:(void(^)(NSArray *contacts))completion
 {
+    dispatch_group_t group = dispatch_group_create();
     NSMutableArray *fetchedContacts = [NSMutableArray new];
     PFQuery *query = [PFQuery queryWithClassName:@"contactsToAlert"];
     [query orderByDescending:@"createdAt"];
@@ -104,10 +119,20 @@
         }
         else {
             for (PFObject *contactObject in contacts) {
-                Contact *contact = [DatabaseManager getContactFromPFObject:contactObject];
-                [fetchedContacts addObject:contact];
+                dispatch_group_enter(group);
+                [DatabaseManager contactFromPFObject:contactObject withCompletion:^(Contact * _Nonnull contact) {
+                    if (contact) {
+                        [fetchedContacts addObject:contact];
+                        dispatch_group_leave(group);
+                    }
+                    else {
+                        dispatch_group_leave(group);
+                    }
+                }];
             }
-            completion((NSArray *) fetchedContacts);
+            dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+                completion((NSArray *) fetchedContacts);
+            });
         }
     }];
 }

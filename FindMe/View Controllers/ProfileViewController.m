@@ -30,9 +30,13 @@ typedef NS_ENUM(NSInteger, Childviews) {
 {
     [super viewDidLoad];
     
-    User* user = [DatabaseManager getCurrentUser];
-    self.usernameLabel.text = user.username;
-    self.profileImageView.image = [UIImage imageWithData:user.profileImageData];
+    [DatabaseManager currentUser:^(User * _Nonnull user) {
+        if (user) {
+            self.profileImageView.layer.cornerRadius = 50;
+            self.usernameLabel.text = user.username;
+            self.profileImageView.image = [UIImage imageWithData:user.profileImageData];
+        }
+    }];
 }
 
 - (IBAction)switchViews:(UISegmentedControl *)sender

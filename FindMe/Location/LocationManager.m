@@ -9,14 +9,16 @@
 #import "LocationManager.h"
 #import "DatabaseManager.h"
 #import "AlertManager.h"
+#import "Location.h"
 
-@interface LocationManager ()
+@interface LocationManager () 
 
 @property (strong,nonatomic) CLLocationManager *locationManager;
 @property (nonatomic, assign) LocationPermissionStatus currentLocationPermission;
 @property (strong, nonatomic) CLLocation *location;
 @property (strong, nonatomic) CLGeocoder *geocoder;
 @property (nonatomic) BOOL isTracking;
+@property (strong, nonatomic) NSMutableArray *locationsVisited;
 
 @end
 
@@ -39,7 +41,8 @@
         self.locationManager = [CLLocationManager new];
         self.locationManager.delegate = self;
         self.geocoder = [CLGeocoder new];
-        self.locationManager.distanceFilter = 100;
+        self.locationsVisited = [NSMutableArray new];
+        self.locationManager.distanceFilter = 10;
         self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
     }
     return self;
@@ -109,11 +112,14 @@
     }
 }
 
-- (void)stopTracking
+- (void)stopTracking:(NSDate *)startDate
 {
     if (self.isTracking) {
         [self.locationManager stopUpdatingLocation];
         self.isTracking = NO;
+        if (self.locationsVisited.count > 1) {
+            [DatabaseManager uploadTrackedLocations:self.locationsVisited withStartDate:startDate];
+        }
     }
     else {
         return;
@@ -129,9 +135,11 @@
 {
     [self decodeLocation:[locations lastObject] withCompletion:^(CLPlacemark *decodedLocation) {
         if (decodedLocation) {
+            Location *location = [[Location alloc] initWithPlacemark:decodedLocation];
+            [self.locationsVisited addObject:location];
             NSString *message = [LocationManager makeStringFromPlacemarkAndContact:decodedLocation];
             [DatabaseManager fetchContacts:^(NSArray * _Nonnull contacts) {
-                if (contacts.count > 1) {
+                if (contacts.count >= 1) {
                     for (Contact *contact in contacts) {
                         [AlertManager sendEmail:contact.firstName toEmail:contact.email withMessage:message];
                     }

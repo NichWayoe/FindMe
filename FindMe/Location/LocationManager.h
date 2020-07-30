@@ -29,11 +29,11 @@ typedef NS_ENUM(NSInteger, LocationPermissionStatus) {
 + (instancetype)shared;
 - (void)requestLocationPermission;
 - (void)beginTracking;
-- (void)stopTracking;
+- (void)stopTracking:(NSDate *)startDate;
 - (CLLocation *)location;
 - (LocationPermissionStatus)authorisationStatus;
 - (BOOL)canGetLocation;
-+ (NSString *)makeStringFromPlacemarkAndContact:(CLPlacemark *)decodedLocation withContact:(Contact *)contact;
++ (NSString *)makeStringFromPlacemarkAndContact:(CLPlacemark *)decodedLocation;
 
 @property (nonatomic, weak) id<LocationManagerDelegate>delegate;
 
