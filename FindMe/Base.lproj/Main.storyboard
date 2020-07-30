@@ -38,12 +38,18 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" textContentType="username"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="SpO-Vw-oot"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x2S-UH-5bE">
                                         <rect key="frame" x="142" y="360" width="225" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="Ap5-zD-hDf"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FindMe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwr-TM-cMA">
                                         <rect key="frame" x="48" y="145" width="303" height="96"/>
@@ -88,6 +94,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="5qS-Hg-Uwd"/>
                     <connections>
+                        <outlet property="logInButton" destination="Fmw-GR-kbe" id="41G-gP-c1i"/>
                         <outlet property="passwordField" destination="x2S-UH-5bE" id="wWT-Sm-p4A"/>
                         <outlet property="usernameField" destination="ZPI-jC-Gon" id="jKW-ab-DlB"/>
                         <segue destination="l4v-Sg-bpi" kind="show" identifier="homeSegue" id="RdV-tg-N2w"/>
@@ -121,6 +128,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" textContentType="given-name"/>
                                         <connections>
+                                            <action selector="onDoneEditingFirstNameField:" destination="BHG-zy-lp1" eventType="editingDidEndOnExit" id="WHb-i6-uIR"/>
                                             <outlet property="delegate" destination="BHG-zy-lp1" id="tcD-we-d7Q"/>
                                         </connections>
                                     </textField>
@@ -130,6 +138,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" textContentType="family-name"/>
                                         <connections>
+                                            <action selector="onDoneEditingLastName:" destination="BHG-zy-lp1" eventType="editingDidEnd" id="Uvz-em-q0A"/>
                                             <outlet property="delegate" destination="BHG-zy-lp1" id="XWj-7J-Kb6"/>
                                         </connections>
                                     </textField>
@@ -137,8 +146,9 @@
                                         <rect key="frame" x="134" y="327" width="195" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                         <connections>
+                                            <action selector="onDoneEditingUsernameField:" destination="BHG-zy-lp1" eventType="editingDidEnd" id="GvP-dq-FkD"/>
                                             <outlet property="delegate" destination="BHG-zy-lp1" id="eSJ-Q4-GOg"/>
                                         </connections>
                                     </textField>
@@ -169,6 +179,7 @@
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                         <connections>
                                             <action selector="onEditingPasswordField:" destination="BHG-zy-lp1" eventType="editingChanged" id="csF-gP-594"/>
+                                            <outlet property="delegate" destination="BHG-zy-lp1" id="MPd-nB-ep5"/>
                                         </connections>
                                     </textField>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="YAV-qR-vcu">
@@ -269,7 +280,7 @@
                         <outlet property="passwordStatus" destination="jiu-Bw-IWN" id="4eK-95-QhF"/>
                         <outlet property="photoSourceView" destination="xaA-UF-Mji" id="8Ti-1U-eN9"/>
                         <outlet property="profilePhoto" destination="YAV-qR-vcu" id="yXf-du-Kuo"/>
-                        <outlet property="registerButton" destination="FR7-Hj-bho" id="SaZ-r2-gFV"/>
+                        <outlet property="registerButton" destination="FR7-Hj-bho" id="5Fn-yi-Rik"/>
                         <outlet property="scrollView" destination="2ff-Wi-kjR" id="2q5-bw-sOk"/>
                         <outlet property="userNameField" destination="1Ef-51-mbO" id="gjB-Nb-dW7"/>
                         <segue destination="l4v-Sg-bpi" kind="show" identifier="homeSegue" id="oco-HZ-96n"/>
@@ -554,7 +565,7 @@
         <!--Navigation Controller-->
         <scene sceneID="NQb-9c-HGm">
             <objects>
-                <navigationController storyboardIdentifier="Home" id="l4v-Sg-bpi" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Home" modalPresentationStyle="fullScreen" id="l4v-Sg-bpi" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="qP3-8T-xah"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="93E-wS-R3D">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -737,7 +748,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="oco-HZ-96n"/>
+        <segue reference="RdV-tg-N2w"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.turn.up.right" catalog="system" width="128" height="106"/>
