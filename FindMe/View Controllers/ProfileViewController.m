@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, Childviews) {
 {
     [super viewDidLoad];
     
-    [DatabaseManager currentUser:^(User * _Nonnull user) {
+    [DatabaseManager getCurrentUser:^(User * _Nonnull user) {
         if (user) {
             self.profileImageView.layer.cornerRadius = 50;
             self.usernameLabel.text = user.username;

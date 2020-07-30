@@ -10,6 +10,7 @@
 #import "DatabaseManager.h"
 #import "AlertManager.h"
 #import "Location.h"
+#import "Trace.h"
 
 @interface LocationManager () 
 
@@ -18,8 +19,8 @@
 @property (strong, nonatomic) CLLocation *location;
 @property (strong, nonatomic) CLGeocoder *geocoder;
 @property (nonatomic) BOOL isTracking;
-@property (strong, nonatomic) NSMutableArray *locationsVisited;
-
+@property (strong, nonatomic) NSMutableArray *visitedLocations;
+@property (strong, nonatomic) Trace *trace;
 @end
 
 @implementation LocationManager
@@ -41,7 +42,7 @@
         self.locationManager = [CLLocationManager new];
         self.locationManager.delegate = self;
         self.geocoder = [CLGeocoder new];
-        self.locationsVisited = [NSMutableArray new];
+        self.visitedLocations = [NSMutableArray new];
         self.locationManager.distanceFilter = 10;
         self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
     }
@@ -106,19 +107,22 @@
     if (!self.isTracking) {
         [self.locationManager startUpdatingLocation];
         self.isTracking  = YES;
+        self.trace = [Trace new];
+        [self.trace start];
     }
     else {
         return;
     }
 }
 
-- (void)stopTracking:(NSDate *)startDate
+- (void)stopTracking
 {
     if (self.isTracking) {
         [self.locationManager stopUpdatingLocation];
+        [self.trace stop:(NSArray *)self.visitedLocations];
         self.isTracking = NO;
-        if (self.locationsVisited.count > 1) {
-            [DatabaseManager uploadTrackedLocations:self.locationsVisited withStartDate:startDate];
+        if (self.visitedLocations.count > 0) {
+            [DatabaseManager saveTrace:self.trace];
         }
     }
     else {
@@ -136,7 +140,7 @@
     [self decodeLocation:[locations lastObject] withCompletion:^(CLPlacemark *decodedLocation) {
         if (decodedLocation) {
             Location *location = [[Location alloc] initWithPlacemark:decodedLocation];
-            [self.locationsVisited addObject:location];
+            [self.visitedLocations addObject:location];
             NSString *message = [LocationManager makeStringFromPlacemarkAndContact:decodedLocation];
             [DatabaseManager fetchContacts:^(NSArray * _Nonnull contacts) {
                 if (contacts.count >= 1) {

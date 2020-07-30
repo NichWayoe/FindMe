@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     
-    [DatabaseManager currentUser:^(User * _Nonnull user) {
+    [DatabaseManager getCurrentUser:^(User * _Nonnull user) {
         if (user) {
             self.user = user;
         }

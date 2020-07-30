@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, LocationPermissionStatus) {
 + (instancetype)shared;
 - (void)requestLocationPermission;
 - (void)beginTracking;
-- (void)stopTracking:(NSDate *)startDate;
+- (void)stopTracking;
 - (CLLocation *)location;
 - (LocationPermissionStatus)authorisationStatus;
 - (BOOL)canGetLocation;

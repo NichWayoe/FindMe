@@ -10,6 +10,7 @@
 #import "Parse/Parse.h"
 #import "Contact.h"
 #import "User.h"
+#import "Trace.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,10 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)logOutUser:(void(^)(NSError * error))completion;
 + (void)logInUser:(NSString *)usernane withPassword:(NSString *)password withCompletion:(void(^)(NSError * error))completion;
 + (void)uploadContacts:(NSArray *)contacts withCompletion:(void(^)(NSError *error))completion;
-+ (void)contactFromPFObject:(PFObject *)contactObject withCompletion:(void(^)(Contact* contact))completion;
++ (void)getContactFromPFObject:(PFObject *)contactObject withCompletion:(void(^)(Contact* contact))completion;
 + (void)checkForPersistentUser: (void(^)(bool isUserloggedIn))completion;
-+ (void)currentUser:(void(^)(User *user))completion;
-+ (void)uploadTrackedLocations:(NSMutableArray *)locations withStartDate:(NSDate *)startDate;
++ (void)getCurrentUser:(void(^)(User *user))completion;
++ (void)saveTrace:(Trace *)trace;
 
 @end
 NS_ASSUME_NONNULL_END

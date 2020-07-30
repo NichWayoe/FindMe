@@ -35,7 +35,7 @@
     }];
 }
 
-+ (void)currentUser:(void(^)(User *user))completion
++ (void)getcurrentUser:(void(^)(User *user))completion
 {
     PFUser *user = [PFUser currentUser];
     User *currentUser = [User new];
@@ -81,17 +81,17 @@
     }
 }
 
-+ (void)uploadTrackedLocations:(NSMutableArray *)locations withStartDate:(NSDate *)startDate;
++ (void)saveTrace:(Trace *)trace
 {
-    PFObject *trackings = [PFObject objectWithClassName:@"Trackings"];
-    trackings[@"user"] = [PFUser currentUser];
-    trackings[@"locations"] = locations;
-    trackings[@"duration"] = [startDate shortTimeAgoSinceNow];
-    trackings[@"dateStarted"] = startDate;
-    [trackings saveInBackground];
+    PFObject *traces = [PFObject objectWithClassName:@"Traces"];
+    traces[@"user"] = [PFUser currentUser];
+    traces[@"locations"] = trace.locations;
+    traces[@"duration"] = trace.duration;
+    traces[@"dateStarted"] = trace.dateStarted;
+    [traces saveInBackground];
 }
 
-+ (void)contactFromPFObject:(PFObject *)contactObject withCompletion:(void(^)(Contact* contact))completion
++ (void)getcontactFromPFObject:(PFObject *)contactObject withCompletion:(void(^)(Contact* contact))completion
 {
     Contact *contact = [Contact new];
     contact.email = contactObject[@"email"];
@@ -120,10 +120,9 @@
         else {
             for (PFObject *contactObject in contacts) {
                 dispatch_group_enter(group);
-                [DatabaseManager contactFromPFObject:contactObject withCompletion:^(Contact * _Nonnull contact) {
+                [DatabaseManager getcontactFromPFObject:contactObject withCompletion:^(Contact * _Nonnull contact) {
                     if (contact) {
                         [fetchedContacts addObject:contact];
-                        dispatch_group_leave(group);
                     }
                     else {
                         dispatch_group_leave(group);

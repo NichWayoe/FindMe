@@ -15,7 +15,6 @@
 @property (strong, nonatomic) LocationManager *locationManager;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (strong, nonatomic) NSTimer *timer;
-@property (strong, nonatomic) NSDate *dateAndTimeNow;
 @property (assign) int seconds;
 @property (assign) int fractions;
 @property (assign) int hours;
@@ -53,7 +52,6 @@
         if ([self.locationManager authorisationStatus] == AllowedAlways) {
             [self designTrackingButtonWithState:@"selected"];
             [self.locationManager beginTracking];
-            [self setCurrentTime];
             self.timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(startTimer) userInfo:nil repeats:YES];
         }
         else {
@@ -62,19 +60,11 @@
     }
     else {
         [self designTrackingButtonWithState:@"unselected"];
-        [self.locationManager stopTracking:self.dateAndTimeNow];
         [self.timer invalidate];
+        [self.locationManager stopTracking];
         self.factionsLabel.text = @".00";
         self.timeLabel.text = @"00:00:00";
     }
-}
-
-- (void)setCurrentTime
-{
-    self.dateAndTimeNow = [NSDate date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    
 }
 
 - (void)startTimer
