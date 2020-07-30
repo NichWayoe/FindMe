@@ -60,8 +60,8 @@
     }
     else {
         [self designTrackingButtonWithState:@"unselected"];
-        [self.locationManager stopTracking];
         [self.timer invalidate];
+        [self.locationManager stopTracking];
         self.factionsLabel.text = @".00";
         self.timeLabel.text = @"00:00:00";
     }

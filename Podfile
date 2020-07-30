@@ -11,6 +11,7 @@ target 'FindMe' do
   pod 'Parse/UI'
   pod 'mailgun', '~> 1.0'
   pod 'AFNetworking'
+  pod 'DateTools'
 
  
 

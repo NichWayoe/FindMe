@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *labels;
 @property (strong, nonatomic) NSArray *userDetails;
+@property (strong, nonatomic) User *user;
 
 @end
 
@@ -26,8 +27,12 @@
 {
     [super viewDidLoad];
     
-    User *user = [DatabaseManager getCurrentUser];
-    self.userDetails = @[@"USERNAME", user.username, @"FIRST NAME", user.firstName, @"LAST NAME", user.lastName, @"EMAIL", user.email];
+    [DatabaseManager getCurrentUser:^(User * _Nonnull user) {
+        if (user) {
+            self.user = user;
+        }
+    }];
+    self.userDetails = @[@"USERNAME", self.user.username, @"FIRST NAME", self.user.firstName, @"LAST NAME", self.user.lastName, @"EMAIL", self.user.email];
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath

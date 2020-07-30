@@ -35,6 +35,8 @@
 		2B84E95524D0892500E8E701 /* UserDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E95424D0892500E8E701 /* UserDetailCell.m */; };
 		2B84E95824D0BB4F00E8E701 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E95724D0BB4F00E8E701 /* HistoryViewController.m */; };
 		2B84E95B24D0BBA300E8E701 /* HistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E95A24D0BBA300E8E701 /* HistoryCell.m */; };
+		2B84E95E24D1D84500E8E701 /* Trace.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E95D24D1D84500E8E701 /* Trace.m */; };
+		2B84E96424D1F2EC00E8E701 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E96324D1F2EC00E8E701 /* Location.m */; };
 		2BAF03D024C7759600AF8875 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BAF03CF24C7759600AF8875 /* DatabaseManager.m */; };
 		63170F27A5992BCDC1232525 /* Pods_FindMeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0588228D9238D0DAC892449 /* Pods_FindMeTests.framework */; };
 		6BBB36CEEDA8BE35CC329333 /* Pods_FindMe_FindMeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A279E2C2B4A7E42657E6C695 /* Pods_FindMe_FindMeUITests.framework */; };
@@ -112,6 +114,10 @@
 		2B84E95724D0BB4F00E8E701 /* HistoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
 		2B84E95924D0BBA300E8E701 /* HistoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryCell.h; sourceTree = "<group>"; };
 		2B84E95A24D0BBA300E8E701 /* HistoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryCell.m; sourceTree = "<group>"; };
+		2B84E95C24D1D84500E8E701 /* Trace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Trace.h; sourceTree = "<group>"; };
+		2B84E95D24D1D84500E8E701 /* Trace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Trace.m; sourceTree = "<group>"; };
+		2B84E96224D1F2EC00E8E701 /* Location.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		2B84E96324D1F2EC00E8E701 /* Location.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		2BAF03CE24C7759600AF8875 /* DatabaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
 		2BAF03CF24C7759600AF8875 /* DatabaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
 		2C41A87BB1A17F9D32D295D3 /* Pods-FindMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindMe.release.xcconfig"; path = "Target Support Files/Pods-FindMe/Pods-FindMe.release.xcconfig"; sourceTree = "<group>"; };
@@ -237,6 +243,10 @@
 				2B42BC8724BD2FA6007241E1 /* Contact.m */,
 				2B84E93B24C8B59800E8E701 /* User.h */,
 				2B84E93C24C8B59800E8E701 /* User.m */,
+				2B84E95C24D1D84500E8E701 /* Trace.h */,
+				2B84E95D24D1D84500E8E701 /* Trace.m */,
+				2B84E96224D1F2EC00E8E701 /* Location.h */,
+				2B84E96324D1F2EC00E8E701 /* Location.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -600,6 +610,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B84E95E24D1D84500E8E701 /* Trace.m in Sources */,
 				2B42BCB624BFEE9B007241E1 /* LocationManager.m in Sources */,
 				2B42BC9C24BE1528007241E1 /* FindMeViewController.m in Sources */,
 				2B84E95224D0875200E8E701 /* LabelCell.m in Sources */,
@@ -613,6 +624,7 @@
 				2B42BC6024BCFB78007241E1 /* main.m in Sources */,
 				2B42BC8824BD2FA6007241E1 /* Contact.m in Sources */,
 				2B42BC9024BE141A007241E1 /* SignUpViewController.m in Sources */,
+				2B84E96424D1F2EC00E8E701 /* Location.m in Sources */,
 				2B84E95524D0892500E8E701 /* UserDetailCell.m in Sources */,
 				2B42BC5224BCFB77007241E1 /* SceneDelegate.m in Sources */,
 				2B84E95B24D0BBA300E8E701 /* HistoryCell.m in Sources */,

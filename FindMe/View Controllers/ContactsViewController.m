@@ -26,6 +26,13 @@
     [self fetchContacts];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self fetchContacts];
+}
+
 - (void)fetchContacts
 {
     [DatabaseManager fetchContacts:^(NSArray * _Nonnull contacts) {
@@ -49,11 +56,6 @@
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.contacts.count;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [self fetchContacts];
 }
 
 - (void)showAlert
