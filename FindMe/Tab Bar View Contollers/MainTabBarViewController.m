@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, ChildViewControllers) {
 {
     if (contacts.count >= 1) {
         NSArray *selectedContacts = (NSArray *)[Contact contactsWithArray:contacts];
-        [DatabaseManager uploadContacts:selectedContacts withCompletion:^(NSError * _Nonnull error) {
+        [DatabaseManager saveContacts:selectedContacts withCompletion:^(NSError * _Nonnull error) {
             if (error) {
                 [self showAlert:error];
             }

@@ -35,7 +35,7 @@
     }];
 }
 
-+ (void)getcurrentUser:(void(^)(User *user))completion
++ (void)getCurrentUser:(void(^)(User *user))completion
 {
     PFUser *user = [PFUser currentUser];
     User *currentUser = [User new];
@@ -55,7 +55,7 @@
     completion(currentUser);
 }
 
-+ (void)uploadContacts:(NSArray *)contacts withCompletion:(void(^)(NSError *error))completion
++ (void)saveContacts:(NSArray *)contacts withCompletion:(void(^)(NSError *error))completion
 {
     PFObject *contactsToAlert = [PFObject objectWithClassName:@"contactsToAlert"];
     if (contacts) {
@@ -91,7 +91,7 @@
     [traces saveInBackground];
 }
 
-+ (void)getcontactFromPFObject:(PFObject *)contactObject withCompletion:(void(^)(Contact* contact))completion
++ (void)getContactFromPFObject:(PFObject *)contactObject withCompletion:(void(^)(Contact* contact))completion
 {
     Contact *contact = [Contact new];
     contact.email = contactObject[@"email"];
@@ -120,13 +120,11 @@
         else {
             for (PFObject *contactObject in contacts) {
                 dispatch_group_enter(group);
-                [DatabaseManager getcontactFromPFObject:contactObject withCompletion:^(Contact * _Nonnull contact) {
+                [DatabaseManager getContactFromPFObject:contactObject withCompletion:^(Contact * _Nonnull contact) {
                     if (contact) {
                         [fetchedContacts addObject:contact];
                     }
-                    else {
-                        dispatch_group_leave(group);
-                    }
+                    dispatch_group_leave(group);
                 }];
             }
             dispatch_group_notify(group, dispatch_get_main_queue(), ^{
