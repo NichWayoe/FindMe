@@ -288,7 +288,7 @@
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="N95-LG-Mll">
                     <connections>
-                        <action selector="uploadProfilePhoto:" destination="BHG-zy-lp1" id="iIg-Zq-07t"/>
+                        <action selector="showPhotoSourceView:" destination="BHG-zy-lp1" id="LZH-IH-ake"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
