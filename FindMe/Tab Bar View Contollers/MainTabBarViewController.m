@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, ChildViewControllers) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.selectedIndex = MapViewController;
 }
 
@@ -37,6 +38,8 @@ typedef NS_ENUM(NSInteger, ChildViewControllers) {
 {
     CNContactPickerViewController *contactPicker = [CNContactPickerViewController new];
     contactPicker.delegate = self;
+    NSPredicate *emailPresentPredicate = [NSPredicate predicateWithFormat:@"emailAddresses.@count > 0"];
+    contactPicker.predicateForEnablingContact = emailPresentPredicate;
     [self presentViewController:contactPicker animated:YES completion:nil];
 }
 

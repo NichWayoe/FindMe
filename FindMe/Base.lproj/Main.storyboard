@@ -223,6 +223,29 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xaA-UF-Mji">
+                                        <rect key="frame" x="123" y="278" width="210" height="112"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eey-gb-B7z">
+                                                <rect key="frame" x="111" y="35" width="49" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="icons8-ios-photos-100"/>
+                                                <connections>
+                                                    <action selector="onTapLibraryButton:" destination="BHG-zy-lp1" eventType="touchUpInside" id="R6g-AT-Wi9"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TYW-LA-ioR">
+                                                <rect key="frame" x="55" y="35" width="48" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="icons8-compact-camera-100 (1)"/>
+                                                <connections>
+                                                    <action selector="onTapCameraButton:" destination="BHG-zy-lp1" eventType="touchUpInside" id="aZT-vn-f3O"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.62267142534255981" green="0.92017215490341187" blue="0.91022342443466187" alpha="0.65778232628191025" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="NWA-cc-D3K"/>
@@ -244,6 +267,7 @@
                         <outlet property="lastNameField" destination="RsU-BS-BpG" id="02m-l4-14O"/>
                         <outlet property="passwordField" destination="DFa-m7-ck9" id="JOy-R2-cyS"/>
                         <outlet property="passwordStatus" destination="jiu-Bw-IWN" id="4eK-95-QhF"/>
+                        <outlet property="photoSourceView" destination="xaA-UF-Mji" id="8Ti-1U-eN9"/>
                         <outlet property="profilePhoto" destination="YAV-qR-vcu" id="yXf-du-Kuo"/>
                         <outlet property="registerButton" destination="FR7-Hj-bho" id="SaZ-r2-gFV"/>
                         <outlet property="scrollView" destination="2ff-Wi-kjR" id="2q5-bw-sOk"/>
@@ -259,7 +283,7 @@
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="CaG-gi-Ga3">
                     <connections>
-                        <action selector="uploadProfilePhoto:" destination="BHG-zy-lp1" id="u2C-do-6Az"/>
+                        <action selector="showPhotoSourceView:" destination="BHG-zy-lp1" id="M4p-5o-VZd"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="N95-LG-Mll">
@@ -268,7 +292,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="652" y="-70"/>
+            <point key="canvasLocation" x="650.72463768115949" y="-70.3125"/>
         </scene>
         <!--FindMe-->
         <scene sceneID="IRy-bY-Yex">
@@ -718,6 +742,8 @@
     <resources>
         <image name="arrowshape.turn.up.right" catalog="system" width="128" height="106"/>
         <image name="globe" catalog="system" width="128" height="121"/>
+        <image name="icons8-compact-camera-100 (1)" width="100" height="100"/>
+        <image name="icons8-ios-photos-100" width="100" height="100"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>

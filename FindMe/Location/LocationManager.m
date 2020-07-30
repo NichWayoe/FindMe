@@ -21,6 +21,7 @@
 @property (nonatomic) BOOL isTracking;
 @property (strong, nonatomic) NSMutableArray *visitedLocations;
 @property (strong, nonatomic) Trace *trace;
+
 @end
 
 @implementation LocationManager

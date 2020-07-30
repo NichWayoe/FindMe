@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *confirmPasswordStatus;
 @property (weak, nonatomic) IBOutlet UILabel *emailStatus;
 @property (weak, nonatomic) IBOutlet UILabel *passwordStatus;
+@property (weak, nonatomic) IBOutlet UIView *photoSourceView;
 
 @end
 
@@ -33,6 +34,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.photoSourceView.alpha = 0;
+    self.photoSourceView.layer.cornerRadius = 10;
     CGFloat contentWidth = self.scrollView.bounds.size.width;
     CGFloat contentHeight = self.scrollView.bounds.size.height;
     [self setTextFields];
@@ -55,6 +59,7 @@
 - (IBAction)dismissKeyboard:(id)sender
 {
     [self.view endEditing:YES];
+    self.photoSourceView.alpha = 0;
 }
 
 - (void)hideAlertLabels
@@ -64,13 +69,32 @@
     self.emailStatus.hidden = YES;
 }
 
-- (IBAction)uploadProfilePhoto:(id)sender
+- (IBAction)showPhotoSourceView:(id)sender
+{
+    [UIView animateWithDuration:0.2 animations:^{
+         self.photoSourceView.alpha = 1;
+    }];
+}
+
+- (IBAction)onTapCameraButton:(id)sender
+{
+    [self uploadProfilePhoto:@"camera"];
+     self.photoSourceView.alpha = 0;
+}
+
+- (IBAction)onTapLibraryButton:(id)sender
+{
+    [self uploadProfilePhoto:@"Library"];
+    self.photoSourceView.alpha = 0;
+}
+
+- (void)uploadProfilePhoto:(NSString* )source
 {
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
     
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    if ([source isEqualToString:@"camera"]) {
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
     else {
