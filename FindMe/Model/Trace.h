@@ -10,12 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Tracking : NSObject
+@interface Trace : NSObject
 
 @property (nonatomic, strong) NSDate *dateStarted;
-@property (assign) int numberOfContacts;
+@property (nonatomic, strong) NSDate *dateEnded;
 @property (nonatomic, strong) NSArray *locations;
 @property (nonatomic, strong) NSString *duration;
+
+- (void)start;
+- (void)stop:(NSArray *)locations;
 
 @end
 

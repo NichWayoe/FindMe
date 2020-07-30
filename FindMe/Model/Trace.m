@@ -6,8 +6,21 @@
 //  Copyright © 2020 Nicholas Wayoe. All rights reserved.
 //
 
-#import "Tracking.h"
+#import "Trace.h"
+#import "DateTools.h"
 
-@implementation Tracking
+@implementation Trace
+
+- (void)start
+{
+    self.dateStarted = [NSDate date];
+}
+
+- (void)stop:(NSArray *)locations
+{
+    self.locations = locations;
+    self.dateEnded = [NSDate date];
+    self.duration = [self.dateEnded shortTimeAgoSinceNow];
+}
 
 @end
