@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSMutableArray *contacts;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -22,6 +23,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.refreshControl = [UIRefreshControl new];
+    [self.refreshControl addTarget:self action:@selector(fetchContacts) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
     self.contacts = [NSMutableArray new];
     [self fetchContacts];
 }
@@ -38,6 +43,7 @@
     [DatabaseManager fetchContacts:^(NSArray * _Nonnull contacts) {
         if (contacts) {
             self.contacts = (NSMutableArray *)contacts;
+            [self.refreshControl endRefreshing];
             [self.tableView reloadData];
         }
         else {

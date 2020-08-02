@@ -34,8 +34,8 @@
     self.minutes = 0;
     self.fractions = 0;
     self.locationManager = LocationManager.shared;
-    self.trackingButton.backgroundColor = [UIColor redColor];
     self.trackingButton.layer.cornerRadius = 75;
+    [self designTrackingButtonWithState:@"unselected"];
     [self permissionsStatusActions];
 }
 
@@ -144,12 +144,14 @@
 {
     if ([state isEqualToString:@"selected"]) {
         self.trackingButton.selected = YES;
+        self.trackingButton.titleLabel.text = @"STOP";
         self.trackingButton.highlighted = NO;
         self.trackingButton.backgroundColor = [UIColor greenColor];
     }
     else {
         self.trackingButton.selected = NO;
-        self.trackingButton.highlighted = NO;
+        self.trackingButton.titleLabel.textColor = [UIColor blueColor];
+        self.trackingButton.titleLabel.text = @"SS";
         self.trackingButton.backgroundColor = [UIColor redColor];
     }
 }

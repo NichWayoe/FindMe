@@ -199,6 +199,8 @@
 		2B42BC4C24BCFB77007241E1 /* FindMe */ = {
 			isa = PBXGroup;
 			children = (
+				2B84E96B24D34A4300E8E701 /* Contacts */,
+				2B84E96724D3400200E8E701 /* Camera */,
 				2BAF03CD24C7757000AF8875 /* Parse Manager */,
 				2B17C1F924C6395700A1551F /* Views */,
 				2B42BCB724C0F930007241E1 /* Tab Bar View Contollers */,
@@ -300,6 +302,20 @@
 			children = (
 			);
 			path = "New Group";
+			sourceTree = "<group>";
+		};
+		2B84E96724D3400200E8E701 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		2B84E96B24D34A4300E8E701 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Contacts;
 			sourceTree = "<group>";
 		};
 		2BAF03CD24C7757000AF8875 /* Parse Manager */ = {

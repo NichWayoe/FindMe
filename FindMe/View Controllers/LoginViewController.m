@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UIButton *logInButton;
 
 @end
 
@@ -21,6 +22,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.logInButton.enabled = NO;
     [self registerForKeyboardNotifications];
 }
 
@@ -41,6 +44,17 @@
             [self showAlert:error];
         }
     }];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (self.passwordField.text.length > 1 && self.usernameField.text.length > 1) {
+        self.logInButton.enabled = YES;
+    }
+    else {
+        self.logInButton.enabled = NO;
+    }
+    return YES;
 }
 
 - (IBAction)onSignUp:(id)sender

@@ -25,6 +25,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *confirmPasswordStatus;
 @property (weak, nonatomic) IBOutlet UILabel *emailStatus;
 @property (weak, nonatomic) IBOutlet UILabel *passwordStatus;
+@property (weak, nonatomic) IBOutlet UIView *photoSourceView;
+@property (nonatomic) bool isValidEmailField;
+@property (nonatomic) bool isValidPasswordField;
+@property (nonatomic) bool isValidFirstNameField;
+@property (nonatomic) bool isValidConfirmPasswordField;
+@property (nonatomic) bool isValidLastNameField;
+@property (nonatomic) bool isValidUsernameNameField;
+
 
 @end
 
@@ -33,10 +41,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.photoSourceView.alpha = 0;
+    self.photoSourceView.layer.cornerRadius = 10;
     CGFloat contentWidth = self.scrollView.bounds.size.width;
     CGFloat contentHeight = self.scrollView.bounds.size.height;
     [self setTextFields];
     self.scrollView.contentSize = CGSizeMake(contentWidth, contentHeight);
+    self.registerButton.enabled = NO;
 }
 
 - (void)setTextFields
@@ -55,6 +67,7 @@
 - (IBAction)dismissKeyboard:(id)sender
 {
     [self.view endEditing:YES];
+    self.photoSourceView.alpha = 0;
 }
 
 - (void)hideAlertLabels
@@ -64,13 +77,32 @@
     self.emailStatus.hidden = YES;
 }
 
-- (IBAction)uploadProfilePhoto:(id)sender
+- (IBAction)showPhotoSourceView:(id)sender
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.photoSourceView.alpha = 1;
+    }];
+}
+
+- (IBAction)onTapCameraButton:(id)sender
+{
+    [self uploadProfilePhoto:@"camera"];
+    self.photoSourceView.alpha = 0;
+}
+
+- (IBAction)onTapLibraryButton:(id)sender
+{
+    [self uploadProfilePhoto:@"Library"];
+    self.photoSourceView.alpha = 0;
+}
+
+- (void)uploadProfilePhoto:(NSString* )source
 {
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
     
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    if ([source isEqualToString:@"camera"]) {
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
     else {
@@ -171,9 +203,41 @@
     if (self.passwordField.text.length < 7) {
         self.passwordStatus.text = @"too short";
         self.passwordStatus.textColor = [UIColor redColor];
+        self.isValidPasswordField = NO;
     }
     else {
         self.passwordStatus.hidden = YES;
+        self.isValidPasswordField = YES;
+    }
+}
+
+- (IBAction)onDoneEditingFirstNameField:(id)sender
+{
+    if (self.firstNameField.text.length > 1) {
+        self.isValidFirstNameField = YES;
+    }
+    else {
+        self.isValidFirstNameField = NO;
+    }
+}
+
+- (IBAction)onDoneEditingLastName:(id)sender
+{
+    if (self.lastNameField.text.length > 1) {
+        self.isValidLastNameField = YES;
+    }
+    else {
+        self.isValidLastNameField = NO;
+    }
+}
+
+- (IBAction)onDoneEditingUsernameField:(id)sender
+{
+    if (self.userNameField.text.length > 4) {
+        self.isValidUsernameNameField = YES;
+    }
+    else {
+        self.isValidUsernameNameField = NO;
     }
 }
 
@@ -185,9 +249,11 @@
     if (![emailTest evaluateWithObject:self.emailField.text]) {
         self.emailStatus.text = @"invalid email";
         self.emailStatus.textColor = [UIColor redColor];
+        self.isValidEmailField = NO;
     }
     else {
         self.emailStatus.hidden = YES;
+        self.isValidEmailField = YES;
     }
 }
 
@@ -196,12 +262,30 @@
     self.confirmPasswordStatus.hidden = NO;
     if ([self.passwordField.text isEqualToString:self.confirmPasswordField.text]) {
         self.confirmPasswordStatus.text = @"Passwords match";
+        self.isValidConfirmPasswordField = YES;
         self.confirmPasswordStatus.textColor = [UIColor greenColor];
     }
     else {
         self.confirmPasswordStatus.text = @"Passwords don't match";
         self.confirmPasswordStatus.textColor = [UIColor redColor];
+        self.isValidConfirmPasswordField = NO;
     }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (self.isValidEmailField && self.isValidLastNameField && self.isValidPasswordField && self.firstNameField) {
+        if (self.confirmPasswordField && self.isValidUsernameNameField) {
+            self.registerButton.enabled = YES;
+        }
+        else {
+            self.registerButton.enabled = NO;
+        }
+    }
+    else {
+        self.registerButton.enabled = NO;
+    }
+    return YES;
 }
 
 - (void)showAlert:(NSError *)error

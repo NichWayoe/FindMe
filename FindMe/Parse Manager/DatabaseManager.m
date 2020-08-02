@@ -91,6 +91,17 @@
     [traces saveInBackground];
 }
 
++ (PFObject *)getPFObjectFromLocation:(Location *)decodedLocation
+{
+    PFObject *location = [PFObject objectWithClassName:@"TracedLocations"];
+    location[@"user"] = [PFUser currentUser];
+    location[@"city"] = decodedLocation.city;
+    location[@"state"] = decodedLocation.state;
+    location[@"address"] = decodedLocation.address;
+    location[@"neighbourhood"] = decodedLocation.neighbourhood;
+    return location;
+}
+
 + (void)getContactFromPFObject:(PFObject *)contactObject withCompletion:(void(^)(Contact* contact))completion
 {
     Contact *contact = [Contact new];

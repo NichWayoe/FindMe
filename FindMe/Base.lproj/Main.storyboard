@@ -38,12 +38,18 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" textContentType="username"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="SpO-Vw-oot"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x2S-UH-5bE">
                                         <rect key="frame" x="142" y="360" width="225" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="Ap5-zD-hDf"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FindMe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwr-TM-cMA">
                                         <rect key="frame" x="48" y="145" width="303" height="96"/>
@@ -88,6 +94,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="5qS-Hg-Uwd"/>
                     <connections>
+                        <outlet property="logInButton" destination="Fmw-GR-kbe" id="41G-gP-c1i"/>
                         <outlet property="passwordField" destination="x2S-UH-5bE" id="wWT-Sm-p4A"/>
                         <outlet property="usernameField" destination="ZPI-jC-Gon" id="jKW-ab-DlB"/>
                         <segue destination="l4v-Sg-bpi" kind="show" identifier="homeSegue" id="RdV-tg-N2w"/>
@@ -121,6 +128,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" textContentType="given-name"/>
                                         <connections>
+                                            <action selector="onDoneEditingFirstNameField:" destination="BHG-zy-lp1" eventType="editingDidEndOnExit" id="WHb-i6-uIR"/>
                                             <outlet property="delegate" destination="BHG-zy-lp1" id="tcD-we-d7Q"/>
                                         </connections>
                                     </textField>
@@ -130,6 +138,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" textContentType="family-name"/>
                                         <connections>
+                                            <action selector="onDoneEditingLastName:" destination="BHG-zy-lp1" eventType="editingDidEnd" id="Uvz-em-q0A"/>
                                             <outlet property="delegate" destination="BHG-zy-lp1" id="XWj-7J-Kb6"/>
                                         </connections>
                                     </textField>
@@ -137,8 +146,9 @@
                                         <rect key="frame" x="134" y="327" width="195" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                         <connections>
+                                            <action selector="onDoneEditingUsernameField:" destination="BHG-zy-lp1" eventType="editingDidEnd" id="GvP-dq-FkD"/>
                                             <outlet property="delegate" destination="BHG-zy-lp1" id="eSJ-Q4-GOg"/>
                                         </connections>
                                     </textField>
@@ -169,6 +179,7 @@
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                         <connections>
                                             <action selector="onEditingPasswordField:" destination="BHG-zy-lp1" eventType="editingChanged" id="csF-gP-594"/>
+                                            <outlet property="delegate" destination="BHG-zy-lp1" id="MPd-nB-ep5"/>
                                         </connections>
                                     </textField>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="YAV-qR-vcu">
@@ -223,6 +234,29 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xaA-UF-Mji">
+                                        <rect key="frame" x="123" y="278" width="210" height="112"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eey-gb-B7z">
+                                                <rect key="frame" x="111" y="35" width="49" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="icons8-ios-photos-100"/>
+                                                <connections>
+                                                    <action selector="onTapLibraryButton:" destination="BHG-zy-lp1" eventType="touchUpInside" id="R6g-AT-Wi9"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TYW-LA-ioR">
+                                                <rect key="frame" x="55" y="35" width="48" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="icons8-compact-camera-100 (1)"/>
+                                                <connections>
+                                                    <action selector="onTapCameraButton:" destination="BHG-zy-lp1" eventType="touchUpInside" id="aZT-vn-f3O"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.62267142534255981" green="0.92017215490341187" blue="0.91022342443466187" alpha="0.65778232628191025" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="NWA-cc-D3K"/>
@@ -244,8 +278,9 @@
                         <outlet property="lastNameField" destination="RsU-BS-BpG" id="02m-l4-14O"/>
                         <outlet property="passwordField" destination="DFa-m7-ck9" id="JOy-R2-cyS"/>
                         <outlet property="passwordStatus" destination="jiu-Bw-IWN" id="4eK-95-QhF"/>
+                        <outlet property="photoSourceView" destination="xaA-UF-Mji" id="8Ti-1U-eN9"/>
                         <outlet property="profilePhoto" destination="YAV-qR-vcu" id="yXf-du-Kuo"/>
-                        <outlet property="registerButton" destination="FR7-Hj-bho" id="SaZ-r2-gFV"/>
+                        <outlet property="registerButton" destination="FR7-Hj-bho" id="5Fn-yi-Rik"/>
                         <outlet property="scrollView" destination="2ff-Wi-kjR" id="2q5-bw-sOk"/>
                         <outlet property="userNameField" destination="1Ef-51-mbO" id="gjB-Nb-dW7"/>
                         <segue destination="l4v-Sg-bpi" kind="show" identifier="homeSegue" id="oco-HZ-96n"/>
@@ -259,16 +294,16 @@
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="CaG-gi-Ga3">
                     <connections>
-                        <action selector="uploadProfilePhoto:" destination="BHG-zy-lp1" id="u2C-do-6Az"/>
+                        <action selector="showPhotoSourceView:" destination="BHG-zy-lp1" id="M4p-5o-VZd"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="N95-LG-Mll">
                     <connections>
-                        <action selector="uploadProfilePhoto:" destination="BHG-zy-lp1" id="iIg-Zq-07t"/>
+                        <action selector="showPhotoSourceView:" destination="BHG-zy-lp1" id="LZH-IH-ake"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="652" y="-70"/>
+            <point key="canvasLocation" x="650.72463768115949" y="-70.3125"/>
         </scene>
         <!--FindMe-->
         <scene sceneID="IRy-bY-Yex">
@@ -284,6 +319,7 @@
                                 <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <state key="normal" title="START"/>
+                                <state key="selected" title="STOP"/>
                                 <connections>
                                     <action selector="onFindMe:" destination="3pB-0z-X24" eventType="touchUpInside" id="2Bm-Nd-j8r"/>
                                 </connections>
@@ -494,17 +530,17 @@
                                             <segue destination="lBe-jb-DmY" kind="embed" id="gmh-RB-HUU"/>
                                         </connections>
                                     </containerView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rir-D3-bRd">
+                                        <rect key="frame" x="117" y="22" width="150" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="nwayoe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZU-Uj-3go">
-                                        <rect key="frame" x="142" y="188" width="128" height="21"/>
+                                        <rect key="frame" x="150" y="190" width="113" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rir-D3-bRd">
-                                        <rect key="frame" x="117" y="38" width="180" height="142"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
                                 </subviews>
                                 <viewLayoutGuide key="contentLayoutGuide" id="7DO-1o-SfC"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="a3J-mu-mC4"/>
@@ -530,7 +566,7 @@
         <!--Navigation Controller-->
         <scene sceneID="NQb-9c-HGm">
             <objects>
-                <navigationController storyboardIdentifier="Home" id="l4v-Sg-bpi" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Home" modalPresentationStyle="fullScreen" id="l4v-Sg-bpi" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="qP3-8T-xah"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="93E-wS-R3D">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -713,11 +749,13 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="oco-HZ-96n"/>
+        <segue reference="RdV-tg-N2w"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.turn.up.right" catalog="system" width="128" height="106"/>
         <image name="globe" catalog="system" width="128" height="121"/>
+        <image name="icons8-compact-camera-100 (1)" width="100" height="100"/>
+        <image name="icons8-ios-photos-100" width="100" height="100"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
