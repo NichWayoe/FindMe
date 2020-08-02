@@ -43,7 +43,6 @@
         self.locationManager = [CLLocationManager new];
         self.locationManager.delegate = self;
         self.geocoder = [CLGeocoder new];
-        self.visitedLocations = [NSMutableArray new];
         self.locationManager.distanceFilter = 10;
         self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
     }
@@ -106,6 +105,7 @@
 - (void)beginTracking
 {
     if (!self.isTracking) {
+        self.visitedLocations = [NSMutableArray new];
         [self.locationManager startUpdatingLocation];
         self.isTracking  = YES;
         self.trace = [Trace new];
@@ -138,10 +138,11 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
+    
     [self decodeLocation:[locations lastObject] withCompletion:^(CLPlacemark *decodedLocation) {
         if (decodedLocation) {
             Location *location = [[Location alloc] initWithPlacemark:decodedLocation];
-            [self.visitedLocations addObject:location];
+            [self.visitedLocations addObject:[DatabaseManager getPFObjectFromLocation:location]];
             NSString *message = [LocationManager makeStringFromPlacemarkAndContact:decodedLocation];
             [DatabaseManager fetchContacts:^(NSArray * _Nonnull contacts) {
                 if (contacts.count >= 1) {

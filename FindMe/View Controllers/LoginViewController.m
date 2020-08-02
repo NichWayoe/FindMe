@@ -48,7 +48,7 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (self.passwordField.text.length > 0 && self.usernameField.text.length > 0) {
+    if (self.passwordField.text.length > 1 && self.usernameField.text.length > 1) {
         self.logInButton.enabled = YES;
     }
     else {

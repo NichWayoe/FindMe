@@ -11,6 +11,7 @@
 #import "Contact.h"
 #import "User.h"
 #import "Trace.h"
+#import "Location.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -25,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)checkForPersistentUser: (void(^)(bool isUserloggedIn))completion;
 + (void)getCurrentUser:(void(^)(User *user))completion;
 + (void)saveTrace:(Trace *)trace;
++ (PFObject *)getPFObjectFromLocation:(Location *)decodedLocation;
 
 @end
 NS_ASSUME_NONNULL_END

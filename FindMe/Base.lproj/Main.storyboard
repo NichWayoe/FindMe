@@ -319,6 +319,7 @@
                                 <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <state key="normal" title="START"/>
+                                <state key="selected" title="STOP"/>
                                 <connections>
                                     <action selector="onFindMe:" destination="3pB-0z-X24" eventType="touchUpInside" id="2Bm-Nd-j8r"/>
                                 </connections>
@@ -529,17 +530,17 @@
                                             <segue destination="lBe-jb-DmY" kind="embed" id="gmh-RB-HUU"/>
                                         </connections>
                                     </containerView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rir-D3-bRd">
+                                        <rect key="frame" x="117" y="22" width="150" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="nwayoe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZU-Uj-3go">
-                                        <rect key="frame" x="142" y="188" width="128" height="21"/>
+                                        <rect key="frame" x="150" y="190" width="113" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rir-D3-bRd">
-                                        <rect key="frame" x="117" y="38" width="180" height="142"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
                                 </subviews>
                                 <viewLayoutGuide key="contentLayoutGuide" id="7DO-1o-SfC"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="a3J-mu-mC4"/>
