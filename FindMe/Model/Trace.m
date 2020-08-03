@@ -20,7 +20,7 @@
 {
     self.locations = locations;
     self.dateEnded = [NSDate date];
-    self.duration = [self.dateEnded shortTimeAgoSinceNow];
+    self.duration = [self.dateStarted shortTimeAgoSinceNow];
 }
 
 @end

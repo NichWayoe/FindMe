@@ -20,4 +20,14 @@
     [super setSelected:selected animated:animated];
 }
 
+- (void)setTrace:(Trace *)trace
+{
+    _trace = trace;
+    self.durationLabel.text = trace.duration;
+    NSDateFormatter *dateFormater = [NSDateFormatter new];
+    [dateFormater setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    self.endDateLabel.text = [dateFormater stringFromDate:trace.dateEnded];
+    self.startDateLabel.text = [dateFormater stringFromDate:trace.dateStarted];
+}
+
 @end

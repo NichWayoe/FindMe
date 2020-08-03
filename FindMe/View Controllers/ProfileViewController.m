@@ -19,7 +19,6 @@
 typedef NS_ENUM(NSInteger, Childviews) {
     BioView,
     HistoryView,
-    SettingsView,
 };
 
 @end
@@ -51,11 +50,6 @@ typedef NS_ENUM(NSInteger, Childviews) {
             self.bioView.alpha = 0;
             self.historyView.alpha = 1;
             self.settingsView.alpha = 0;
-            break;
-        case SettingsView:
-            self.bioView.alpha = 0;
-            self.historyView.alpha = 0;
-            self.settingsView.alpha = 1;
             break;
     }
 }
