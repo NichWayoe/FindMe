@@ -7,26 +7,65 @@
 //
 
 #import "HistoryDetailViewController.h"
+#import "DatabaseManager.h"
+#import "LocationCell.h"
+#import "HistoryCell.h"
 
-@interface HistoryDetailViewController ()
+@interface HistoryDetailViewController () <UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) NSMutableArray *locations;
 
 @end
 
 @implementation HistoryDetailViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.locations = [NSMutableArray new];
+    for (id location in self.trace.locations) {
+        [self.locations addObject:location];
+    }
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        HistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HistoryCell"];
+        cell.trace = self.trace;
+        return cell;
+    }
+    else {
+        LocationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell"];
+        cell.location = self.locations[indexPath.row];
+        return cell;
+    }
 }
-*/
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return  1;
+    }
+    else {
+        return self.locations.count;
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return @"Trace Details";
+    }
+    else {
+        return @"Locations";
+    }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
 
 @end

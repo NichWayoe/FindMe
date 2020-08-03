@@ -6,9 +6,9 @@
 //  Copyright © 2020 Nicholas Wayoe. All rights reserved.
 //
 
-#import "TraceCell.h"
+#import "LocationCell.h"
 
-@implementation TraceCell
+@implementation LocationCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
