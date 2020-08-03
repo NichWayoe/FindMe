@@ -43,6 +43,7 @@
     [DatabaseManager fetchTraces:^(NSArray * _Nonnull traces) {
         if (traces) {
             self.traces = traces;
+            [self.refreshControl endRefreshing];
             [self.tableView reloadData];
         }
         else {
@@ -60,6 +61,12 @@
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.traces.count;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    [self.delegate didSelectCellWithTrace:self.traces[indexPath.row]];
 }
 
 @end

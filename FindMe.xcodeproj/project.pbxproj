@@ -28,10 +28,11 @@
 		2B42BCA224BE1552007241E1 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42BCA124BE1552007241E1 /* MapViewController.m */; };
 		2B42BCB624BFEE9B007241E1 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42BCB524BFEE9B007241E1 /* LocationManager.m */; };
 		2B42BCBD24C0FB6A007241E1 /* MainTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B42BCBC24C0FB6A007241E1 /* MainTabBarViewController.m */; };
+		2B77FB4024D85A89005E9F91 /* HistoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B77FB3F24D85A88005E9F91 /* HistoryDetailViewController.m */; };
+		2B77FB4324D8709A005E9F91 /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B77FB4224D8709A005E9F91 /* LocationCell.m */; };
 		2B84E93D24C8B59800E8E701 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E93C24C8B59800E8E701 /* User.m */; };
 		2B84E94924CF9B7B00E8E701 /* AlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E94824CF9B7B00E8E701 /* AlertManager.m */; };
 		2B84E94F24D083EB00E8E701 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E94E24D083EB00E8E701 /* AboutViewController.m */; };
-		2B84E95224D0875200E8E701 /* LabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E95124D0875200E8E701 /* LabelCell.m */; };
 		2B84E95524D0892500E8E701 /* UserDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E95424D0892500E8E701 /* UserDetailCell.m */; };
 		2B84E95824D0BB4F00E8E701 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E95724D0BB4F00E8E701 /* HistoryViewController.m */; };
 		2B84E95B24D0BBA300E8E701 /* HistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E95A24D0BBA300E8E701 /* HistoryCell.m */; };
@@ -100,14 +101,16 @@
 		2B42BCB524BFEE9B007241E1 /* LocationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		2B42BCBB24C0FB6A007241E1 /* MainTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarViewController.h; sourceTree = "<group>"; };
 		2B42BCBC24C0FB6A007241E1 /* MainTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabBarViewController.m; sourceTree = "<group>"; };
+		2B77FB3E24D85A88005E9F91 /* HistoryDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryDetailViewController.h; sourceTree = "<group>"; };
+		2B77FB3F24D85A88005E9F91 /* HistoryDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryDetailViewController.m; sourceTree = "<group>"; };
+		2B77FB4124D8709A005E9F91 /* LocationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationCell.h; sourceTree = "<group>"; };
+		2B77FB4224D8709A005E9F91 /* LocationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationCell.m; sourceTree = "<group>"; };
 		2B84E93B24C8B59800E8E701 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		2B84E93C24C8B59800E8E701 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		2B84E94724CF9B7B00E8E701 /* AlertManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertManager.h; sourceTree = "<group>"; };
 		2B84E94824CF9B7B00E8E701 /* AlertManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertManager.m; sourceTree = "<group>"; };
 		2B84E94D24D083EB00E8E701 /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		2B84E94E24D083EB00E8E701 /* AboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
-		2B84E95024D0875200E8E701 /* LabelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LabelCell.h; sourceTree = "<group>"; };
-		2B84E95124D0875200E8E701 /* LabelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LabelCell.m; sourceTree = "<group>"; };
 		2B84E95324D0892500E8E701 /* UserDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserDetailCell.h; sourceTree = "<group>"; };
 		2B84E95424D0892500E8E701 /* UserDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserDetailCell.m; sourceTree = "<group>"; };
 		2B84E95624D0BB4F00E8E701 /* HistoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
@@ -164,12 +167,12 @@
 			children = (
 				2B17C1FA24C63A5D00A1551F /* ContactCell.h */,
 				2B17C1FB24C63A5D00A1551F /* ContactCell.m */,
-				2B84E95024D0875200E8E701 /* LabelCell.h */,
-				2B84E95124D0875200E8E701 /* LabelCell.m */,
 				2B84E95324D0892500E8E701 /* UserDetailCell.h */,
 				2B84E95424D0892500E8E701 /* UserDetailCell.m */,
 				2B84E95924D0BBA300E8E701 /* HistoryCell.h */,
 				2B84E95A24D0BBA300E8E701 /* HistoryCell.m */,
+				2B77FB4124D8709A005E9F91 /* LocationCell.h */,
+				2B77FB4224D8709A005E9F91 /* LocationCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -273,6 +276,8 @@
 				2B84E94E24D083EB00E8E701 /* AboutViewController.m */,
 				2B84E95624D0BB4F00E8E701 /* HistoryViewController.h */,
 				2B84E95724D0BB4F00E8E701 /* HistoryViewController.m */,
+				2B77FB3E24D85A88005E9F91 /* HistoryDetailViewController.h */,
+				2B77FB3F24D85A88005E9F91 /* HistoryDetailViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -629,7 +634,7 @@
 				2B84E95E24D1D84500E8E701 /* Trace.m in Sources */,
 				2B42BCB624BFEE9B007241E1 /* LocationManager.m in Sources */,
 				2B42BC9C24BE1528007241E1 /* FindMeViewController.m in Sources */,
-				2B84E95224D0875200E8E701 /* LabelCell.m in Sources */,
+				2B77FB4024D85A89005E9F91 /* HistoryDetailViewController.m in Sources */,
 				2B84E95824D0BB4F00E8E701 /* HistoryViewController.m in Sources */,
 				2B42BC9924BE1510007241E1 /* ContactsViewController.m in Sources */,
 				2B42BC4F24BCFB77007241E1 /* AppDelegate.m in Sources */,
@@ -637,6 +642,7 @@
 				2B84E93D24C8B59800E8E701 /* User.m in Sources */,
 				2B42BCBD24C0FB6A007241E1 /* MainTabBarViewController.m in Sources */,
 				2B42BC8D24BE13FA007241E1 /* LoginViewController.m in Sources */,
+				2B77FB4324D8709A005E9F91 /* LocationCell.m in Sources */,
 				2B42BC6024BCFB78007241E1 /* main.m in Sources */,
 				2B42BC8824BD2FA6007241E1 /* Contact.m in Sources */,
 				2B42BC9024BE141A007241E1 /* SignUpViewController.m in Sources */,

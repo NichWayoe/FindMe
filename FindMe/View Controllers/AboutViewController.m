@@ -9,7 +9,6 @@
 #import "AboutViewController.h"
 #import "DatabaseManager.h"
 #import "User.h"
-#import "LabelCell.h"
 #import "UserDetailCell.h"
 
 @interface AboutViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -32,27 +31,29 @@
             self.user = user;
         }
     }];
-    self.userDetails = @[@"USERNAME", self.user.username, @"FIRST NAME", self.user.firstName, @"LAST NAME", self.user.lastName, @"EMAIL", self.user.email];
+    self.userDetails = @[self.user.username, self.user.firstName, self.user.lastName,self.user.email];
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    if (indexPath.row % 2 == 0) {
-        LabelCell *labelCell = [tableView dequeueReusableCellWithIdentifier:@"LabelCell"];
-        labelCell.nameLabel.text = self.userDetails[indexPath.row];
-        [labelCell.nameLabel.text uppercaseString];
-        return labelCell;
-    }
-    else {
         UserDetailCell *userDetailCell = [tableView dequeueReusableCellWithIdentifier:@"UserDetailCell"];
-        userDetailCell.detailLabel.text = self.userDetails[indexPath.row];
+        userDetailCell.detailLabel.text = self.userDetails[indexPath.section];
         return userDetailCell;
-    }
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 8;
+    return 1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 4;
+}
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSArray *sectionNames = @[@"Username", @"First Name", @"Last Name", @"Email"];
+    return sectionNames[section];
+    
 }
 
 @end
