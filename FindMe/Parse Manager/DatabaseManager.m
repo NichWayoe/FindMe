@@ -55,6 +55,73 @@
     completion(currentUser);
 }
 
++ (Trace *)getTraceFromPFObject:(PFObject *)PFTrace
+{
+    dispatch_group_t group = dispatch_group_create();
+    NSMutableArray *locatonsArray =[NSMutableArray new];
+    Trace *trace = [Trace new];
+    trace.duration = PFTrace[@"duration"];
+    trace.dateStarted = PFTrace[@"dateStarted"];
+    trace.dateEnded = PFTrace[@"dateEnded"];
+    for (PFObject *object in PFTrace[@"locations"])
+    {
+        dispatch_group_enter(group);
+        [DatabaseManager getPFLocationWithObjectID:object.objectId withCompletion:^(PFObject * _Nonnull PFLocation) {
+            if (PFLocation) {
+                [locatonsArray addObject:[DatabaseManager getLocationFromPFObject:PFLocation]];
+            }
+            dispatch_group_leave(group);
+        }];
+    }
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        trace.locations = locatonsArray;
+    });
+    return trace;
+}
+
++ (Location *)getLocationFromPFObject:(PFObject *)PFLocation
+{
+    Location *location = [Location new];
+    location.city = PFLocation[@"city"];
+    location.address = PFLocation[@"address"];
+    location.country = PFLocation[@"country"];
+    location.state = PFLocation[@"state"];
+    return location;
+}
+
++ (void) getPFLocationWithObjectID:(NSString *)objectID withCompletion:(void(^)(PFObject *PFLocation))completion
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"TracedLocations"];
+    [query whereKey:@"objectId" equalTo:objectID];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (objects) {
+            completion([objects lastObject]);
+        }
+        else {
+            completion(nil);
+        }
+    }];
+}
+
++ (void)fetchTraces:(void(^)(NSArray *traces))completion
+{
+    NSMutableArray *fetchedTraces = [NSMutableArray new];
+    PFQuery *query = [PFQuery queryWithClassName:@"Traces"];
+    [query orderByDescending:@"createdAt"];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (objects) {
+            for (PFObject *trace in objects) {
+                [fetchedTraces addObject:[DatabaseManager getTraceFromPFObject:trace]];
+            }
+            completion((NSArray *)fetchedTraces);
+        }
+        else {
+            completion(nil);
+        }
+    }];
+}
+
 + (void)saveContacts:(NSArray *)contacts withCompletion:(void(^)(NSError *error))completion
 {
     PFObject *contactsToAlert = [PFObject objectWithClassName:@"contactsToAlert"];
@@ -87,6 +154,7 @@
     traces[@"user"] = [PFUser currentUser];
     traces[@"locations"] = trace.locations;
     traces[@"duration"] = trace.duration;
+    traces[@"dateEnded"] = trace.dateEnded;
     traces[@"dateStarted"] = trace.dateStarted;
     [traces saveInBackground];
 }
@@ -96,9 +164,9 @@
     PFObject *location = [PFObject objectWithClassName:@"TracedLocations"];
     location[@"user"] = [PFUser currentUser];
     location[@"city"] = decodedLocation.city;
+    location[@"country"] = decodedLocation.country;
     location[@"state"] = decodedLocation.state;
     location[@"address"] = decodedLocation.address;
-    location[@"neighbourhood"] = decodedLocation.neighbourhood;
     return location;
 }
 

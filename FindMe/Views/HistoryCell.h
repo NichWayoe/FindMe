@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Trace.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HistoryCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *durationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *numberOfContactLabel;
+@property (strong, nonatomic) Trace *trace;
+@property (weak, nonatomic) IBOutlet UILabel *endDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *startDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numberOfLocationsLabel;
 
 @end
 

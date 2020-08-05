@@ -15,9 +15,15 @@
     [super awakeFromNib];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+- (void)setTrace:(Trace *)trace
 {
-    [super setSelected:selected animated:animated];
+    _trace = trace;
+    self.durationLabel.text = trace.duration;
+    NSDateFormatter *dateFormater = [NSDateFormatter new];
+    [dateFormater setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    self.numberOfLocationsLabel.text = [NSString stringWithFormat:@"%d", trace.locations.count];
+    self.endDateLabel.text = [dateFormater stringFromDate:trace.dateEnded];
+    self.startDateLabel.text = [dateFormater stringFromDate:trace.dateStarted];
 }
 
 @end

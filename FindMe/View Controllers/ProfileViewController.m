@@ -8,18 +8,21 @@
 
 #import "ProfileViewController.h"
 #import "DatabaseManager.h"
+#import "HistoryViewController.h"
+#import "HistoryDetailViewController.h"
 
-@interface ProfileViewController ()
+@interface ProfileViewController () <HistoryViewControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet UIView *bioView;
 @property (weak, nonatomic) IBOutlet UIView *historyView;
 @property (weak, nonatomic) IBOutlet UIView *settingsView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-
+@property (strong, nonatomic) HistoryViewController *historyViewController;
+@property (strong, nonatomic) Trace *trace;
 typedef NS_ENUM(NSInteger, Childviews) {
     BioView,
     HistoryView,
-    SettingsView,
 };
 
 @end
@@ -29,7 +32,8 @@ typedef NS_ENUM(NSInteger, Childviews) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.historyViewController = [self.childViewControllers firstObject];
+    self.historyViewController.delegate = self;
     [DatabaseManager getCurrentUser:^(User * _Nonnull user) {
         if (user) {
             self.profileImageView.layer.cornerRadius = 75;
@@ -52,13 +56,21 @@ typedef NS_ENUM(NSInteger, Childviews) {
             self.historyView.alpha = 1;
             self.settingsView.alpha = 0;
             break;
-        case SettingsView:
-            self.bioView.alpha = 0;
-            self.historyView.alpha = 0;
-            self.settingsView.alpha = 1;
-            break;
     }
 }
 
+- (void)didSelectCellWithTrace:(Trace *)trace
+{
+    self.trace = trace;
+    [self performSegueWithIdentifier:@"historyDetails" sender:self];
+}
 
-@end
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"historyDetails"]) {
+        HistoryDetailViewController *historyDetailViewConroller = [segue destinationViewController];
+        historyDetailViewConroller.trace = self.trace;
+    }
+}
+
+@end;

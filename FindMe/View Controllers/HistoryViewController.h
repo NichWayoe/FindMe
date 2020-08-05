@@ -7,10 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Trace.h"
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol HistoryViewControllerDelegate <NSObject>
+
+- (void)didSelectCellWithTrace:(Trace *)trace;
+
+@end
+
 @interface HistoryViewController : UIViewController
+
+@property (nonatomic, weak) id<HistoryViewControllerDelegate>delegate;
 
 @end
 
