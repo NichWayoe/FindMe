@@ -15,12 +15,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="icons8-sherlock-holmes-100" translatesAutoresizingMaskIntoConstraints="NO" id="NuU-At-y88">
-                                <rect key="frame" x="122" y="395" width="147" height="143"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="icons8-sherlock-holmes-100" translatesAutoresizingMaskIntoConstraints="NO" id="NuU-At-y88">
+                                <rect key="frame" x="133.5" y="374.5" width="147" height="147"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="147" id="GDo-zt-eHY"/>
+                                    <constraint firstAttribute="width" constant="147" id="mYw-Pw-Mxq"/>
+                                </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FINDME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TtL-fK-FH5">
+                                <rect key="frame" x="154.5" y="529.5" width="105" height="33"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="TtL-fK-FH5" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Fgl-a6-E3M"/>
+                            <constraint firstItem="TtL-fK-FH5" firstAttribute="top" secondItem="NuU-At-y88" secondAttribute="bottom" constant="8" id="TRm-cB-aKX"/>
+                            <constraint firstItem="NuU-At-y88" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ep6-jm-7dL"/>
+                            <constraint firstItem="NuU-At-y88" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="yI0-ZX-ukX"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>

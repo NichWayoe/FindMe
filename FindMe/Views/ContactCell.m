@@ -24,7 +24,7 @@
 {
     _contact = contact;
     self.contactProfileImageView.layer.cornerRadius = 25;
-    self.contactNameLabel.text = [contact.lastName stringByAppendingString:contact.firstName];
+    self.contactNameLabel.text = [NSString stringWithFormat:@"%@ %@", contact.firstName, contact.lastName];
     self.emailField.text = contact.email;
     self.contactProfileImageView.image = [UIImage imageWithData:contact.profileImageData];
 }

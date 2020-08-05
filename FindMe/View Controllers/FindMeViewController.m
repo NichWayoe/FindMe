@@ -63,6 +63,10 @@
         [self.timer invalidate];
         [self.locationManager stopTracking];
         self.factionsLabel.text = @".00";
+        self.hours = 0;
+        self.seconds = 0;
+        self.minutes = 0;
+        self.fractions = 0;
         self.timeLabel.text = @"00:00:00";
     }
 }
