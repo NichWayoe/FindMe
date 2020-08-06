@@ -176,6 +176,7 @@
     contact.email = contactObject[@"email"];
     contact.firstName = contactObject[@"firstName"];
     contact.lastName = contactObject[@"LastName"];
+    contact.dateCreated = contactObject.createdAt;
     PFFileObject *contactImageFile = contactObject[@"profileImage"];
     [contactImageFile getDataInBackgroundWithBlock:^(NSData * _Nullable ImageData, NSError * _Nullable error) {
         if (!error) {
@@ -193,7 +194,7 @@
     [query orderByDescending:@"createdAt"];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *contacts, NSError *error) {
-        if (error) {
+        if (error && contacts) {
             completion(nil);
         }
         else {
@@ -207,7 +208,11 @@
                 }];
             }
             dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-                completion((NSArray *) fetchedContacts);
+                NSSortDescriptor *sortDescriptor;
+                sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated"
+                                                             ascending:YES];
+                NSArray *sortedArray = [fetchedContacts sortedArrayUsingDescriptors:@[sortDescriptor]];
+                completion(sortedArray);
             });
         }
     }];

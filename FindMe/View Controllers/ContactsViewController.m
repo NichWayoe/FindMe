@@ -24,6 +24,8 @@
 {
     [super viewDidLoad];
     
+    self.tableView.tableFooterView = [[UIView alloc]
+                                      initWithFrame:CGRectZero];
     self.refreshControl = [UIRefreshControl new];
     [self.refreshControl addTarget:self action:@selector(fetchContacts) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];

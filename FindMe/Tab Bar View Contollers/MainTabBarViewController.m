@@ -68,8 +68,11 @@ typedef NS_ENUM(NSInteger, ChildViewControllers) {
         if (!error) {
             SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UINavigationController *navigationController = [UINavigationController new];
+            [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
             LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-            myDelegate.window.rootViewController = loginViewController;
+            navigationController.viewControllers = @[loginViewController];
+            myDelegate.window.rootViewController = navigationController;
         }
         else {
             [self showAlert:error];
