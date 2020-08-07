@@ -123,9 +123,9 @@
         [self.locationManager stopUpdatingLocation];
         [self.trace stop:(NSArray *)self.decodedVisitedLocations];
         self.isTracking = NO;
+        [self.delegate didEndTrace:((NSArray*) self.visitedLocations)];
         if (self.decodedVisitedLocations.count > 0) {
             [DatabaseManager saveTrace:self.trace];
-            [self.delegate didEndTrace:((NSArray*) self.visitedLocations)];
         }
     }
     else {

@@ -150,13 +150,13 @@
         self.trackingButton.selected = YES;
         self.trackingButton.titleLabel.text = @"STOP";
         self.trackingButton.highlighted = NO;
-        self.trackingButton.backgroundColor = [UIColor greenColor];
+        self.trackingButton.backgroundColor = [UIColor redColor];
     }
     else {
         self.trackingButton.selected = NO;
-        self.trackingButton.titleLabel.textColor = [UIColor blueColor];
+        self.trackingButton.titleLabel.textColor = [UIColor whiteColor];
         self.trackingButton.titleLabel.text = @"SS";
-        self.trackingButton.backgroundColor = [UIColor redColor];
+        self.trackingButton.backgroundColor = [UIColor greenColor];
     }
 }
 

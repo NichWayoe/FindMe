@@ -52,13 +52,14 @@ typedef NS_ENUM(NSInteger, ChildViewControllers) {
                 [self showAlert:error];
             }
             else {
-                
+                if (self.selectedIndex == ContactsViewController) {
+                       [self.childViewControllers[ContactsViewController] viewWillAppear:YES];
+                   }
+                   else {
+                       self.selectedIndex = ContactsViewController;
+                   }
             }
         }];
-        self.selectedIndex = ContactsViewController;
-    }
-    else {
-        
     }
 }
 

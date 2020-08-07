@@ -813,11 +813,11 @@
             </objects>
             <point key="canvasLocation" x="2040.5797101449277" y="3474.7767857142858"/>
         </scene>
-        <!--Main Tab Bar View Controller-->
+        <!--FindMe-->
         <scene sceneID="GYE-wI-4xY">
             <objects>
                 <tabBarController id="JVU-jJ-ApI" customClass="MainTabBarViewController" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="dtf-Qd-3k5">
+                    <navigationItem key="navigationItem" title="FindMe" id="dtf-Qd-3k5">
                         <barButtonItem key="leftBarButtonItem" title="Log out" id="WXt-0S-Mij">
                             <connections>
                                 <action selector="onTapLogOut:" destination="JVU-jJ-ApI" id="Ddz-Tr-woX"/>
@@ -948,11 +948,11 @@
             </objects>
             <point key="canvasLocation" x="350.72463768115944" y="2659.8214285714284"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--FindMe-->
         <scene sceneID="NQb-9c-HGm">
             <objects>
                 <navigationController storyboardIdentifier="Home" modalPresentationStyle="fullScreen" id="l4v-Sg-bpi" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="qP3-8T-xah"/>
+                    <navigationItem key="navigationItem" title="FindMe" id="qP3-8T-xah"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="93E-wS-R3D">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

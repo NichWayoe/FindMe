@@ -23,7 +23,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.tableView.tableFooterView = [[UIView alloc]
                                       initWithFrame:CGRectZero];
     self.refreshControl = [UIRefreshControl new];
@@ -44,7 +43,7 @@
 {
     [DatabaseManager fetchContacts:^(NSArray * _Nonnull contacts) {
         if (contacts) {
-            self.contacts = (NSMutableArray *)contacts;
+            self.contacts = [contacts mutableCopy];
             [self.refreshControl endRefreshing];
             [self.tableView reloadData];
         }
@@ -61,9 +60,28 @@
     return cell;
 }
 
+- (void)didSelectContacts:(NSArray<CNContact *> *)contacts {
+    NSMutableArray *selectedContacts = [Contact contactsWithArray:contacts];
+    for (Contact *contact in selectedContacts) {
+        [self.contacts addObject:contact];
+    }
+}
+
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.contacts.count;
+}
+
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:@"delete" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        [DatabaseManager deleteContact:self.contacts[indexPath.row]];
+        [self.contacts removeObjectAtIndex:(indexPath.row)];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        completionHandler(YES);
+    }];
+    UISwipeActionsConfiguration *configuration = [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
+    return configuration;
 }
 
 - (void)showAlert

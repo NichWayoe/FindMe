@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)saveUser:(User *)user withCompletion:(void(^)(NSError *error))completion;
 + (void)fetchContacts:(void(^)(NSArray *contacts))completion;
 + (void)fetchTraces:(void(^)(NSArray *traces))completion;
++ (void)deleteContact:(Contact *)contact;
 + (void)logOutUser:(void(^)(NSError * error))completion;
 + (void)logInUser:(NSString *)usernane withPassword:(NSString *)password withCompletion:(void(^)(NSError * error))completion;
 + (void)saveContacts:(NSArray *)contacts withCompletion:(void(^)(NSError *error))completion;

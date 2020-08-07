@@ -55,6 +55,21 @@
     completion(currentUser);
 }
 
+
++ (void)deleteContact:(Contact *)contact
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"contactsToAlert"];
+    [query whereKey:@"user" equalTo:PFUser.currentUser];
+    [query whereKey:@"firstName" equalTo:contact.firstName];
+    [query whereKey:@"LastName" equalTo:contact.lastName];
+    [query whereKey:@"email" equalTo:contact.email];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (objects) {
+            [PFObject deleteAllInBackground:objects];
+        }
+    }];
+}
+
 + (Trace *)getTraceFromPFObject:(PFObject *)PFTrace
 {
     dispatch_group_t group = dispatch_group_create();
@@ -137,14 +152,17 @@
             }
             [contactsToAlert saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (!succeeded && error ) {
+                    completion(error);
                 }
                 else {
+                    completion(nil);
                 }
             }];
         }
     }
     else {
-        
+        NSError *error = [NSError errorWithDomain:@"com.FindMe" code:400 userInfo:@{@"Error reason":@"No contacts Selected"}];
+        completion(error);
     }
 }
 
