@@ -14,6 +14,8 @@
 
 @property (strong, nonatomic) LocationManager *locationManager;
 @property (strong,nonatomic) GMSMapView *mapView;
+@property (strong, nonatomic) GMSMutablePath *tracePath;
+@property (strong, nonatomic) GMSPolyline *traceLine;
 
 @end
 
@@ -26,6 +28,7 @@
     [self defaultMapView];
     self.locationManager = LocationManager.shared;
     self.locationManager.delegate = self;
+    self.tracePath = [GMSMutablePath path];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -87,6 +90,34 @@
     [self.locationManager requestLocationPermission];
     self.mapView.myLocationEnabled = YES;
     [self.view addSubview:self.mapView];
+}
+
+- (void)didChangeLocation:(CLLocation *)location
+{
+    [self.tracePath addCoordinate:location.coordinate];
+    self.traceLine = [GMSPolyline polylineWithPath:self.tracePath];
+    self.traceLine.strokeWidth = 5;
+    self.traceLine.map = self.mapView;
+}
+
+- (void)didStartTrace:(BOOL)isStarted
+{
+    if (isStarted) {
+        [self.mapView clear];
+    }
+    else {
+        return;
+    }
+}
+
+- (void)didEndTrace:(NSArray<CLLocation *> *)locations
+{
+    GMSCircle *circle =[GMSCircle circleWithPosition:[locations lastObject].coordinate radius:100];
+    circle.map = self.mapView;
+    circle.radius = 100;
+    circle.strokeColor = [UIColor redColor];
+    circle.strokeWidth = 5;
+    [self.tracePath removeAllCoordinates];
 }
 
 - (void)showAlert

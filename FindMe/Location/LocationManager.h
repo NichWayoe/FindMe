@@ -21,6 +21,9 @@ typedef NS_ENUM(NSInteger, LocationPermissionStatus) {
 };
 
 - (void)authorisationStatusDidChange:(LocationPermissionStatus )status;
+- (void)didEndTrace:(NSArray <CLLocation *> *)locations;
+- (void)didStartTrace:(BOOL)isStarted;
+- (void)didChangeLocation: (CLLocation *)location;
 
 @end
 

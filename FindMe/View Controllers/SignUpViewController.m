@@ -61,7 +61,7 @@
     [self createBottomBorder:self.passwordField];
     [self createBottomBorder:self.userNameField];
     [self createBottomBorder:self.confirmPasswordField];
-    self.profilePhoto.layer.cornerRadius = 50;
+    self.profilePhoto.layer.cornerRadius = 75;
 }
 
 - (IBAction)dismissKeyboard:(id)sender
@@ -153,7 +153,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-    self.profilePhoto.image = [self resizeImage:editedImage withSize:CGSizeMake(414, 414)];
+    self.profilePhoto.image = [self resizeImage:editedImage withSize:CGSizeMake(150, 150)];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

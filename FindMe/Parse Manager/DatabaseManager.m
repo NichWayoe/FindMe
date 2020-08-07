@@ -178,12 +178,17 @@
     contact.lastName = contactObject[@"LastName"];
     contact.dateCreated = contactObject.createdAt;
     PFFileObject *contactImageFile = contactObject[@"profileImage"];
-    [contactImageFile getDataInBackgroundWithBlock:^(NSData * _Nullable ImageData, NSError * _Nullable error) {
-        if (!error) {
-            contact.profileImageData = ImageData;
-            completion(contact);
-        }
-    }];
+    if (contactObject[@"profileImage"] == nil) {
+        completion(contact);
+    }
+    else {
+        [contactImageFile getDataInBackgroundWithBlock:^(NSData * _Nullable ImageData, NSError * _Nullable error) {
+            if (!error) {
+                contact.profileImageData = ImageData;
+                completion(contact);
+            }
+        }];
+    }
 }
 
 + (void)fetchContacts:(void(^)(NSArray *contacts))completion
@@ -203,8 +208,8 @@
                 [DatabaseManager getContactFromPFObject:contactObject withCompletion:^(Contact * _Nonnull contact) {
                     if (contact) {
                         [fetchedContacts addObject:contact];
+                        dispatch_group_leave(group);
                     }
-                    dispatch_group_leave(group);
                 }];
             }
             dispatch_group_notify(group, dispatch_get_main_queue(), ^{
