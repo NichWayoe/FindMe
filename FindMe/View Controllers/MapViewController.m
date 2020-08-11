@@ -60,6 +60,7 @@
     }
 }
 
+
 - (void)authorisationStatusDidChange:(LocationPermissionStatus)status
 {
     switch (status) {

@@ -37,7 +37,7 @@
 	<key>NSContactsUsageDescription</key>
 	<string>Allow the App access to your contacts</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>shsh</string>
+	<string>This allow would use your location in order to effectively track and send alerts whenever you start a trace</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>The app tracks your location and notify people you designate as your contacts. Please grant this permission to enable this feature.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

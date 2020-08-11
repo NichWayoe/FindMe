@@ -196,7 +196,7 @@
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="304" id="tGN-lk-kuQ"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" textContentType="email"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" textContentType="email"/>
                                                         <connections>
                                                             <action selector="onDoneEditingEmailField:" destination="BHG-zy-lp1" eventType="editingDidEnd" id="8t2-5P-mOP"/>
                                                             <outlet property="delegate" destination="BHG-zy-lp1" id="r1O-UP-dPf"/>
@@ -1143,7 +1143,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="RdV-tg-N2w"/>
+        <segue reference="oco-HZ-96n"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.turn.up.right" catalog="system" width="128" height="106"/>

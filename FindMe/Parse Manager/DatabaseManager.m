@@ -139,9 +139,11 @@
 
 + (void)saveContacts:(NSArray *)contacts withCompletion:(void(^)(NSError *error))completion
 {
-    PFObject *contactsToAlert = [PFObject objectWithClassName:@"contactsToAlert"];
+    dispatch_group_t group = dispatch_group_create();
     if (contacts) {
         for (Contact* contact in contacts) {
+            dispatch_group_enter(group);
+            PFObject *contactsToAlert = [PFObject objectWithClassName:@"contactsToAlert"];
             contactsToAlert[@"user"] = [PFUser currentUser];
             contactsToAlert[@"firstName"] = contact.firstName;
             contactsToAlert[@"LastName"] = contact.lastName;
@@ -151,14 +153,17 @@
                 contactsToAlert[@"profileImage"] = imageFile;
             }
             [contactsToAlert saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                if (!succeeded && error ) {
-                    completion(error);
+                if (!succeeded && error) {
+                     completion(error);
                 }
                 else {
-                    completion(nil);
+                    dispatch_group_leave(group);
                 }
             }];
         }
+        dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+            completion(nil);
+        });
     }
     else {
         NSError *error = [NSError errorWithDomain:@"com.FindMe" code:400 userInfo:@{@"Error reason":@"No contacts Selected"}];
