@@ -72,12 +72,13 @@
 {
     return 2;
 }
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"traceOnMap"]) {
     TraceMapViewController *traceMapViewController = [segue destinationViewController];
     traceMapViewController.coordinates = self.locations;
+    }
 }
-    
-}
+
 @end

@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TraceMapViewController : UIViewController
 
+@property (nonatomic, strong) NSMutableArray *coordinates;
+
 @end
 
 NS_ASSUME_NONNULL_END

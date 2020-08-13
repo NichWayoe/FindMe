@@ -146,7 +146,7 @@
     }
     else {
         CLLocationDistance distance = [currentLocation distanceFromLocation:[self.visitedLocations lastObject]];
-        if (distance > 10) {
+        if (distance > 500) {
             [self.visitedLocations addObject:currentLocation];
             [self decodeLocation:currentLocation withCompletion:^(CLPlacemark *decodedLocation) {
                 if (decodedLocation) {
