@@ -99,6 +99,9 @@
     Location *location = [Location new];
     location.city = PFLocation[@"city"];
     location.address = PFLocation[@"address"];
+    PFGeoPoint *coordinate = PFLocation[@"coordinate"];
+    location.latitude = coordinate.latitude;
+    location.longtitude = coordinate.longitude;
     location.country = PFLocation[@"country"];
     location.state = PFLocation[@"state"];
     return location;
@@ -187,6 +190,8 @@
     PFObject *location = [PFObject objectWithClassName:@"TracedLocations"];
     location[@"user"] = [PFUser currentUser];
     location[@"city"] = decodedLocation.city;
+    PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:decodedLocation.latitude longitude:decodedLocation.longtitude];
+    location[@"coordinate"] = point;
     location[@"country"] = decodedLocation.country;
     location[@"state"] = decodedLocation.state;
     location[@"address"] = decodedLocation.address;

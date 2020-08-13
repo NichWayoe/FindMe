@@ -143,11 +143,10 @@
     CLLocation *currentLocation = [locations lastObject];
     if (self.visitedLocations.count == 0) {
         [self.visitedLocations addObject:currentLocation];
-        [self.delegate didChangeLocation:currentLocation];
     }
     else {
         CLLocationDistance distance = [currentLocation distanceFromLocation:[self.visitedLocations lastObject]];
-        if (distance > 1000) {
+        if (distance > 10) {
             [self.visitedLocations addObject:currentLocation];
             [self decodeLocation:currentLocation withCompletion:^(CLPlacemark *decodedLocation) {
                 if (decodedLocation) {
@@ -160,20 +159,12 @@
                                 [AlertManager sendEmail:contact.firstName toEmail:contact.email withMessage:message];
                             }
                         }
-                        else {
-                            return;
-                        }
                     }];
-                }
-                else {
-                    return;
                 }
             }];
         }
-        else {
-            [self.delegate didChangeLocation:currentLocation];
-        }
     }
+    [self.delegate didChangeLocation:currentLocation];
 }
 
 - (void)decodeLocation:(CLLocation *)location withCompletion:(void(^)(CLPlacemark *decodedLocation))completion

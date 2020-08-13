@@ -17,6 +17,8 @@
         self.city = decodedLocation.locality;
         self.state = decodedLocation.administrativeArea;
         self.country = decodedLocation.country;
+        self.latitude = decodedLocation.location.coordinate.latitude;
+        self.longtitude = decodedLocation.location.coordinate.longitude;
         self.address = [ NSString stringWithFormat:@"%@ %@", decodedLocation.thoroughfare, decodedLocation.postalCode];
     }
     return self;

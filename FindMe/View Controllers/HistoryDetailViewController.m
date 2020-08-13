@@ -10,6 +10,8 @@
 #import "DatabaseManager.h"
 #import "LocationCell.h"
 #import "HistoryCell.h"
+#import "Location.h"
+#import "TraceMapViewController.h"
 
 @interface HistoryDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray *locations;
@@ -21,13 +23,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     self.locations = [NSMutableArray new];
-    for (id location in self.trace.locations) {
+    for (Location *location in self.trace.locations) {
         [self.locations addObject:location];
     }
 }
 
+- (IBAction)onTapView:(id)sender {
+    [self performSegueWithIdentifier:@"traceOnMap" sender:nil];
+}
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
@@ -67,5 +72,12 @@
 {
     return 2;
 }
-
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"traceOnMap"]) {
+    TraceMapViewController *traceMapViewController = [segue destinationViewController];
+    traceMapViewController.coordinates = self.locations;
+}
+    
+}
 @end

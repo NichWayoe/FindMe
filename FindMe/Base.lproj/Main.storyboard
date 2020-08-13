@@ -62,7 +62,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="Uuz-Ne-e3S"/>
                                                 </constraints>
-                                                <state key="normal" title="sign up">
+                                                <state key="normal" title="Sign Up">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -807,11 +807,36 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NGF-ha-Ito"/>
                     </view>
-                    <navigationItem key="navigationItem" id="MkT-6O-s6z"/>
+                    <navigationItem key="navigationItem" id="MkT-6O-s6z">
+                        <barButtonItem key="rightBarButtonItem" title="View" id="yNz-4F-5jQ">
+                            <connections>
+                                <action selector="onTapView:" destination="nZO-v1-h4h" id="cpw-3r-dvd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="Wn0-gh-sNE" kind="show" identifier="traceOnMap" id="HtR-tU-7Eu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QZi-Nz-aZz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2040.5797101449277" y="3474.7767857142858"/>
+        </scene>
+        <!--Trace Map View Controller-->
+        <scene sceneID="Qwy-8F-otF">
+            <objects>
+                <viewController id="Wn0-gh-sNE" customClass="TraceMapViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tgG-Fg-8M1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="L1R-Ur-tS8"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="yby-6Z-xJS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F8b-3B-ez4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2826" y="3475"/>
         </scene>
         <!--FindMe-->
         <scene sceneID="GYE-wI-4xY">
@@ -1143,7 +1168,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="oco-HZ-96n"/>
+        <segue reference="RdV-tg-N2w"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.turn.up.right" catalog="system" width="128" height="106"/>
