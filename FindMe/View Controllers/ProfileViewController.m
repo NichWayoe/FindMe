@@ -38,7 +38,12 @@ typedef NS_ENUM(NSInteger, Childviews) {
         if (user) {
             self.profileImageView.layer.cornerRadius = 75;
             self.usernameLabel.text = user.username;
-            self.profileImageView.image = [UIImage imageWithData:user.profileImageData];
+            if (user.profileImageData) {
+                self.profileImageView.image = [UIImage imageWithData:user.profileImageData];
+            }
+            else {
+                self.profileImageView.image = [UIImage systemImageNamed:@"person"];
+            }
         }
     }];
 }
@@ -73,4 +78,4 @@ typedef NS_ENUM(NSInteger, Childviews) {
     }
 }
 
-@end;
+@end

@@ -63,6 +63,10 @@
         [self.timer invalidate];
         [self.locationManager stopTracking];
         self.factionsLabel.text = @".00";
+        self.hours = 0;
+        self.seconds = 0;
+        self.minutes = 0;
+        self.fractions = 0;
         self.timeLabel.text = @"00:00:00";
     }
 }
@@ -146,13 +150,13 @@
         self.trackingButton.selected = YES;
         self.trackingButton.titleLabel.text = @"STOP";
         self.trackingButton.highlighted = NO;
-        self.trackingButton.backgroundColor = [UIColor greenColor];
+        self.trackingButton.backgroundColor = [UIColor redColor];
     }
     else {
         self.trackingButton.selected = NO;
-        self.trackingButton.titleLabel.textColor = [UIColor blueColor];
+        self.trackingButton.titleLabel.textColor = [UIColor whiteColor];
         self.trackingButton.titleLabel.text = @"SS";
-        self.trackingButton.backgroundColor = [UIColor redColor];
+        self.trackingButton.backgroundColor = [UIColor greenColor];
     }
 }
 

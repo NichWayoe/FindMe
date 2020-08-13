@@ -14,7 +14,6 @@
 @interface AboutViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *labels;
 @property (strong, nonatomic) NSArray *userDetails;
 @property (strong, nonatomic) User *user;
 
@@ -26,6 +25,9 @@
 {
     [super viewDidLoad];
     
+    self.tableView.tableFooterView = [[UIView alloc]
+                                      initWithFrame:CGRectZero];
+    self.tableView.tableFooterView.backgroundColor = [UIColor redColor];
     [DatabaseManager getCurrentUser:^(User * _Nonnull user) {
         if (user) {
             self.user = user;
@@ -36,9 +38,9 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-        UserDetailCell *userDetailCell = [tableView dequeueReusableCellWithIdentifier:@"UserDetailCell"];
-        userDetailCell.detailLabel.text = self.userDetails[indexPath.section];
-        return userDetailCell;
+    UserDetailCell *userDetailCell = [tableView dequeueReusableCellWithIdentifier:@"UserDetailCell"];
+    userDetailCell.detailLabel.text = self.userDetails[indexPath.section];
+    return userDetailCell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -49,7 +51,8 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 4;
 }
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSArray *sectionNames = @[@"Username", @"First Name", @"Last Name", @"Email"];
     return sectionNames[section];

@@ -39,6 +39,7 @@
 		2B84E95E24D1D84500E8E701 /* Trace.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E95D24D1D84500E8E701 /* Trace.m */; };
 		2B84E96424D1F2EC00E8E701 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E96324D1F2EC00E8E701 /* Location.m */; };
 		2BAF03D024C7759600AF8875 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BAF03CF24C7759600AF8875 /* DatabaseManager.m */; };
+		2BC64FCB24E330A200D577CB /* TraceMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC64FCA24E330A200D577CB /* TraceMapViewController.m */; };
 		63170F27A5992BCDC1232525 /* Pods_FindMeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0588228D9238D0DAC892449 /* Pods_FindMeTests.framework */; };
 		6BBB36CEEDA8BE35CC329333 /* Pods_FindMe_FindMeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A279E2C2B4A7E42657E6C695 /* Pods_FindMe_FindMeUITests.framework */; };
 /* End PBXBuildFile section */
@@ -123,6 +124,8 @@
 		2B84E96324D1F2EC00E8E701 /* Location.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		2BAF03CE24C7759600AF8875 /* DatabaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
 		2BAF03CF24C7759600AF8875 /* DatabaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
+		2BC64FC924E330A200D577CB /* TraceMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TraceMapViewController.h; sourceTree = "<group>"; };
+		2BC64FCA24E330A200D577CB /* TraceMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TraceMapViewController.m; sourceTree = "<group>"; };
 		2C41A87BB1A17F9D32D295D3 /* Pods-FindMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindMe.release.xcconfig"; path = "Target Support Files/Pods-FindMe/Pods-FindMe.release.xcconfig"; sourceTree = "<group>"; };
 		517A78D3A5E003A86D99C02D /* Pods-FindMe-FindMeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindMe-FindMeUITests.release.xcconfig"; path = "Target Support Files/Pods-FindMe-FindMeUITests/Pods-FindMe-FindMeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A279E2C2B4A7E42657E6C695 /* Pods_FindMe_FindMeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FindMe_FindMeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -278,6 +281,8 @@
 				2B84E95724D0BB4F00E8E701 /* HistoryViewController.m */,
 				2B77FB3E24D85A88005E9F91 /* HistoryDetailViewController.h */,
 				2B77FB3F24D85A88005E9F91 /* HistoryDetailViewController.m */,
+				2BC64FC924E330A200D577CB /* TraceMapViewController.h */,
+				2BC64FCA24E330A200D577CB /* TraceMapViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -640,6 +645,7 @@
 				2B42BC4F24BCFB77007241E1 /* AppDelegate.m in Sources */,
 				2B42BC9F24BE153C007241E1 /* ProfileViewController.m in Sources */,
 				2B84E93D24C8B59800E8E701 /* User.m in Sources */,
+				2BC64FCB24E330A200D577CB /* TraceMapViewController.m in Sources */,
 				2B42BCBD24C0FB6A007241E1 /* MainTabBarViewController.m in Sources */,
 				2B42BC8D24BE13FA007241E1 /* LoginViewController.m in Sources */,
 				2B77FB4324D8709A005E9F91 /* LocationCell.m in Sources */,

@@ -19,6 +19,7 @@
 @property (strong, nonatomic) CLLocation *location;
 @property (strong, nonatomic) CLGeocoder *geocoder;
 @property (nonatomic) BOOL isTracking;
+@property (strong, nonatomic) NSMutableArray *decodedVisitedLocations;
 @property (strong, nonatomic) NSMutableArray *visitedLocations;
 @property (strong, nonatomic) Trace *trace;
 
@@ -43,7 +44,7 @@
         self.locationManager = [CLLocationManager new];
         self.locationManager.delegate = self;
         self.geocoder = [CLGeocoder new];
-        self.locationManager.distanceFilter = 10;
+        self.locationManager.distanceFilter = kCLDistanceFilterNone;
         self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
     }
     return self;
@@ -62,7 +63,7 @@
 + (NSString *)makeStringFromPlacemarkAndContact:(CLPlacemark *)decodedLocation
 {
     NSString *message = [NSString stringWithFormat: @" \
-                         Address : %@ %@ %@ \
+                         Address : %@ %@ \
                          \
                          city : %@ \
                          \
@@ -71,7 +72,7 @@
                          Country : %@ \
                          \
                          Your are receiving this notification because put you as emergency Contact. \
-                         ", decodedLocation.subThoroughfare, decodedLocation.thoroughfare, decodedLocation.postalCode, decodedLocation.locality, decodedLocation.administrativeArea, decodedLocation.country];
+                         ", decodedLocation.thoroughfare, decodedLocation.postalCode, decodedLocation.locality, decodedLocation.administrativeArea, decodedLocation.country];
     return message;
 }
 
@@ -103,11 +104,13 @@
 - (void)beginTracking
 {
     if (!self.isTracking) {
+        self.decodedVisitedLocations = [NSMutableArray new];
         self.visitedLocations = [NSMutableArray new];
         [self.locationManager startUpdatingLocation];
         self.isTracking  = YES;
         self.trace = [Trace new];
         [self.trace start];
+        [self.delegate didStartTrace:YES];
     }
     else {
         return;
@@ -118,9 +121,10 @@
 {
     if (self.isTracking) {
         [self.locationManager stopUpdatingLocation];
-        [self.trace stop:(NSArray *)self.visitedLocations];
+        [self.trace stop:(NSArray *)self.decodedVisitedLocations];
         self.isTracking = NO;
-        if (self.visitedLocations.count > 0) {
+        [self.delegate didEndTrace:((NSArray*) self.visitedLocations)];
+        if (self.decodedVisitedLocations.count > 0) {
             [DatabaseManager saveTrace:self.trace];
         }
     }
@@ -136,27 +140,31 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
-    
-    [self decodeLocation:[locations lastObject] withCompletion:^(CLPlacemark *decodedLocation) {
-        if (decodedLocation) {
-            Location *location = [[Location alloc] initWithPlacemark:decodedLocation];
-            [self.visitedLocations addObject:[DatabaseManager getPFObjectFromLocation:location]];
-            NSString *message = [LocationManager makeStringFromPlacemarkAndContact:decodedLocation];
-            [DatabaseManager fetchContacts:^(NSArray * _Nonnull contacts) {
-                if (contacts.count >= 1) {
-                    for (Contact *contact in contacts) {
-                        [AlertManager sendEmail:contact.firstName toEmail:contact.email withMessage:message];
-                    }
-                }
-                else {
-                    return;
+    CLLocation *currentLocation = [locations lastObject];
+    if (self.visitedLocations.count == 0) {
+        [self.visitedLocations addObject:currentLocation];
+    }
+    else {
+        CLLocationDistance distance = [currentLocation distanceFromLocation:[self.visitedLocations lastObject]];
+        if (distance > 500) {
+            [self.visitedLocations addObject:currentLocation];
+            [self decodeLocation:currentLocation withCompletion:^(CLPlacemark *decodedLocation) {
+                if (decodedLocation) {
+                    Location *location = [[Location alloc] initWithPlacemark:decodedLocation];
+                    [self.decodedVisitedLocations addObject:[DatabaseManager getPFObjectFromLocation:location]];
+                    NSString *message = [LocationManager makeStringFromPlacemarkAndContact:decodedLocation];
+                    [DatabaseManager fetchContacts:^(NSArray * _Nonnull contacts) {
+                        if (contacts.count >= 1) {
+                            for (Contact *contact in contacts) {
+                                [AlertManager sendEmail:contact.firstName toEmail:contact.email withMessage:message];
+                            }
+                        }
+                    }];
                 }
             }];
         }
-        else {
-            return;
-        }
-    }];
+    }
+    [self.delegate didChangeLocation:currentLocation];
 }
 
 - (void)decodeLocation:(CLLocation *)location withCompletion:(void(^)(CLPlacemark *decodedLocation))completion
@@ -170,7 +178,6 @@
         }
     }];
 }
-
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {

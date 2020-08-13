@@ -55,6 +55,21 @@
     completion(currentUser);
 }
 
+
++ (void)deleteContact:(Contact *)contact
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"contactsToAlert"];
+    [query whereKey:@"user" equalTo:PFUser.currentUser];
+    [query whereKey:@"firstName" equalTo:contact.firstName];
+    [query whereKey:@"LastName" equalTo:contact.lastName];
+    [query whereKey:@"email" equalTo:contact.email];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (objects) {
+            [PFObject deleteAllInBackground:objects];
+        }
+    }];
+}
+
 + (Trace *)getTraceFromPFObject:(PFObject *)PFTrace
 {
     dispatch_group_t group = dispatch_group_create();
@@ -84,6 +99,9 @@
     Location *location = [Location new];
     location.city = PFLocation[@"city"];
     location.address = PFLocation[@"address"];
+    PFGeoPoint *coordinate = PFLocation[@"coordinate"];
+    location.latitude = coordinate.latitude;
+    location.longtitude = coordinate.longitude;
     location.country = PFLocation[@"country"];
     location.state = PFLocation[@"state"];
     return location;
@@ -124,9 +142,11 @@
 
 + (void)saveContacts:(NSArray *)contacts withCompletion:(void(^)(NSError *error))completion
 {
-    PFObject *contactsToAlert = [PFObject objectWithClassName:@"contactsToAlert"];
+    dispatch_group_t group = dispatch_group_create();
     if (contacts) {
         for (Contact* contact in contacts) {
+            dispatch_group_enter(group);
+            PFObject *contactsToAlert = [PFObject objectWithClassName:@"contactsToAlert"];
             contactsToAlert[@"user"] = [PFUser currentUser];
             contactsToAlert[@"firstName"] = contact.firstName;
             contactsToAlert[@"LastName"] = contact.lastName;
@@ -136,15 +156,21 @@
                 contactsToAlert[@"profileImage"] = imageFile;
             }
             [contactsToAlert saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                if (!succeeded && error ) {
+                if (!succeeded && error) {
+                     completion(error);
                 }
                 else {
+                    dispatch_group_leave(group);
                 }
             }];
         }
+        dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+            completion(nil);
+        });
     }
     else {
-        
+        NSError *error = [NSError errorWithDomain:@"com.FindMe" code:400 userInfo:@{@"Error reason":@"No contacts Selected"}];
+        completion(error);
     }
 }
 
@@ -164,6 +190,8 @@
     PFObject *location = [PFObject objectWithClassName:@"TracedLocations"];
     location[@"user"] = [PFUser currentUser];
     location[@"city"] = decodedLocation.city;
+    PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:decodedLocation.latitude longitude:decodedLocation.longtitude];
+    location[@"coordinate"] = point;
     location[@"country"] = decodedLocation.country;
     location[@"state"] = decodedLocation.state;
     location[@"address"] = decodedLocation.address;
@@ -176,13 +204,19 @@
     contact.email = contactObject[@"email"];
     contact.firstName = contactObject[@"firstName"];
     contact.lastName = contactObject[@"LastName"];
+    contact.dateCreated = contactObject.createdAt;
     PFFileObject *contactImageFile = contactObject[@"profileImage"];
-    [contactImageFile getDataInBackgroundWithBlock:^(NSData * _Nullable ImageData, NSError * _Nullable error) {
-        if (!error) {
-            contact.profileImageData = ImageData;
-            completion(contact);
-        }
-    }];
+    if (contactObject[@"profileImage"] == nil) {
+        completion(contact);
+    }
+    else {
+        [contactImageFile getDataInBackgroundWithBlock:^(NSData * _Nullable ImageData, NSError * _Nullable error) {
+            if (!error) {
+                contact.profileImageData = ImageData;
+                completion(contact);
+            }
+        }];
+    }
 }
 
 + (void)fetchContacts:(void(^)(NSArray *contacts))completion
@@ -193,7 +227,7 @@
     [query orderByDescending:@"createdAt"];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *contacts, NSError *error) {
-        if (error) {
+        if (error && contacts) {
             completion(nil);
         }
         else {
@@ -202,12 +236,16 @@
                 [DatabaseManager getContactFromPFObject:contactObject withCompletion:^(Contact * _Nonnull contact) {
                     if (contact) {
                         [fetchedContacts addObject:contact];
+                        dispatch_group_leave(group);
                     }
-                    dispatch_group_leave(group);
                 }];
             }
             dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-                completion((NSArray *) fetchedContacts);
+                NSSortDescriptor *sortDescriptor;
+                sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated"
+                                                             ascending:YES];
+                NSArray *sortedArray = [fetchedContacts sortedArrayUsingDescriptors:@[sortDescriptor]];
+                completion(sortedArray);
             });
         }
     }];

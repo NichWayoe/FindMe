@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *state;
 @property (nonatomic, strong) NSString *neighbourhood;
 @property (nonatomic, strong) NSString *country;
+@property (nonatomic)  CLLocationDegrees latitude;
+@property (nonatomic)  CLLocationDegrees longtitude;
 
 - (instancetype)initWithPlacemark:(CLPlacemark *)decodedLocation;
 
