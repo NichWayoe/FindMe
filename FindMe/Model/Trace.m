@@ -8,7 +8,6 @@
 
 #import "Trace.h"
 #import "DateTools.h"
-
 @implementation Trace
 
 - (void)start
