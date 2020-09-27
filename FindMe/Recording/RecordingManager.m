@@ -41,17 +41,9 @@
 
 - (void)startRecording:(void(^)(NSError * error, BOOL isStarted))completion
 {
-   if (self.recorder.isRecording) {
-       return;
-    }
-   else {
-       if ([self.recorder record]) {
-           completion(nil,YES);
-       }
-       else {
-           completion(nil, NO);
-       }
-   }
+if (!self.recorder.isRecording) {
+    completion(nil, [self.recorder record]);
+}
 }
 
 - (void)stopRecording:(void(^)(NSError *error, BOOL isEnded))completion
