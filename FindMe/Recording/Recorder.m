@@ -1,20 +1,20 @@
 //
-//  RecordingManager.m
+//  Recorder.m
 //  FindMe
 //
 //  Created by Nicholas Wayoe on 9/14/20.
 //  Copyright © 2020 Nicholas Wayoe. All rights reserved.
 //
 
-#import "RecordingManager.h"
+#import "Recorder.h"
 
-@interface RecordingManager ()
+@interface Recorder ()
 
 @property (nonatomic, strong) AVAudioRecorder* recorder;
 
 @end
 
-@implementation RecordingManager
+@implementation Recorder
 
 - (instancetype)init
 {
@@ -39,7 +39,7 @@
     return self;
 }
 
-- (void)startRecording:(void(^)(NSError * error, BOOL isStarted))completion
+- (void)start:(void(^)(NSError * error, BOOL isStarted))completion
 {
     if (!self.recorder.isRecording) {
         completion(nil, [self.recorder record]);
@@ -47,7 +47,7 @@
     
 }
 
-- (void)stopRecording:(void(^)(NSError *error, BOOL isEnded))completion
+- (void)stop:(void(^)(NSError *error, BOOL isEnded))completion
 {
     if (!self.recorder.isRecording) {
         completion(nil, NO);

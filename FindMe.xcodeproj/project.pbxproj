@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2199AF924E64514A6D3A11B9 /* Pods_FindMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E14D289B8457FB116F5B200 /* Pods_FindMe.framework */; };
-		2B04A16D251FB36E00B4EDD3 /* RecordingSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B04A16C251FB36E00B4EDD3 /* RecordingSession.m */; };
 		2B17C1F624C6331500A1551F /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B17C1F524C6331500A1551F /* Contacts.framework */; };
 		2B17C1F824C6331D00A1551F /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B17C1F724C6331D00A1551F /* ContactsUI.framework */; };
 		2B17C1FC24C63A5D00A1551F /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B17C1FB24C63A5D00A1551F /* ContactCell.m */; };
@@ -39,7 +38,7 @@
 		2B84E95B24D0BBA300E8E701 /* HistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E95A24D0BBA300E8E701 /* HistoryCell.m */; };
 		2B84E95E24D1D84500E8E701 /* Trace.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E95D24D1D84500E8E701 /* Trace.m */; };
 		2B84E96424D1F2EC00E8E701 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E96324D1F2EC00E8E701 /* Location.m */; };
-		2B93677D250F2B4F00EC985A /* RecordingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B93677C250F2B4F00EC985A /* RecordingManager.m */; };
+		2B93677D250F2B4F00EC985A /* Recorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B93677C250F2B4F00EC985A /* Recorder.m */; };
 		2BAF03D024C7759600AF8875 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BAF03CF24C7759600AF8875 /* DatabaseManager.m */; };
 		2BC64FCB24E330A200D577CB /* TraceMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC64FCA24E330A200D577CB /* TraceMapViewController.m */; };
 		2BE75FDF25165206000D4008 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE75FDE25165205000D4008 /* AVFoundation.framework */; };
@@ -67,8 +66,6 @@
 /* Begin PBXFileReference section */
 		0D15CE343A13BA92FFCD76A3 /* Pods-FindMeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindMeTests.debug.xcconfig"; path = "Target Support Files/Pods-FindMeTests/Pods-FindMeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1E14D289B8457FB116F5B200 /* Pods_FindMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FindMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2B04A16B251FB36E00B4EDD3 /* RecordingSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordingSession.h; sourceTree = "<group>"; };
-		2B04A16C251FB36E00B4EDD3 /* RecordingSession.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordingSession.m; sourceTree = "<group>"; };
 		2B17C1F524C6331500A1551F /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		2B17C1F724C6331D00A1551F /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		2B17C1FA24C63A5D00A1551F /* ContactCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactCell.h; sourceTree = "<group>"; };
@@ -127,8 +124,8 @@
 		2B84E95D24D1D84500E8E701 /* Trace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Trace.m; sourceTree = "<group>"; };
 		2B84E96224D1F2EC00E8E701 /* Location.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		2B84E96324D1F2EC00E8E701 /* Location.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
-		2B93677B250F2B4F00EC985A /* RecordingManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordingManager.h; sourceTree = "<group>"; };
-		2B93677C250F2B4F00EC985A /* RecordingManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordingManager.m; sourceTree = "<group>"; };
+		2B93677B250F2B4F00EC985A /* Recorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Recorder.h; sourceTree = "<group>"; };
+		2B93677C250F2B4F00EC985A /* Recorder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Recorder.m; sourceTree = "<group>"; };
 		2BAF03CE24C7759600AF8875 /* DatabaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
 		2BAF03CF24C7759600AF8875 /* DatabaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
 		2BC64FC924E330A200D577CB /* TraceMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TraceMapViewController.h; sourceTree = "<group>"; };
@@ -270,7 +267,6 @@
 		2B42BC8A24BE13CB007241E1 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2B42BCBE24C38A56007241E1 /* New Group */,
 				2B42BC8B24BE13FA007241E1 /* LoginViewController.h */,
 				2B42BC8C24BE13FA007241E1 /* LoginViewController.m */,
 				2B42BC8E24BE141A007241E1 /* SignUpViewController.h */,
@@ -315,20 +311,11 @@
 			path = "Tab Bar View Contollers";
 			sourceTree = "<group>";
 		};
-		2B42BCBE24C38A56007241E1 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		2B93677A250F2B1600EC985A /* Recording */ = {
 			isa = PBXGroup;
 			children = (
-				2B93677B250F2B4F00EC985A /* RecordingManager.h */,
-				2B93677C250F2B4F00EC985A /* RecordingManager.m */,
-				2B04A16B251FB36E00B4EDD3 /* RecordingSession.h */,
-				2B04A16C251FB36E00B4EDD3 /* RecordingSession.m */,
+				2B93677B250F2B4F00EC985A /* Recorder.h */,
+				2B93677C250F2B4F00EC985A /* Recorder.m */,
 			);
 			path = Recording;
 			sourceTree = "<group>";
@@ -664,11 +651,10 @@
 				2B84E95B24D0BBA300E8E701 /* HistoryCell.m in Sources */,
 				2B84E94924CF9B7B00E8E701 /* AlertManager.m in Sources */,
 				2B17C1FC24C63A5D00A1551F /* ContactCell.m in Sources */,
-				2B04A16D251FB36E00B4EDD3 /* RecordingSession.m in Sources */,
 				2BAF03D024C7759600AF8875 /* DatabaseManager.m in Sources */,
 				2B84E94F24D083EB00E8E701 /* AboutViewController.m in Sources */,
 				2B42BCA224BE1552007241E1 /* MapViewController.m in Sources */,
-				2B93677D250F2B4F00EC985A /* RecordingManager.m in Sources */,
+				2B93677D250F2B4F00EC985A /* Recorder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
