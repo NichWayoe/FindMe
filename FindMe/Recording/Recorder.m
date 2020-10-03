@@ -44,7 +44,6 @@
     if (!self.recorder.isRecording) {
         completion(nil, [self.recorder record]);
     }
-    
 }
 
 - (void)stop:(void(^)(NSError *error, BOOL isEnded))completion
