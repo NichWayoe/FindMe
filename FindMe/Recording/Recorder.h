@@ -1,5 +1,5 @@
 //
-//  RecordingManager.h
+//  Recorder.h
 //  FindMe
 //
 //  Created by Nicholas Wayoe on 9/14/20.
@@ -11,12 +11,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RecordingManager : NSObject
+@interface Recorder : NSObject
 
 @property (nonatomic) BOOL isRecording;
 
-- (void)startRecording:(void(^)(NSError * error, BOOL isStarted))completion;
-- (void)stopRecording:(void(^)(NSError *error, BOOL isEnded))completion;
+- (void)start:(void(^)(NSError * error, BOOL isStarted))completion;
+- (void)stop:(void(^)(NSError *error, BOOL isEnded))completion;
 
 @end
 
