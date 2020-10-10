@@ -1,6 +1,6 @@
 # Project 5 - *FindMe*
 
-**FindMe** is an app that automically traces notifies the contacts of a user whenever the user initiaties a trace.
+**FindMe** is an app that automically traces and notifies the contacts of a user whenever the user initiaties a trace.
 Time spent: **10** hours per week
 
 ## User Stories
