@@ -39,8 +39,10 @@
 		2B84E95E24D1D84500E8E701 /* Trace.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E95D24D1D84500E8E701 /* Trace.m */; };
 		2B84E96424D1F2EC00E8E701 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B84E96324D1F2EC00E8E701 /* Location.m */; };
 		2B93677D250F2B4F00EC985A /* Recorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B93677C250F2B4F00EC985A /* Recorder.m */; };
+		2BA55BDC253B6419003AD51F /* RecordingSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA55BDB253B6419003AD51F /* RecordingSession.m */; };
 		2BAF03D024C7759600AF8875 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BAF03CF24C7759600AF8875 /* DatabaseManager.m */; };
 		2BC64FCB24E330A200D577CB /* TraceMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC64FCA24E330A200D577CB /* TraceMapViewController.m */; };
+		2BC84BD72529770B00CBA145 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC84BD62529770A00CBA145 /* File.swift */; };
 		2BE75FDF25165206000D4008 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE75FDE25165205000D4008 /* AVFoundation.framework */; };
 		63170F27A5992BCDC1232525 /* Pods_FindMeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0588228D9238D0DAC892449 /* Pods_FindMeTests.framework */; };
 		6BBB36CEEDA8BE35CC329333 /* Pods_FindMe_FindMeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A279E2C2B4A7E42657E6C695 /* Pods_FindMe_FindMeUITests.framework */; };
@@ -126,10 +128,14 @@
 		2B84E96324D1F2EC00E8E701 /* Location.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		2B93677B250F2B4F00EC985A /* Recorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Recorder.h; sourceTree = "<group>"; };
 		2B93677C250F2B4F00EC985A /* Recorder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Recorder.m; sourceTree = "<group>"; };
+		2BA55BDA253B6419003AD51F /* RecordingSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordingSession.h; sourceTree = "<group>"; };
+		2BA55BDB253B6419003AD51F /* RecordingSession.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordingSession.m; sourceTree = "<group>"; };
 		2BAF03CE24C7759600AF8875 /* DatabaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
 		2BAF03CF24C7759600AF8875 /* DatabaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
 		2BC64FC924E330A200D577CB /* TraceMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TraceMapViewController.h; sourceTree = "<group>"; };
 		2BC64FCA24E330A200D577CB /* TraceMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TraceMapViewController.m; sourceTree = "<group>"; };
+		2BC84BD52529770A00CBA145 /* FindMe-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FindMe-Bridging-Header.h"; sourceTree = "<group>"; };
+		2BC84BD62529770A00CBA145 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = File.swift; path = ../../Desktop/File.swift; sourceTree = "<group>"; };
 		2BE75FDE25165205000D4008 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		2C41A87BB1A17F9D32D295D3 /* Pods-FindMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindMe.release.xcconfig"; path = "Target Support Files/Pods-FindMe/Pods-FindMe.release.xcconfig"; sourceTree = "<group>"; };
 		517A78D3A5E003A86D99C02D /* Pods-FindMe-FindMeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindMe-FindMeUITests.release.xcconfig"; path = "Target Support Files/Pods-FindMe-FindMeUITests/Pods-FindMe-FindMeUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -223,10 +229,12 @@
 				2B42BC5024BCFB77007241E1 /* SceneDelegate.h */,
 				2B42BC5124BCFB77007241E1 /* SceneDelegate.m */,
 				2B42BC5624BCFB77007241E1 /* Main.storyboard */,
+				2BC84BD62529770A00CBA145 /* File.swift */,
 				2B42BC5924BCFB78007241E1 /* Assets.xcassets */,
 				2B42BC5B24BCFB78007241E1 /* LaunchScreen.storyboard */,
 				2B42BC5E24BCFB78007241E1 /* Info.plist */,
 				2B42BC5F24BCFB78007241E1 /* main.m */,
+				2BC84BD52529770A00CBA145 /* FindMe-Bridging-Header.h */,
 			);
 			path = FindMe;
 			sourceTree = "<group>";
@@ -316,6 +324,8 @@
 			children = (
 				2B93677B250F2B4F00EC985A /* Recorder.h */,
 				2B93677C250F2B4F00EC985A /* Recorder.m */,
+				2BA55BDA253B6419003AD51F /* RecordingSession.h */,
+				2BA55BDB253B6419003AD51F /* RecordingSession.m */,
 			);
 			path = Recording;
 			sourceTree = "<group>";
@@ -429,6 +439,7 @@
 				TargetAttributes = {
 					2B42BC4924BCFB77007241E1 = {
 						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1200;
 					};
 					2B42BC6424BCFB78007241E1 = {
 						CreatedOnToolsVersion = 11.5;
@@ -645,7 +656,9 @@
 				2B42BC6024BCFB78007241E1 /* main.m in Sources */,
 				2B42BC8824BD2FA6007241E1 /* Contact.m in Sources */,
 				2B42BC9024BE141A007241E1 /* SignUpViewController.m in Sources */,
+				2BC84BD72529770B00CBA145 /* File.swift in Sources */,
 				2B84E96424D1F2EC00E8E701 /* Location.m in Sources */,
+				2BA55BDC253B6419003AD51F /* RecordingSession.m in Sources */,
 				2B84E95524D0892500E8E701 /* UserDetailCell.m in Sources */,
 				2B42BC5224BCFB77007241E1 /* SceneDelegate.m in Sources */,
 				2B84E95B24D0BBA300E8E701 /* HistoryCell.m in Sources */,
@@ -824,15 +837,22 @@
 			baseConfigurationReference = BDDA237307F04D6B5D67F873 /* Pods-FindMe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 75VN7B5QN7;
 				INFOPLIST_FILE = FindMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nwayoe.FindMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FindMe/FindMe-Bridging-Header.h";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -842,15 +862,20 @@
 			baseConfigurationReference = 2C41A87BB1A17F9D32D295D3 /* Pods-FindMe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 75VN7B5QN7;
 				INFOPLIST_FILE = FindMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nwayoe.FindMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FindMe/FindMe-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -859,6 +884,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0D15CE343A13BA92FFCD76A3 /* Pods-FindMeTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75VN7B5QN7;
@@ -880,6 +906,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E93D1EE73FB104F9E75AFF01 /* Pods-FindMeTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75VN7B5QN7;
@@ -901,6 +928,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C168EF939BBA1F49BE160166 /* Pods-FindMe-FindMeUITests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75VN7B5QN7;
 				INFOPLIST_FILE = FindMeUITests/Info.plist;
@@ -920,6 +948,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 517A78D3A5E003A86D99C02D /* Pods-FindMe-FindMeUITests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75VN7B5QN7;
 				INFOPLIST_FILE = FindMeUITests/Info.plist;

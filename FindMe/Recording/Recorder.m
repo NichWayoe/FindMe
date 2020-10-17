@@ -30,10 +30,9 @@
         NSURL *url =[NSURL URLWithString:@"record.mp3" relativeToURL:baseUrl];
         self.recorder = [[AVAudioRecorder alloc] initWithURL:url settings:settings error:&error];
         if (self.recorder) {
-            
         }
         else {
-            
+
         }
     }
     return self;
