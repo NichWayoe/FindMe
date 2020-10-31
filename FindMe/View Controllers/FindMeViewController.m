@@ -8,11 +8,14 @@
 
 #import "FindMeViewController.h"
 #import "LocationManager.h"
+#import "RecordingSession.h"
+#import "Recorder.h"
 
 @interface FindMeViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *trackingButton;
 @property (strong, nonatomic) LocationManager *locationManager;
+@property (strong, nonatomic) Recorder *recorder;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (strong, nonatomic) NSTimer *timer;
 @property (assign) int seconds;
@@ -29,10 +32,7 @@
 {
     [super viewDidLoad];
     
-    self.hours = 0;
-    self.seconds = 0;
-    self.minutes = 0;
-    self.fractions = 0;
+    [self initializeTimer];
     self.locationManager = LocationManager.shared;
     self.trackingButton.layer.cornerRadius = 75;
     [self designTrackingButtonWithState:@"unselected"];
@@ -52,6 +52,22 @@
         if ([self.locationManager authorisationStatus] == AllowedAlways) {
             [self designTrackingButtonWithState:@"selected"];
             [self.locationManager beginTracking];
+            [RecordingSession activateSession:^(NSError * _Nonnull error, BOOL isActivated) {
+                if (isActivated) {
+                    self.recorder = [Recorder new];
+                    [self.recorder start:^(NSError * _Nonnull error, BOOL isStarted) {
+                        if (isStarted) {
+                            
+                        }
+                        else {
+                            [self showAlert];
+                        }
+                    }];
+                }
+                else {
+                    [self showAlert];
+                }
+            }];
             self.timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(startTimer) userInfo:nil repeats:YES];
         }
         else {
@@ -59,16 +75,23 @@
         }
     }
     else {
+        [self.recorder stop:^(NSError * _Nonnull error, BOOL isEnded) {
+        }];
         [self designTrackingButtonWithState:@"unselected"];
         [self.timer invalidate];
         [self.locationManager stopTracking];
-        self.factionsLabel.text = @".00";
-        self.hours = 0;
-        self.seconds = 0;
-        self.minutes = 0;
-        self.fractions = 0;
-        self.timeLabel.text = @"00:00:00";
+        [self initializeTimer];
     }
+}
+
+- (void)initializeTimer
+{
+    self.hours = 0;
+    self.seconds = 0;
+    self.minutes = 0;
+    self.fractions = 0;
+    self.factionsLabel.text = @".00";
+    self.timeLabel.text = @"00:00:00";
 }
 
 - (void)startTimer

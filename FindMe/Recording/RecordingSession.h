@@ -13,9 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RecordingSession : NSObject
 
-- (void)setUpRecordingSession:(void(^)(NSError * error, BOOL isSuccessful))completion;
-- (void)activateSession:(void(^)(NSError * error, BOOL isActivated))completion;
-- (void)deactivateSucession:(void(^)(NSError * error, BOOL isDeactivated))completion;
++ (void)setUpRecordingSession:(void(^)(NSError * error, BOOL isSuccessful))completion;
++ (void)activateSession:(void(^)(NSError * error, BOOL isActivated))completion;
++ (void)deactivateSucession:(void(^)(NSError * error, BOOL isDeactivated))completion;
 
 @end
 

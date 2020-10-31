@@ -840,14 +840,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 75VN7B5QN7;
+				DEVELOPMENT_TEAM = D4LS79J8BG;
 				INFOPLIST_FILE = FindMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				NEW_SETTING = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nwayoe.FindMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nwayoe.FindMee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FindMe/FindMe-Bridging-Header.h";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "";
@@ -865,14 +865,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 75VN7B5QN7;
+				DEVELOPMENT_TEAM = D4LS79J8BG;
 				INFOPLIST_FILE = FindMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				NEW_SETTING = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nwayoe.FindMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nwayoe.FindMee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FindMe/FindMe-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

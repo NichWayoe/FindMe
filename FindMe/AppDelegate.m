@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Parse/Parse.h"
+#import "RecordingSession.h"
 @import GoogleMaps;
 
 @interface AppDelegate ()
@@ -19,6 +20,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [RecordingSession setUpRecordingSession:^(NSError * _Nonnull error, BOOL isSuccessful) {
+    }];
     ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
              configuration.applicationId = @"myAppId";
              configuration.server = @"https://findmern.herokuapp.com/parse";

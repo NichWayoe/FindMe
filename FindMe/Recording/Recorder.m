@@ -26,13 +26,15 @@
             AVSampleRateKey: @(12000),
             AVNumberOfChannelsKey: @(1),
         };
-        NSURL *baseUrl = [NSURL fileURLWithPath:@"file:/Users/nwayoe/Documents/"];
-        NSURL *url =[NSURL URLWithString:@"record.mp3" relativeToURL:baseUrl];
-        self.recorder = [[AVAudioRecorder alloc] initWithURL:url settings:settings error:&error];
+        NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentPath = [searchPaths objectAtIndex:0];
+        NSString *pathToSave = [documentPath stringByAppendingPathComponent:[self dateString]];
+        NSURL *outputFileURL = [NSURL fileURLWithPath:pathToSave];
+        NSLog(@"%@",outputFileURL);
+        self.recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:settings error:&error];
         if (self.recorder) {
         }
         else {
-
         }
     }
     return self;
@@ -49,12 +51,21 @@
 {
     if (!self.recorder.isRecording) {
         completion(nil, NO);
-       }
-      else {
-          [self.recorder stop];
-          completion(nil, YES);
-      }
+    }
+    else {
+        [self.recorder stop];
+        completion(nil, YES);
+    }
 }
 
+- (NSString *)dateString
+{
+    NSDate *date = [NSDate new];
+    date = [NSDate date];
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    formatter.dateFormat = @"ddMMMYYY_hhmmssa";
+    NSString *datestring = [[formatter stringFromDate:date] stringByAppendingString:@".m4a"];
+    return datestring;
+}
 
 @end

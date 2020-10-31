@@ -8,43 +8,28 @@
 
 #import "RecordingSession.h"
 
-
-@interface RecordingSession ()
-
-@property (nonatomic, strong) AVAudioSession* session;
-@property (nonatomic) BOOL isActive;
-
-@end
-
 @implementation RecordingSession
 
-- (instancetype)init{
-    self = [super init];
-    if (self) {
-        self.session = [AVAudioSession sharedInstance];
-    }
-    return self;
-}
-
-- (void)setUpRecordingSession:(void(^)(NSError * error, BOOL isSuccessful))completion
++ (void)setUpRecordingSession:(void(^)(NSError * error, BOOL isSuccessful))completion
 {
+    AVAudioSession *session = [AVAudioSession new];
     NSError *error;
-    BOOL success = [self.session setCategory:AVAudioSessionCategoryPlayAndRecord mode:AVAudioSessionModeDefault options:0 error:&error];
+    BOOL success = [session setCategory:AVAudioSessionCategoryPlayAndRecord mode:AVAudioSessionModeDefault options:0 error:&error];
     if (!success) {
         completion(error, NO);
     }
     else {
+        [session requestRecordPermission:^(BOOL granted) {
+        }];
         completion(nil, YES);
     }
 }
 
-- (void)activateSession:(void(^)(NSError * error, BOOL isActivated))completion
++ (void)activateSession:(void(^)(NSError * error, BOOL isActivated))completion
 {
-    NSError *error;
-    if (self.isActive) {
-    }
-    else {
-        BOOL sucess = [self.session setActive:YES error:&error];
+        NSError *error;
+        AVAudioSession *session = [AVAudioSession new];
+        BOOL sucess = [session setActive:YES error:&error];
         if (!sucess) {
             completion(error, NO);
         }
@@ -52,19 +37,17 @@
             completion(nil, YES);
         }
     }
-}
 
-- (void)deactivateSucession:(void(^)(NSError * error, BOOL isDeactivated))completion
++ (void)deactivateSucession:(void(^)(NSError * error, BOOL isDeactivated))completion
 {
     NSError *error;
-    if (self.isActive) {
-        BOOL success = [self.session setActive:YES error:&error];
-        if (!success) {
-            completion(error, NO);
-        }
-        else {
-            completion(nil, YES);
-        }
+    AVAudioSession *session = [AVAudioSession new];
+    BOOL sucess = [session setActive:NO error:&error];
+    if (!sucess) {
+        completion(error, NO);
+    }
+    else {
+        completion(nil, YES);
     }
 }
 
