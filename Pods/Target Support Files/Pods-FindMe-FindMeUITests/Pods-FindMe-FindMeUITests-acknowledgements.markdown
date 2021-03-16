@@ -83,7 +83,7 @@ SOFTWARE.
 
 ## GoogleMaps
 
-Copyright 2020 Google
+Copyright 2021 Google
 
 ## Parse
 

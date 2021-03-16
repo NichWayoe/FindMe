@@ -134,7 +134,6 @@
 		2BAF03CF24C7759600AF8875 /* DatabaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
 		2BC64FC924E330A200D577CB /* TraceMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TraceMapViewController.h; sourceTree = "<group>"; };
 		2BC64FCA24E330A200D577CB /* TraceMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TraceMapViewController.m; sourceTree = "<group>"; };
-		2BC84BD52529770A00CBA145 /* FindMe-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FindMe-Bridging-Header.h"; sourceTree = "<group>"; };
 		2BC84BD62529770A00CBA145 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = File.swift; path = ../../Desktop/File.swift; sourceTree = "<group>"; };
 		2BE75FDE25165205000D4008 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		2C41A87BB1A17F9D32D295D3 /* Pods-FindMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindMe.release.xcconfig"; path = "Target Support Files/Pods-FindMe/Pods-FindMe.release.xcconfig"; sourceTree = "<group>"; };
@@ -234,7 +233,6 @@
 				2B42BC5B24BCFB78007241E1 /* LaunchScreen.storyboard */,
 				2B42BC5E24BCFB78007241E1 /* Info.plist */,
 				2B42BC5F24BCFB78007241E1 /* main.m */,
-				2BC84BD52529770A00CBA145 /* FindMe-Bridging-Header.h */,
 			);
 			path = FindMe;
 			sourceTree = "<group>";
@@ -847,7 +845,7 @@
 					"@executable_path/Frameworks",
 				);
 				NEW_SETTING = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nwayoe.FindMee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nwayoe.FindMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FindMe/FindMe-Bridging-Header.h";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "";
@@ -872,7 +870,7 @@
 					"@executable_path/Frameworks",
 				);
 				NEW_SETTING = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nwayoe.FindMee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nwayoe.FindMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FindMe/FindMe-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

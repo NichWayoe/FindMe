@@ -12,7 +12,7 @@
 
 @interface TraceMapViewController ()
 
-@property (strong,nonatomic) GMSMapView *mapView;
+@property (strong, nonatomic) GMSMapView *mapView;
 
 @end
 
